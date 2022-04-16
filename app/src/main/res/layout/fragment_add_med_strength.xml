@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint_layout_add_med_strength"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".AddMedStrengthFragment">
+
+    <include layout="@layout/add_med_toolbar" />
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/add_med_header"
+        tools:layout_editor_absoluteY="56dp" />
+
+
+    <EditText
+        android:id="@+id/edit_text_strength_add_med"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:ems="10"
+        android:inputType="number"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/text_view_unit_add_med_strength"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="TextView"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_text_strength_add_med"
+        app:layout_constraintStart_toEndOf="@+id/edit_text_strength_add_med"
+        app:layout_constraintTop_toTopOf="@+id/edit_text_strength_add_med" />
+
+
+    <include layout="@layout/add_med_next_button" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/strength_units_recycler_view_add_med"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_strength_add_med" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

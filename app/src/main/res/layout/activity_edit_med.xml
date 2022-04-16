@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#dddddd">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#eeeeee"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="SpeakableTextPresentCheck">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_view_condition_edit_med"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:cardElevation="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/card_view_icon_edit_med">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/text_view_condition_edit_med"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="Condition"
+                        android:textColor="@color/dodger_blue"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/edit_text_condition_edit_med"
+                        style="@style/Widget.AppCompat.EditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:shadowColor="#FF0000"
+                        android:text="Cough"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/text_view_condition_edit_med"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_condition_edit_med"
+                        tools:ignore="TouchTargetSizeCheck" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_view_icon_edit_med"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardElevation="5dp"
+                app:layout_constraintEnd_toEndOf="@+id/card_view_med_name_edit_med"
+                app:layout_constraintStart_toStartOf="@+id/card_view_med_name_edit_med"
+                app:layout_constraintTop_toBottomOf="@+id/card_view_schedule_edit_med">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/text_view_icon_edit_med"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="Icon"
+                        android:textColor="@color/dodger_blue"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <HorizontalScrollView
+                        android:id="@+id/horizontal_scroll_view_icons_edit_med"
+                        android:layout_width="0dp"
+                        android:layout_height="46dp"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="32dp"
+                        android:layout_marginBottom="8dp"
+                        android:scrollbars="none"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_icon_edit_med"
+                        tools:ignore="SpeakableTextPresentCheck">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/image_view_icon1_edit_med"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_weight="1"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_alarm" />
+
+                            <ImageView
+                                android:id="@+id/image_view_icon2_edit_med"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_marginStart="32dp"
+                                android:layout_weight="1"
+                                app:layout_constraintStart_toEndOf="@+id/image_view_icon3_edit_med"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_alarm" />
+
+                            <ImageView
+                                android:id="@+id/image_view_icon3_edit_med"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_marginStart="32dp"
+                                android:layout_weight="1"
+                                app:layout_constraintStart_toEndOf="@+id/image_view_icon4_edit_med"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_alarm" />
+
+                            <ImageView
+                                android:id="@+id/image_view_icon4_edit_med"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_marginStart="32dp"
+                                android:layout_weight="1"
+                                app:layout_constraintStart_toEndOf="@+id/image_view_icon1_edit_med"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_alarm" />
+
+                            <ImageView
+                                android:id="@+id/image_view_icon5_edit_med"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_marginStart="32dp"
+                                android:layout_weight="1"
+                                app:layout_constraintStart_toEndOf="@+id/image_view_icon2_edit_med"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_alarm" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </HorizontalScrollView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_view_schedule_edit_med"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardElevation="5dp"
+                app:layout_constraintEnd_toEndOf="@+id/card_view_med_name_edit_med"
+                app:layout_constraintStart_toStartOf="@+id/card_view_med_name_edit_med"
+                app:layout_constraintTop_toBottomOf="@+id/card_view_reminder_edit_med">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RadioGroup
+                        android:id="@+id/radio_group_duration_edit_med"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        app:layout_constraintStart_toStartOf="@+id/text_view_duration_edit_med"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_duration_edit_med">
+
+                        <RadioButton
+                            android:id="@+id/radio_button_ongoing_treatment_edit_med"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Ongoing treatment" />
+
+                        <RadioButton
+                            android:id="@+id/radio_button_number_of_days_edit_med"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="number of days" />
+                    </RadioGroup>
+
+                    <TextView
+                        android:id="@+id/text_view_schedule_edit_med"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="Schedule"
+                        android:textColor="@color/dodger_blue"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/text_view_start_date_label_edit_med"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Start date:"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="@+id/text_view_schedule_edit_med"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_schedule_edit_med" />
+
+                    <TextView
+                        android:id="@+id/text_view_duration_edit_med"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Duration"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="@+id/text_view_schedule_edit_med"
+                        app:layout_constraintTop_toBottomOf="@+id/divider_edit_med" />
+
+                    <TextView
+                        android:id="@+id/text_view_days_edit_med"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Days"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="@+id/text_view_schedule_edit_med"
+                        app:layout_constraintTop_toBottomOf="@+id/divider_2_edit_med" />
+
+                    <TextView
+                        android:id="@+id/text_view_start_date_edit_med"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:text="Sun, 10 Apr"
+                        android:textColor="@color/dodger_blue"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/text_view_start_date_label_edit_med"
+                        app:layout_constraintStart_toEndOf="@+id/text_view_start_date_label_edit_med"
+                        app:layout_constraintTop_toTopOf="@+id/text_view_start_date_label_edit_med" />
+
+                    <View
+                        android:id="@+id/divider_edit_med"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="?android:attr/listDivider"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_start_date_label_edit_med" />
+
+                    <View
+                        android:id="@+id/divider_2_edit_med"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="?android:attr/listDivider"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/radio_group_duration_edit_med" />
+
+                    <RadioGroup
+                        android:id="@+id/radio_group_days_edit_med"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/text_view_days_edit_med"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_days_edit_med">
+
+                        <RadioButton
+                            android:id="@+id/radio_button_every_day_edit_med"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Every day" />
+
+                        <RadioButton
+                            android:id="@+id/radio_button_specific_days_of_the_week_edit_med"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Specific days of the week" />
+                    </RadioGroup>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_view_instructions_edit_med"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:cardElevation="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/card_view_condition_edit_med">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/text_view_instructions_edit_med"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="Instructions"
+                        android:textColor="@color/dodger_blue"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/text_view_should_this_be_taken_with_food_edit_med"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Should this be taken with food?"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="@+id/text_view_instructions_edit_med"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_instructions_edit_med" />
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/text_view_should_this_be_taken_with_food_edit_med"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_should_this_be_taken_with_food_edit_med">
+
+                        <RadioButton
+                            android:id="@+id/radio_button_before_eating_edit_med"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Before eating" />
+
+                        <RadioButton
+                            android:id="@+id/radio_button_while_eating_edit_med"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="While eating" />
+
+                        <RadioButton
+                            android:id="@+id/radio_button_after_eating_edit_med"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="After eating" />
+
+                        <RadioButton
+                            android:id="@+id/radio_button_does_not_matter_edit_med"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Doesn't matter" />
+                    </RadioGroup>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_view_med_name_edit_med"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:cardElevation="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/text_view_med_name_edit_med"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="Medication Name"
+                        android:textColor="@color/dodger_blue"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/edit_text_med_name_edit_med"
+                        style="@style/Widget.AppCompat.EditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:shadowColor="#FF0000"
+                        android:text="Curam"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/text_view_med_name_edit_med"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_med_name_edit_med"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_view_reminder_edit_med"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardElevation="5dp"
+                app:layout_constraintEnd_toEndOf="@+id/card_view_med_name_edit_med"
+                app:layout_constraintStart_toStartOf="@+id/card_view_med_name_edit_med"
+                app:layout_constraintTop_toBottomOf="@+id/card_view_med_name_edit_med">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/text_view_reminder_times_edit_med"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="Reminder Times"
+                        android:textColor="@color/dodger_blue"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/text_view_third_dose_time_edit_med"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="22:00"
+                        android:textColor="@color/dodger_blue"
+                        android:textSize="24sp"
+                        app:layout_constraintStart_toStartOf="@+id/text_view_second_dose_time_edit_med"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_second_dose_time_edit_med" />
+
+                    <TextView
+                        android:id="@+id/text_view_fourth_dose_time_edit_med"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="22:00"
+                        android:textColor="@color/dodger_blue"
+                        android:textSize="24sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/text_view_third_dose_time_edit_med"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_third_dose_time_edit_med" />
+
+                    <TextView
+                        android:id="@+id/text_view_second_dose_time_edit_med"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="22:00"
+                        android:textColor="@color/dodger_blue"
+                        android:textSize="24sp"
+                        app:layout_constraintStart_toStartOf="@+id/text_view_first_dose_time_edit_med"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_first_dose_time_edit_med" />
+
+                    <TextView
+                        android:id="@+id/text_view_first_dose_time_edit_med"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="10:00"
+                        android:textColor="@color/dodger_blue"
+                        android:textSize="24sp"
+                        app:layout_constraintStart_toStartOf="@+id/text_view_reminder_times_edit_med"
+                        app:layout_constraintTop_toBottomOf="@+id/spinner_reminder_times_edit_med" />
+
+                    <Spinner
+                        android:id="@+id/spinner_reminder_times_edit_med"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:minHeight="48dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_reminder_times_edit_med"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+                    <Switch
+                        android:id="@+id/switch_med_reminder_times_edit_med"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:minWidth="48dp"
+                        android:minHeight="48dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/text_view_reminder_times_edit_med"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/text_view_reminder_times_edit_med" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_view_prescription_refill_edit_med"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardElevation="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/card_view_instructions_edit_med">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <EditText
+                        android:id="@+id/edit_text_current_amount_of_meds_edit_med"
+                        style="@style/Widget.AppCompat.EditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:ems="10"
+                        android:inputType="number|textPersonName"
+                        android:shadowColor="#FF0000"
+                        android:text="2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/text_view_refill_remaining_amount_label_edit_med"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_refill_remaining_amount_label_edit_med"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <EditText
+                        android:id="@+id/edit_text_remaining_amount_edit_med"
+                        style="@style/Widget.AppCompat.EditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:ems="10"
+                        android:inputType="number|textPersonName"
+                        android:shadowColor="#FF0000"
+                        android:text="2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="@+id/text_view_refill_remaining_amount_label_edit_med"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_refill_before_how_many_edit_med"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <TextView
+                        android:id="@+id/text_view_prescription_refill_edit_med"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="Prescription Refill"
+                        android:textColor="@color/dodger_blue"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/text_view_refill_time_chooser_edit_med"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="11:00"
+                        android:textColor="@color/dodger_blue"
+                        android:textSize="16sp"
+                        android:textStyle="normal"
+                        app:layout_constraintStart_toStartOf="@+id/text_view_refill_what_time_edit_med"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_refill_what_time_edit_med" />
+
+                    <TextView
+                        android:id="@+id/text_view_refill_remaining_amount_label_edit_med"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="Enter the amount of meds you currently have to get a refill reminder"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/text_view_prescription_refill_edit_med"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_prescription_refill_edit_med" />
+
+                    <TextView
+                        android:id="@+id/text_view_refill_before_how_many_edit_med"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="How much remaining?"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="@+id/text_view_prescription_refill_edit_med"
+                        app:layout_constraintTop_toBottomOf="@+id/edit_text_current_amount_of_meds_edit_med" />
+
+                    <TextView
+                        android:id="@+id/text_view_refill_what_time_edit_med"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="What time?"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="@+id/text_view_prescription_refill_edit_med"
+                        app:layout_constraintTop_toBottomOf="@+id/edit_text_remaining_amount_edit_med" />
+
+                    <Switch
+                        android:id="@+id/switch_refill_reminder_edit_med"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:text="Refill reminder"
+                        app:layout_constraintBottom_toBottomOf="@+id/text_view_prescription_refill_edit_med"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/text_view_prescription_refill_edit_med"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

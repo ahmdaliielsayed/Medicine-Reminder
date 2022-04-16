@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedicineReminder">
         <activity
+            android:name=".editmed.view.EditMedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".addmed.view.AddMedActivity"
+            android:exported="false" />
+        <activity
             android:name=".home.view.HomeActivity"
             android:exported="true"
             android:label="@string/title_activity_home" />
