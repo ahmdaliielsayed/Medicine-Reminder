@@ -1,4 +1,29 @@
 <resources>
     <string name="app_name">Medicine Reminder</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="remindy">Remindy</string>
+    <string name="title_screen_one">Add pills that you take regularly</string>
+    <string name="description_screen_one">Start by adding any medication or vitamin \n you are taking on a regular basis.</string>
+    <string name="next">Next</string>
+    <string name="title_screen_two">Schedule for the time reminder</string>
+    <string name="description_screen_two">Set a time and date for your pills, You can \n customize your own schedule.</string>
+    <string name="title_screen_three">Get notification to take your pills</string>
+    <string name="description_screen_three">Receive friendly reminders to help you take \n your pills on time</string>
+    <string name="finish">Finish</string>
+    <string name="no_internet_access">No Internet Access</string>
+    <string name="check_connection">Check your connection settings \n and try again</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="or_continue_with">Or continue with</string>
+    <string name="register">Register</string>
+    <string name="not_a_member">Not a member?</string>
+    <string name="img_picked_cancelled">Image pick cancelled</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

@@ -7,4 +7,19 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="texas_rose">#FFC04F</color>
+    <color name="dodger_blue">#3E8AFB</color>
+    <color name="malibu">#88C9FF</color>
+    <color name="malibu_alpha_20">#3388C9FF</color>
+    <color name="cherokee">#FCD69A</color>
+
+    <color name="fuchsia_blue">#7C4BDA</color>
+    <color name="perfume">#D1BEF4</color>
+    <color name="ship_gray">#37353C</color>
+    <color name="amethyst_smoke">#96939F</color>
+    <color name="whisper">#F2F1F3</color>
+
+    <color name="perano">#A5B1FB</color>
+    <color name="lochmara">#0288D1</color>
 </resources>

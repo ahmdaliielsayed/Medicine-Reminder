@@ -1,10 +1,6 @@
-package com.ahmdalii.medicinereminder.db;
+package com.ahmdalii.medicinereminder.db.room;
 
 import android.content.Context;
-
-import androidx.lifecycle.LiveData;
-
-import java.util.List;
 
 public class ConcreteLocalSource implements LocalSource {
 
