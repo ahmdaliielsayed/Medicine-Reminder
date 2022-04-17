@@ -1,4 +1,4 @@
-package com.ahmdalii.medicinereminder.addmed.view;
+package com.ahmdalii.medicinereminder.addmed.view.adapters;
 
 import android.content.Context;
 import android.graphics.Color;

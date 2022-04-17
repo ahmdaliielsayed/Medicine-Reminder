@@ -1,7 +1,7 @@
 package com.ahmdalii.medicinereminder.model;
 
 public enum MedicineUnit {
-    gm("gm"),
+    g("g"),
     mg("mg"),
     IU("IU"),
     mcg("mcg"),

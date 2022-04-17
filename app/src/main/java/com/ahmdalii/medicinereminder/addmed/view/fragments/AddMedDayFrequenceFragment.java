@@ -1,4 +1,4 @@
-package com.ahmdalii.medicinereminder.addmed.view;
+package com.ahmdalii.medicinereminder.addmed.view.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.ahmdalii.medicinereminder.R;
+import com.ahmdalii.medicinereminder.addmed.model.MedicineDayFrequency;
+import com.ahmdalii.medicinereminder.addmed.view.AddMedActivityInterface;
 
 
 public class AddMedDayFrequenceFragment extends Fragment implements View.OnClickListener {
@@ -54,13 +56,18 @@ public class AddMedDayFrequenceFragment extends Fragment implements View.OnClick
     @Override
     public void onClick(View v) {
         if(((TextView) v).getId() == R.id.text_view_everyday_add_med) {
+            ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setDayFrequency(MedicineDayFrequency.EVERYDAY);
+            ((AddMedActivityInterface) getActivity()).setMaxNumberOfSteps(11);
             ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedTimeFrequencyFragment());
         }
         else if(((TextView) v).getId() == R.id.text_view_specific_days_of_the_week_add_med) {
+            ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setDayFrequency(MedicineDayFrequency.SPECIFIC_DAYS);
+            ((AddMedActivityInterface) getActivity()).setMaxNumberOfSteps(11);
             ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedWeekDaysFragment());
         }
         else if(((TextView) v).getId() == R.id.text_view_every_number_of_days_add_med) {
-            ((AddMedActivityInterface) getActivity()).decrementMaxNumberOfSteps();
+            ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setDayFrequency(MedicineDayFrequency.EVERY_NUMBER_OF_DAYS);
+            ((AddMedActivityInterface) getActivity()).setMaxNumberOfSteps(10);
             ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedTimesFragment());
         }
     }

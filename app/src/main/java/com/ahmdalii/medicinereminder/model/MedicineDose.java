@@ -4,24 +4,26 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "time_scheduler")
-public class TimeScheduler {
+@Entity(tableName = "medicine_dose")
+public class MedicineDose {
     @PrimaryKey
     @NonNull
     private String id;
-    private String daySchedulerID;
+    private String medID;
+    private String day;
     private String time;
     private Integer amount;
     private String status;
     private String giverID;
     private Boolean isSync;
 
-    public TimeScheduler() {
+    public MedicineDose() {
     }
 
-    public TimeScheduler(@NonNull String id, String daySchedulerID, String time, Integer amount, String status, String giverID, Boolean isSync) {
+    public MedicineDose(@NonNull String id, String medID, String day, String time, Integer amount, String status, String giverID, Boolean isSync) {
         this.id = id;
-        this.daySchedulerID = daySchedulerID;
+        this.medID = medID;
+        this.day = day;
         this.time = time;
         this.amount = amount;
         this.status = status;
@@ -38,12 +40,20 @@ public class TimeScheduler {
         this.id = id;
     }
 
-    public String getDaySchedulerID() {
-        return daySchedulerID;
+    public String getMedID() {
+        return medID;
     }
 
-    public void setDaySchedulerID(String daySchedulerID) {
-        this.daySchedulerID = daySchedulerID;
+    public void setMedID(String medID) {
+        this.medID = medID;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
     }
 
     public String getTime() {
