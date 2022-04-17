@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.ahmdalii.medicinereminder.R;
+
 
 public class AddMedTimeFrequencyFragment extends Fragment implements View.OnClickListener {
 
@@ -65,6 +67,6 @@ public class AddMedTimeFrequencyFragment extends Fragment implements View.OnClic
         else if(((TextView) v).getId() == R.id.text_view_4_times_a_day_add_med_time_frequency) {
 
         }
-        ((MainActivity) getActivity()).nextStep(savedInstanceState);
+        ((AddMedActivity) getActivity()).nextStep(savedInstanceState, new AddMedTimesFragment());
     }
 }

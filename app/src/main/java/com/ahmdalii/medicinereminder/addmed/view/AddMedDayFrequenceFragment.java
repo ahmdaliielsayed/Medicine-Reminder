@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.ahmdalii.medicinereminder.R;
+
 
 public class AddMedDayFrequenceFragment extends Fragment implements View.OnClickListener {
 
@@ -52,14 +54,14 @@ public class AddMedDayFrequenceFragment extends Fragment implements View.OnClick
     @Override
     public void onClick(View v) {
         if(((TextView) v).getId() == R.id.text_view_everyday_add_med) {
-
+            ((AddMedActivity) getActivity()).nextStep(savedInstanceState, new AddMedTimeFrequencyFragment());
         }
         else if(((TextView) v).getId() == R.id.text_view_specific_days_of_the_week_add_med) {
-
+            ((AddMedActivity) getActivity()).nextStep(savedInstanceState, new AddMedWeekDaysFragment());
         }
         else if(((TextView) v).getId() == R.id.text_view_every_number_of_days_add_med) {
-
+            ((AddMedActivity) getActivity()).decrementMaxNumberOfSteps();
+            ((AddMedActivity) getActivity()).nextStep(savedInstanceState, new AddMedTimesFragment());
         }
-        ((MainActivity) getActivity()).nextStep(savedInstanceState);
     }
 }

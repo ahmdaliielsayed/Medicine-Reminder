@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.ahmdalii.medicinereminder.R;
+
 
 public class AddMedReasonFragment extends Fragment {
 
@@ -48,7 +50,7 @@ public class AddMedReasonFragment extends Fragment {
         view.findViewById(R.id.button_next_add_med).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).nextStep(savedInstanceState);
+                ((AddMedActivity) getActivity()).nextStep(savedInstanceState, new AddMedDayFrequenceFragment());
             }
         });
     }

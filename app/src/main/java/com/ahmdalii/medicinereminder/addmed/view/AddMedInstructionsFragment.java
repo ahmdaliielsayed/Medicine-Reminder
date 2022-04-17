@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.ahmdalii.medicinereminder.R;
+
 
 public class AddMedInstructionsFragment extends Fragment implements View.OnClickListener {
 
@@ -44,12 +46,7 @@ public class AddMedInstructionsFragment extends Fragment implements View.OnClick
         ((TextView) view.findViewById(R.id.text_view_toolbar_title)).setText("Medication Refill Reminder");
         ((TextView) view.findViewById(R.id.text_view_add_header)).setText("Medication Refill Reminder");
 
-        view.findViewById(R.id.button_next_add_med).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity) getActivity()).nextStep(savedInstanceState);
-            }
-        });
+
 
         view.findViewById(R.id.text_view_before_eating_add_med_instructions).setOnClickListener(this);
         view.findViewById(R.id.text_view_while_eating_add_med_instructions).setOnClickListener(this);
@@ -68,6 +65,6 @@ public class AddMedInstructionsFragment extends Fragment implements View.OnClick
 
         }
 
-        ((MainActivity) getActivity()).nextStep(savedInstanceState);
+        ((AddMedActivity) getActivity()).addMedFinished();
     }
 }

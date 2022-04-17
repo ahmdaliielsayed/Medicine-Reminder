@@ -5,7 +5,7 @@
     android:id="@+id/constraint_layout_add_med_name"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddMedNameFragment">
+    tools:context=".addmed.view.AddMedActivity">
 
     <include layout="@layout/add_med_toolbar" />
 
@@ -18,11 +18,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/blue"
+        android:backgroundTint="@color/dodger_blue"
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:textColor="@color/blue"
+        android:textColor="@color/dodger_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraint_layout_add_header"

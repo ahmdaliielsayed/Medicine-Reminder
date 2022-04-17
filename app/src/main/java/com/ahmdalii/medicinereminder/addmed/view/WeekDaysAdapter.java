@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ahmdalii.medicinereminder.R;
+
 import java.util.ArrayList;
 
 public class WeekDaysAdapter extends RecyclerView.Adapter<WeekDaysAdapter.ViewHolder> {
@@ -50,7 +52,7 @@ public class WeekDaysAdapter extends RecyclerView.Adapter<WeekDaysAdapter.ViewHo
             public void onClick(View v) {
                 days.set(i, new Pair<>(days.get(i).first, !days.get(i).second));
                 if(days.get(i).second == true) {
-                    holder.dayTextView.setBackgroundColor(context.getResources().getColor(R.color.blue));
+                    holder.dayTextView.setBackgroundColor(context.getResources().getColor(R.color.dodger_blue));
                     holder.dayTextView.setTextColor(Color.WHITE);
                 }
                 else {

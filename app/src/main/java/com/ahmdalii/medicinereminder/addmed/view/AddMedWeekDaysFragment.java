@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ahmdalii.medicinereminder.R;
+
 
 public class AddMedWeekDaysFragment extends Fragment {
 
@@ -53,7 +55,7 @@ public class AddMedWeekDaysFragment extends Fragment {
         view.findViewById(R.id.button_next_add_med).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).nextStep(savedInstanceState);
+                ((AddMedActivity) getActivity()).nextStep(savedInstanceState, new AddMedTimesFragment());
             }
         });
     }

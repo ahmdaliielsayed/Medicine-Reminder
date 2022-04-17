@@ -1,5 +1,6 @@
 package com.ahmdalii.medicinereminder.medications.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.ahmdalii.medicinereminder.R;
+import com.ahmdalii.medicinereminder.addmed.view.AddMedActivity;
 import com.ahmdalii.medicinereminder.medications.repository.MedicationsPojo;
 import com.ahmdalii.medicinereminder.medications.repository.MedicationsSectionPojo;
 
@@ -70,6 +72,7 @@ public class MedicationsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.i("emy", "onClick: you clicked");
+                startActivity(new Intent(getContext(), AddMedActivity.class));
             }
         });
 

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".AddMedReasonFragment">
+    tools:context=".addmed.view.AddMedActivity">
 
     <include layout="@layout/add_med_toolbar"/>
 
@@ -26,7 +26,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="64dp"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/blue"
+        android:backgroundTint="@color/dodger_blue"
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"

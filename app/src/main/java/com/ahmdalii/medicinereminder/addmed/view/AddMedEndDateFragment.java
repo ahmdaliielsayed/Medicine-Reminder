@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.ahmdalii.medicinereminder.R;
+
 
 public class AddMedEndDateFragment extends Fragment {
 
@@ -43,7 +45,7 @@ public class AddMedEndDateFragment extends Fragment {
         view.findViewById(R.id.button_next_add_med).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).nextStep(savedInstanceState);
+                ((AddMedActivity) getActivity()).nextStep(savedInstanceState, new AddMedRefillReminderFragment());
             }
         });
     }
