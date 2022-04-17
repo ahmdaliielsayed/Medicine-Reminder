@@ -26,4 +26,9 @@ public class SplashRepo implements SplashRepoInterface {
     public boolean isBoardingFinish() {
         return SharedPrefManager.getInstance(context, Constants.ON_BOARDING_FILE).getBooleanValue(Constants.ON_BOARDING_FINISH_KEY);
     }
+
+    @Override
+    public boolean isUserLogin() {
+        return SharedPrefManager.getInstance(context, Constants.USERS_FILE).getBooleanValue(Constants.USER_LOGIN_KEY);
+    }
 }

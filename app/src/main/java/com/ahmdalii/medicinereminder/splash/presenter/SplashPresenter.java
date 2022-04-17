@@ -17,4 +17,9 @@ public class SplashPresenter implements SplashPresenterInterface {
     public void isBoardingFinish() {
         viewFragmentInterface.isBoardingFinish(repoInterface.isBoardingFinish());
     }
+
+    @Override
+    public void isUserLogin() {
+        viewFragmentInterface.isUserLogin(repoInterface.isUserLogin());
+    }
 }

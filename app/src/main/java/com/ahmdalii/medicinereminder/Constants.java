@@ -4,4 +4,6 @@ public class Constants {
 
     public static final String ON_BOARDING_FILE = "onBoardingFile";
     public static final String ON_BOARDING_FINISH_KEY = "onBoardingFinishKey";
+    public static final String USERS_FILE = "usersFile";
+    public static final String USER_LOGIN_KEY = "userLoginKey";
 }

@@ -1,4 +1,4 @@
-package com.ahmdalii.medicinereminder.db.room;
+package com.ahmdalii.medicinereminder.db.room.medicine;
 
 import android.content.Context;
 

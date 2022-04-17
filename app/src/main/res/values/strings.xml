@@ -26,5 +26,22 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="error">Error</string>
+    <string name="ok">OK</string>
+    <string name="full_name">Full Name</string>
+    <string name="new_account">New \nAccount</string>
+    <string name="upload_profile_picture">Upload your \n profile picture</string>
+    <string name="re_password">Re-Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="already_registered_sign_in_here">Already Registered? Sign in here</string>
+    <string name="set_your_profile_img">Please, Set your profile image!</string>
+    <string name="type_your_full_name">Please, Type your Full Name!</string>
+    <string name="type_your_email">Please, Type your Email!</string>
+    <string name="type_email_address_correctly">Please, Type your Email address correctly!\nlike: example@example.com</string>
+    <string name="type_your_password">Please, Type your Password!</string>
+    <string name="password_length">Password should be at least 6 characters long!</string>
+    <string name="confirm_your_password">Please, Confirm your password!</string>
+    <string name="error_msg_password_incompatible">Two passwords incompatible</string>
     <string name="addamed">Add A Med</string>
+    <string name="comment_on_play_store">Please, comment with error on play store to fix this error!</string>
 </resources>

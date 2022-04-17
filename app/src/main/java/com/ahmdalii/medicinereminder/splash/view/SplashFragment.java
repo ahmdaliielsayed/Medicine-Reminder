@@ -1,5 +1,6 @@
 package com.ahmdalii.medicinereminder.splash.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,9 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ahmdalii.medicinereminder.R;
+import com.ahmdalii.medicinereminder.home.view.HomeActivity;
 import com.ahmdalii.medicinereminder.splash.presenter.SplashPresenter;
 import com.ahmdalii.medicinereminder.splash.presenter.SplashPresenterInterface;
 import com.ahmdalii.medicinereminder.splash.repository.SplashRepo;
+
+import java.util.Objects;
 
 public class SplashFragment extends Fragment implements SplashFragmentInterface {
 
@@ -43,10 +47,20 @@ public class SplashFragment extends Fragment implements SplashFragmentInterface 
     public void isBoardingFinish(boolean isFinish) {
         new Handler().postDelayed(() -> {
             if (isFinish) {
-                Navigation.findNavController(view).navigate(R.id.action_splashFragment_to_loginFragment);
+                presenterInterface.isUserLogin();
             } else {
                 Navigation.findNavController(view).navigate(R.id.action_splashFragment_to_viewPagerFragment);
             }
         }, 3000);
+    }
+
+    @Override
+    public void isUserLogin(boolean isLogin) {
+        if (isLogin) {
+            startActivity(new Intent(getActivity(), HomeActivity.class));
+            Objects.requireNonNull(getActivity()).finish();
+        } else {
+            Navigation.findNavController(view).navigate(R.id.action_splashFragment_to_loginFragment);
+        }
     }
 }

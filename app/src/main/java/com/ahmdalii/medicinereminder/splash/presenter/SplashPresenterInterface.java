@@ -5,4 +5,5 @@ import android.view.View;
 public interface SplashPresenterInterface {
 
     void isBoardingFinish();
+    void isUserLogin();
 }

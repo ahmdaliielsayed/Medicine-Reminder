@@ -1,4 +1,4 @@
-package com.ahmdalii.medicinereminder.db.room;
+package com.ahmdalii.medicinereminder.db.room.medicine;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
