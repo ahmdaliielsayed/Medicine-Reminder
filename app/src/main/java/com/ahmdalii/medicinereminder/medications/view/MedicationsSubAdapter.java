@@ -1,5 +1,6 @@
 package com.ahmdalii.medicinereminder.medications.view;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ public class MedicationsSubAdapter extends RecyclerView.Adapter<MedicationsSubAd
         TextView nameText;
         TextView strengthText;
         TextView pillText;
-        //View layout;
+        View layout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -35,6 +36,7 @@ public class MedicationsSubAdapter extends RecyclerView.Adapter<MedicationsSubAd
             nameText = itemView.findViewById(R.id.textView1);
             strengthText = itemView.findViewById(R.id.textView2);
             pillText = itemView.findViewById(R.id.textView3);
+            layout = itemView.findViewById(R.id.innerRowId);
         }
     }
 
@@ -56,6 +58,13 @@ public class MedicationsSubAdapter extends RecyclerView.Adapter<MedicationsSubAd
         holder.nameText.setText(data.get(position).getName());
         holder.strengthText.setText(data.get(position).getStrength());
         holder.pillText.setText(data.get(position).getLeftNum() + " Pill(s) left");
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("emy", "onClick: you clicked a medication row " + data.get(position).getName());
+                //weite your code here
+            }
+        });
 
     }
 
