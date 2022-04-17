@@ -29,6 +29,7 @@ public class MedicationsFragment extends Fragment {
 
     public MedicationsFragment() {
         // Required empty public constructor
+        //hello from fragment
     }
 
     @Override
