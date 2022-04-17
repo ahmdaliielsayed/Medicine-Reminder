@@ -45,7 +45,7 @@ public class AddMedStartDateFragment extends Fragment {
         view.findViewById(R.id.button_next_add_med).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((AddMedActivity) getActivity()).nextStep(savedInstanceState, new AddMedEndDateFragment());
+                ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedEndDateFragment());
             }
         });
 

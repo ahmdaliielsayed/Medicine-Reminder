@@ -81,6 +81,6 @@ public class AddMedFormFragment extends Fragment implements View.OnClickListener
         else if(((TextView) v).getId() == R.id.text_view_topical_add_med_form) {
 
         }
-        ((AddMedActivity) getActivity()).nextStep(savedInstanceState, new AddMedStrengthFragment());
+        ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedStrengthFragment());
     }
 }

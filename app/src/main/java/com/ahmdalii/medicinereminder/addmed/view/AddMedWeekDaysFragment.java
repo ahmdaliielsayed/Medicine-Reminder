@@ -55,7 +55,7 @@ public class AddMedWeekDaysFragment extends Fragment {
         view.findViewById(R.id.button_next_add_med).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((AddMedActivity) getActivity()).nextStep(savedInstanceState, new AddMedTimesFragment());
+                ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedTimesFragment());
             }
         });
     }

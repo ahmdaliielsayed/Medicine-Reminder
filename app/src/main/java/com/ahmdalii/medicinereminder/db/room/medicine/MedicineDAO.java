@@ -7,17 +7,19 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+import com.ahmdalii.medicinereminder.model.Medicine;
+
 import java.util.List;
 
 @Dao
 public interface MedicineDAO {
 
-//    @Query("SELECT * FROM medicines")
-//    LiveData<List<Medicine>> getAllMedicines();
+    @Query("SELECT * FROM medicine")
+    LiveData<List<Medicine>> getAllMedicines();
 
-//    @Insert(onConflict = OnConflictStrategy.IGNORE)
-//    void insertMedicine(Medicine medicine);
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void insertMedicine(Medicine medicine);
 
-//    @Delete
-//    void deleteMedicine(Medicine medicine);
+    @Delete
+    void deleteMedicine(Medicine medicine);
 }

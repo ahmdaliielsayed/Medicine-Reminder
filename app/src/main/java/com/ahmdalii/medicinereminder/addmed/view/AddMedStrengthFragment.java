@@ -76,7 +76,7 @@ public class AddMedStrengthFragment extends Fragment {
         view.findViewById(R.id.button_next_add_med).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((AddMedActivity) getActivity()).nextStep(savedInstanceState, new AddMedReasonFragment());
+                ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedReasonFragment());
             }
         });
     }

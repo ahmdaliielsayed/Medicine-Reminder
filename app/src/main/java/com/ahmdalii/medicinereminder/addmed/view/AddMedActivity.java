@@ -9,11 +9,12 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.ahmdalii.medicinereminder.R;
+import com.ahmdalii.medicinereminder.model.Medicine;
 import com.shuhart.stepview.StepView;
 
 import java.util.ArrayList;
 
-public class AddMedActivity extends AppCompatActivity {
+public class AddMedActivity extends AppCompatActivity implements AddMedActivityInterface {
 
     StepView stepper;
 
@@ -25,10 +26,14 @@ public class AddMedActivity extends AppCompatActivity {
     int stepIndex = 0;
     int stepsNumber = 11;
 
+    Medicine medicine;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_med);
+
+        medicine = new Medicine();
 
         Toolbar toolbar = findViewById(R.id.toolbar_add_med);
 

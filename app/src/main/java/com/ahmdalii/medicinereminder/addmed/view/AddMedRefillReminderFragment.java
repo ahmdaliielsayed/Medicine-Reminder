@@ -44,7 +44,7 @@ public class AddMedRefillReminderFragment extends Fragment {
         view.findViewById(R.id.button_next_add_med).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((AddMedActivity) getActivity()).nextStep(savedInstanceState, new AddMedInstructionsFragment());
+                ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedInstructionsFragment());
             }
         });
     }

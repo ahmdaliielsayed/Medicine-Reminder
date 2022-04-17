@@ -65,6 +65,6 @@ public class AddMedInstructionsFragment extends Fragment implements View.OnClick
 
         }
 
-        ((AddMedActivity) getActivity()).addMedFinished();
+        ((AddMedActivityInterface) getActivity()).addMedFinished();
     }
 }

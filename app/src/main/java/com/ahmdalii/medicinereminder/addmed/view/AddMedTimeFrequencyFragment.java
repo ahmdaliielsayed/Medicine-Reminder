@@ -67,6 +67,6 @@ public class AddMedTimeFrequencyFragment extends Fragment implements View.OnClic
         else if(((TextView) v).getId() == R.id.text_view_4_times_a_day_add_med_time_frequency) {
 
         }
-        ((AddMedActivity) getActivity()).nextStep(savedInstanceState, new AddMedTimesFragment());
+        ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedTimesFragment());
     }
 }
