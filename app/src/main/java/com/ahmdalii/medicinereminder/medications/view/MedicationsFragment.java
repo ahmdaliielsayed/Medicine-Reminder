@@ -8,9 +8,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.ahmdalii.medicinereminder.R;
 import com.ahmdalii.medicinereminder.medications.repository.MedicationsPojo;
@@ -27,9 +29,10 @@ public class MedicationsFragment extends Fragment {
     List<MedicationsSectionPojo> data;
     RecyclerView recyclerView;
 
+    Button addMedBtn;
+
     public MedicationsFragment() {
         // Required empty public constructor
-        //hello from fragment
     }
 
     @Override
@@ -50,6 +53,7 @@ public class MedicationsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.recyclerViewId);
+        addMedBtn = view.findViewById(R.id.addMedId);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         layoutManager.setOrientation(RecyclerView.VERTICAL);
@@ -61,6 +65,13 @@ public class MedicationsFragment extends Fragment {
 
         MedicationsMainAdapter mainAdapter = new MedicationsMainAdapter(data);
         recyclerView.setAdapter(mainAdapter);
+
+        addMedBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("emy", "onClick: you clicked");
+            }
+        });
 
     }
 }
