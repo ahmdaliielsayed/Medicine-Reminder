@@ -3,12 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< HEAD
         <entry key="..\:/Studies/ITI/Courses/21. Android with Java/Project/Medicine-Reminder/app/src/main/res/drawable/border.xml" value="0.1875" />
         <entry key="..\:/Studies/ITI/Courses/21. Android with Java/Project/Medicine-Reminder/app/src/main/res/layout/activity_add_med.xml" value="0.18795289855072464" />
         <entry key="..\:/Studies/ITI/Courses/21. Android with Java/Project/Medicine-Reminder/app/src/main/res/layout/activity_edit_med.xml" value="0.18795289855072464" />
         <entry key="..\:/Studies/ITI/Courses/21. Android with Java/Project/Medicine-Reminder/app/src/main/res/layout/add_med.xml" value="0.18795289855072464" />
         <entry key="..\:/Studies/ITI/Courses/21. Android with Java/Project/Medicine-Reminder/app/src/main/res/layout/fragment_display_med.xml" value="0.18795289855072464" />
         <entry key="..\:/Studies/ITI/Courses/21. Android with Java/Project/Medicine-Reminder/app/src/main/res/menu/app_bar.xml" value="0.25416666666666665" />
+=======
+        <entry key="..\:/ITI/android/material/project/projectRepo/Medicine-Reminder/app/src/main/res/drawable/btn_round.xml" value="0.2703125" />
+        <entry key="..\:/ITI/android/material/project/projectRepo/Medicine-Reminder/app/src/main/res/layout/activity_home.xml" value="0.17135416666666667" />
+        <entry key="..\:/ITI/android/material/project/projectRepo/Medicine-Reminder/app/src/main/res/layout/fragment_medications.xml" value="0.2" />
+        <entry key="..\:/ITI/android/material/project/projectRepo/Medicine-Reminder/app/src/main/res/layout/fragment_medications2.xml" value="0.25416666666666665" />
+        <entry key="..\:/ITI/android/material/project/projectRepo/Medicine-Reminder/app/src/main/res/layout/medications_row_inner.xml" value="0.4" />
+        <entry key="..\:/ITI/android/material/project/projectRepo/Medicine-Reminder/app/src/main/res/layout/medications_row_outer.xml" value="0.17135416666666667" />
+        <entry key="..\:/ITI/android/material/project/projectRepo/Medicine-Reminder/app/src/main/res/menu/bottom_nav_menu.xml" value="0.12916666666666668" />
+>>>>>>> 6b66d6a0fa09955dc76bbe76e78935fb0cb683b3
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/MedicineReminder/app/src/main/res/drawable/btn_round_left_side.xml" value="0.2890625" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/MedicineReminder/app/src/main/res/drawable/btn_round_one_side.xml" value="0.2890625" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/MedicineReminder/app/src/main/res/drawable/default_dot.xml" value="0.2890625" />
