@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container_view_add_med"
+        android:name="com.ahmdalii.medicinereminder.addmed.view.AddMedNameFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/stepper_add_med"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.shuhart.stepview.StepView
+        android:id="@+id/stepper_add_med"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:sv_doneCircleColor="@color/purple_700"
+        app:sv_doneCircleRadius="8dp"
+        app:sv_doneStepLineColor="@color/purple_700"
+        app:sv_doneStepMarkColor="@color/white"
+        app:sv_nextStepLineColor="@color/dodger_blue"
+        app:sv_nextTextColor="@color/dodger_blue"
+        app:sv_nextStepCircleColor="@color/dodger_blue"
+        app:sv_selectedCircleColor="@color/dodger_blue"
+        app:sv_selectedCircleRadius="12dp"
+        app:sv_selectedStepNumberColor="@color/white"
+        app:sv_selectedTextColor="@color/dodger_blue"
+        app:sv_stepLineWidth="4dp"
+        app:sv_stepNumberTextSize="12sp"
+        app:sv_stepPadding="2dp"
+        app:sv_stepViewStyle="@style/StepView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

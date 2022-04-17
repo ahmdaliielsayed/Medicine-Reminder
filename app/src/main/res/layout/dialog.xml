@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/round_corners">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_layout_top_notification_dialog"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:background="@drawable/top_round_corners"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/image_view_delete_notification_dialog"
+            android:layout_width="32dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/image_view_edit_notification_dialog"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/ic_menu_delete" />
+
+        <ImageView
+            android:id="@+id/image_view_edit_notification_dialog"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/ic_menu_edit" />
+
+        <ImageView
+            android:id="@+id/image_view_info_notification_dialog"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="32dp"
+            app:layout_constraintBottom_toBottomOf="@+id/image_view_delete_notification_dialog"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/image_view_delete_notification_dialog"
+            app:srcCompat="@android:drawable/ic_menu_info_details" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/image_view_med_icon_notification_dialog"
+        android:layout_width="46dp"
+        android:layout_height="81dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraint_layout_top_notification_dialog"
+        app:srcCompat="@android:drawable/btn_default_small" />
+
+    <TextView
+        android:id="@+id/text_view_med_name_notification_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Phenadone"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_view_med_icon_notification_dialog" />
+
+    <ImageView
+        android:id="@+id/image_view_calendar_notification_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_med_name_notification_dialog"
+        app:srcCompat="@android:drawable/ic_menu_month" />
+
+    <ImageView
+        android:id="@+id/image_view_quantity_notification_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/image_view_calendar_notification_dialog"
+        app:layout_constraintTop_toBottomOf="@+id/image_view_calendar_notification_dialog"
+        app:srcCompat="@android:drawable/ic_menu_help" />
+
+    <ImageView
+        android:id="@+id/image_view_clock_notification_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/image_view_quantity_notification_dialog"
+        app:layout_constraintTop_toBottomOf="@+id/image_view_quantity_notification_dialog"
+        app:srcCompat="@android:drawable/ic_menu_recent_history" />
+
+    <TextView
+        android:id="@+id/text_view_time_notification_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="Scheduled for 16:00, today"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/image_view_calendar_notification_dialog"
+        app:layout_constraintStart_toEndOf="@+id/image_view_calendar_notification_dialog"
+        app:layout_constraintTop_toTopOf="@+id/image_view_calendar_notification_dialog" />
+
+    <TextView
+        android:id="@+id/text_view_quantity_notification_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10 mL"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/image_view_quantity_notification_dialog"
+        app:layout_constraintStart_toStartOf="@+id/text_view_time_notification_dialog"
+        app:layout_constraintTop_toTopOf="@+id/image_view_quantity_notification_dialog" />
+
+    <TextView
+        android:id="@+id/text_view_last_taken_notification_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Last taken at 16: 00, Sat. 9 Apr"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/image_view_clock_notification_dialog"
+        app:layout_constraintStart_toStartOf="@+id/text_view_quantity_notification_dialog"
+        app:layout_constraintTop_toTopOf="@+id/image_view_clock_notification_dialog" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bottom_round_corners"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_view_clock_notification_dialog"
+        app:layout_constraintVertical_bias="1.0">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_take_notification_dialog"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:cardBackgroundColor="#1C75E1"
+            app:cardCornerRadius="25dp"
+            app:contentPadding="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/card_view_skip_notification_dialog"
+            app:layout_constraintEnd_toStartOf="@+id/card_view_reschedule_notification_dialog"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/card_view_skip_notification_dialog"
+            app:layout_constraintTop_toTopOf="@+id/card_view_skip_notification_dialog">
+
+            <ImageView
+                android:id="@+id/image_view_take_notification_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/ic_check" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_skip_notification_dialog"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="8dp"
+            app:cardBackgroundColor="#D5D5D5"
+            app:cardCornerRadius="25dp"
+            app:contentPadding="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/image_view_skip_notification_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/ic_skip" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_reschedule_notification_dialog"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="48dp"
+            app:cardBackgroundColor="#D5D5D5"
+            app:cardCornerRadius="25dp"
+            app:contentPadding="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/card_view_take_notification_dialog"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/card_view_take_notification_dialog">
+
+            <ImageView
+                android:id="@+id/image_view_reschedule_notification_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/ic_alarm" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/text_view_skip_notification_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Skip"
+            android:textColor="#1C75E1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/card_view_skip_notification_dialog"
+            app:layout_constraintStart_toStartOf="@+id/card_view_skip_notification_dialog"
+            app:layout_constraintTop_toBottomOf="@+id/card_view_skip_notification_dialog" />
+
+        <TextView
+            android:id="@+id/text_view_take_notification_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Take"
+            android:textColor="#1C75E1"
+            app:layout_constraintBottom_toBottomOf="@+id/text_view_skip_notification_dialog"
+            app:layout_constraintEnd_toEndOf="@+id/card_view_take_notification_dialog"
+            app:layout_constraintStart_toStartOf="@+id/card_view_take_notification_dialog"
+            app:layout_constraintTop_toTopOf="@+id/text_view_skip_notification_dialog" />
+
+        <TextView
+            android:id="@+id/text_view_reschedule_notification_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reschedule"
+            android:textColor="#1C75E1"
+            app:layout_constraintBottom_toBottomOf="@+id/text_view_take_notification_dialog"
+            app:layout_constraintEnd_toEndOf="@+id/card_view_reschedule_notification_dialog"
+            app:layout_constraintStart_toStartOf="@+id/card_view_reschedule_notification_dialog"
+            app:layout_constraintTop_toTopOf="@+id/text_view_take_notification_dialog" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

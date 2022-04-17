@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint_layout_add_med_refill_reminder"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".AddMedRefillReminderFragment">
+
+    <include layout="@layout/add_med_toolbar"/>
+
+    <include
+        android:id="@+id/include10"
+        layout="@layout/add_med_header"
+        tools:layout_editor_absoluteY="56dp" />
+
+
+    <TimePicker
+        android:id="@+id/time_picker_refill_reminder_add_med"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="96dp"
+        android:timePickerMode="spinner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/text_view_remind_me_at_refill_reminder_add_med"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_remind_me_when_refill_reminder_add_med" />
+
+    <include layout="@layout/add_med_next_button"/>
+
+    <TextView
+        android:id="@+id/text_view_remaining_refill_reminder_add_med"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="Remaining:"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include10" />
+
+    <TextView
+        android:id="@+id/text_view_remind_me_refill_reminder_add_med"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="Remind me when"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/text_view_remaining_refill_reminder_add_med"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_remaining_refill_reminder_add_med" />
+
+    <TextView
+        android:id="@+id/text_view_left_refill_reminder_add_med"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="left"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/text_view_remind_me_refill_reminder_add_med"
+        app:layout_constraintStart_toEndOf="@+id/edit_text_remind_me_when_refill_reminder_add_med"
+        app:layout_constraintTop_toTopOf="@+id/text_view_remind_me_refill_reminder_add_med" />
+
+    <EditText
+        android:id="@+id/edit_text_remaining_amount_refill_reminder_add_med"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:ems="10"
+        android:inputType="number"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/text_view_remaining_refill_reminder_add_med"
+        app:layout_constraintStart_toEndOf="@+id/text_view_remaining_refill_reminder_add_med"
+        app:layout_constraintTop_toTopOf="@+id/text_view_remaining_refill_reminder_add_med"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <EditText
+        android:id="@+id/edit_text_remind_me_when_refill_reminder_add_med"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:ems="10"
+        android:inputType="number"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/text_view_remind_me_refill_reminder_add_med"
+        app:layout_constraintStart_toEndOf="@+id/text_view_remind_me_refill_reminder_add_med"
+        app:layout_constraintTop_toTopOf="@+id/text_view_remind_me_refill_reminder_add_med"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/text_view_remind_me_at_refill_reminder_add_med"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remind me at"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/time_picker_refill_reminder_add_med"
+        app:layout_constraintStart_toStartOf="@+id/text_view_remind_me_refill_reminder_add_med"
+        app:layout_constraintTop_toTopOf="@+id/time_picker_refill_reminder_add_med" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

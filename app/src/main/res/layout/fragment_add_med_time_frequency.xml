@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint_layout_add_med_time_frequency"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".AddMedTimeFrequencyFragment">
+
+    <include layout="@layout/add_med_toolbar"/>
+
+    <include
+        android:id="@+id/include5"
+        layout="@layout/add_med_header"
+        tools:layout_editor_absoluteY="56dp" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include5"
+        tools:ignore="SpeakableTextPresentCheck">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/text_view_once_daily_add_med_time_frequency"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="450dp"
+                android:text="Once daily"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/divider10"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_once_daily_add_med_time_frequency" />
+
+            <View
+                android:id="@+id/divider11"
+                android:layout_width="377dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="@+id/divider10"
+                app:layout_constraintStart_toStartOf="@+id/divider10"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_twice_daily_add_med_time_frequency" />
+
+            <View
+                android:id="@+id/divider12"
+                android:layout_width="377dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="@+id/divider10"
+                app:layout_constraintStart_toStartOf="@+id/divider10"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_3_times_a_day_add_med_time_frequency" />
+
+            <TextView
+                android:id="@+id/text_view_twice_daily_add_med_time_frequency"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Twice daily"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/text_view_once_daily_add_med_time_frequency"
+                app:layout_constraintStart_toStartOf="@+id/text_view_once_daily_add_med_time_frequency"
+                app:layout_constraintTop_toBottomOf="@+id/divider10" />
+
+            <TextView
+                android:id="@+id/text_view_3_times_a_day_add_med_time_frequency"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="3 times a day"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/text_view_twice_daily_add_med_time_frequency"
+                app:layout_constraintStart_toStartOf="@+id/text_view_once_daily_add_med_time_frequency"
+                app:layout_constraintTop_toBottomOf="@+id/divider11" />
+
+            <TextView
+                android:id="@+id/text_view_4_times_a_day_add_med_time_frequency"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="4 times a day"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/text_view_3_times_a_day_add_med_time_frequency"
+                app:layout_constraintStart_toStartOf="@+id/text_view_once_daily_add_med_time_frequency"
+                app:layout_constraintTop_toBottomOf="@+id/divider12" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

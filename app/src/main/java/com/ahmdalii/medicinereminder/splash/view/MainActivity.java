@@ -26,8 +26,6 @@ public class MainActivity extends AppCompatActivity implements ConnectivityRecei
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Objects.requireNonNull(getSupportActionBar()).hide();
-
         connectionLostMain = findViewById(R.id.connectionLostMain);
         fragmentContainerView = findViewById(R.id.fragmentContainerView);
 
