@@ -18,14 +18,13 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.ahmdalii.medicinereminder.R;
+import com.ahmdalii.medicinereminder.UIHelper;
 import com.ahmdalii.medicinereminder.db.room.user.ConcreteLocalSourceUser;
 import com.ahmdalii.medicinereminder.home.view.HomeActivity;
-import com.ahmdalii.medicinereminder.model.User;
 import com.ahmdalii.medicinereminder.network.FirebaseClient;
 import com.ahmdalii.medicinereminder.register.presenter.RegisterPresenter;
 import com.ahmdalii.medicinereminder.register.presenter.RegisterPresenterInterface;
@@ -124,18 +123,7 @@ public class RegisterFragment extends Fragment implements RegisterFragmentInterf
 
     @Override
     public void onImgUploadError(String error) {
-        showAlert(error);
-    }
-
-    void showAlert(String error) {
-        new AlertDialog.Builder(view.getContext())
-                .setTitle(R.string.error)
-                .setMessage(error)
-                .setPositiveButton(R.string.ok, (dialogInterface, i) -> {
-
-                })
-                .setIcon(R.drawable.error_icon)
-                .show();
+        UIHelper.showAlert(view.getContext(), R.string.error, error, R.drawable.error_icon);
     }
 
     @Override
@@ -151,7 +139,7 @@ public class RegisterFragment extends Fragment implements RegisterFragmentInterf
 
     @Override
     public void onError(String error) {
-        showAlert(error);
+        UIHelper.showAlert(view.getContext(), R.string.error, error, R.drawable.error_icon);
     }
 
     @Override

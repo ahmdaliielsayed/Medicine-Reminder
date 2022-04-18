@@ -1,7 +1,7 @@
 package com.ahmdalii.medicinereminder.network;
 
-public interface NetworkDelegate {
+public interface NetworkRegisterDelegate {
 
-    void onResponse();
+    void onResponse(String userId);
     void onFailure(String error);
 }

@@ -7,7 +7,7 @@ import com.ahmdalii.medicinereminder.Constants;
 import com.ahmdalii.medicinereminder.db.room.user.LocalSourceUser;
 import com.ahmdalii.medicinereminder.db.sharedpreference.SharedPrefManager;
 import com.ahmdalii.medicinereminder.model.User;
-import com.ahmdalii.medicinereminder.network.NetworkDelegate;
+import com.ahmdalii.medicinereminder.network.NetworkRegisterDelegate;
 import com.ahmdalii.medicinereminder.network.NetworkImageProfileDelegate;
 import com.ahmdalii.medicinereminder.network.RemoteSource;
 
@@ -38,8 +38,8 @@ public class RegisterRepo implements RegisterRepoInterface {
     }
 
     @Override
-    public void createUserOnFirebase(NetworkDelegate networkDelegate, String name, String email, String password, String profileImageURI) {
-        remoteSource.enqueueCall(networkDelegate, name, email, password, profileImageURI);
+    public void createUserOnFirebase(NetworkRegisterDelegate networkRegisterDelegate, String name, String email, String password, String profileImageURI) {
+        remoteSource.enqueueCall(networkRegisterDelegate, name, email, password, profileImageURI);
     }
 
     @Override

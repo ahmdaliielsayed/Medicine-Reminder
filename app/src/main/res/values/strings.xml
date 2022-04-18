@@ -44,4 +44,7 @@
     <string name="error_msg_password_incompatible">Two passwords incompatible</string>
     <string name="addamed">Add A Med</string>
     <string name="comment_on_play_store">Please, comment with error on play store to fix this error!</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="reset_link_sent">Email sent to you Successfully! \nPlease, check your email inbox.</string>
+    <string name="reset">Reset</string>
 </resources>

@@ -5,5 +5,7 @@ import android.net.Uri;
 public interface RemoteSource {
 
     void enqueueCall(NetworkImageProfileDelegate networkImageProfileDelegate, Uri uriProfileImage);
-    void enqueueCall(NetworkDelegate networkDelegate, String name, String email, String password, String profileImageURI);
+    void enqueueCall(NetworkRegisterDelegate networkRegisterDelegate, String name, String email, String password, String profileImageURI);
+    void enqueueCall(NetworkDelegate networkDelegate, String email, String password);
+    void enqueueCall(NetworkDelegate networkDelegate, String email);
 }

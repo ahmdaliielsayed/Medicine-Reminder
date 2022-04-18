@@ -5,13 +5,11 @@ import android.content.SharedPreferences;
 
 public class SharedPrefManager {
 
-    private Context context;
     private final SharedPreferences sharedPreferences;
     private final SharedPreferences.Editor editor;
     private static SharedPrefManager sharedPrefManager;
 
     private SharedPrefManager(Context context, String fileName) {
-        this.context = context;
         sharedPreferences = context.getSharedPreferences(fileName, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
     }

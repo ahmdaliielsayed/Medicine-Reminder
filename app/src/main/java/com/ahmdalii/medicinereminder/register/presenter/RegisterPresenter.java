@@ -3,15 +3,15 @@ package com.ahmdalii.medicinereminder.register.presenter;
 import android.net.Uri;
 
 import com.ahmdalii.medicinereminder.model.User;
-import com.ahmdalii.medicinereminder.network.NetworkDelegate;
+import com.ahmdalii.medicinereminder.network.NetworkRegisterDelegate;
 import com.ahmdalii.medicinereminder.network.NetworkImageProfileDelegate;
 import com.ahmdalii.medicinereminder.register.repository.RegisterRepoInterface;
 import com.ahmdalii.medicinereminder.register.view.RegisterFragmentInterface;
 
-public class RegisterPresenter implements RegisterPresenterInterface, NetworkImageProfileDelegate, NetworkDelegate {
+public class RegisterPresenter implements RegisterPresenterInterface, NetworkImageProfileDelegate, NetworkRegisterDelegate {
 
-    private RegisterFragmentInterface viewFragmentInterface;
-    private RegisterRepoInterface repoInterface;
+    private final RegisterFragmentInterface viewFragmentInterface;
+    private final RegisterRepoInterface repoInterface;
 
     private String name, email, password, profileImageURI;
 

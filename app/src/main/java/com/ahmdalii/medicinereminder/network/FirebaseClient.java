@@ -2,15 +2,9 @@ package com.ahmdalii.medicinereminder.network;
 
 import android.net.Uri;
 
-import androidx.annotation.NonNull;
-
-import com.ahmdalii.medicinereminder.R;
 import com.ahmdalii.medicinereminder.model.User;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
@@ -24,7 +18,7 @@ public class FirebaseClient implements RemoteSource {
 
     private static FirebaseClient firebaseClient = null;
 
-    private FirebaseAuth mAuth;
+    private final FirebaseAuth mAuth;
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
 
@@ -56,7 +50,7 @@ public class FirebaseClient implements RemoteSource {
 
     // register user with email and password and create user profile on firebase
     @Override
-    public void enqueueCall(NetworkDelegate networkDelegate, String name, String email, String password, String profileImageURI) {
+    public void enqueueCall(NetworkRegisterDelegate networkRegisterDelegate, String name, String email, String password, String profileImageURI) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -73,11 +67,35 @@ public class FirebaseClient implements RemoteSource {
                                         databaseReference = FirebaseDatabase.getInstance().getReference("Users");
                                         User user = new User(uid, name, email, password, profileImageURI, null);
                                         databaseReference.child(uid).setValue(user)
-                                                .addOnCompleteListener(task2 -> networkDelegate.onResponse(uid))
-                                                .addOnFailureListener(e -> networkDelegate.onFailure(e.getMessage()));
+                                                .addOnCompleteListener(task2 -> networkRegisterDelegate.onResponse(uid))
+                                                .addOnFailureListener(e -> networkRegisterDelegate.onFailure(e.getMessage()));
                                     })
-                                    .addOnFailureListener(e -> networkDelegate.onFailure(e.getMessage()));
+                                    .addOnFailureListener(e -> networkRegisterDelegate.onFailure(e.getMessage()));
                         }
+                    }
+                })
+                .addOnFailureListener(e -> networkRegisterDelegate.onFailure(e.getMessage()));
+    }
+
+    // login user with email and password
+    @Override
+    public void enqueueCall(NetworkDelegate networkDelegate, String email, String password) {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        networkDelegate.onResponse();
+                    }
+                })
+                .addOnFailureListener(e -> networkDelegate.onFailure(e.getMessage()));
+    }
+
+    // reset password
+    @Override
+    public void enqueueCall(NetworkDelegate networkDelegate, String email) {
+        mAuth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        networkDelegate.onResponse();
                     }
                 })
                 .addOnFailureListener(e -> networkDelegate.onFailure(e.getMessage()));
