@@ -24,7 +24,7 @@ public class ConcreteLocalSourceUser implements LocalSourceUser {
     }
 
     @Override
-    public void insertMedicine(User user) {
+    public void insertUser(User user) {
         new Thread(() -> dao.insertUser(user)).start();
     }
 }

@@ -47,4 +47,6 @@
     <string name="reset_password">Reset Password</string>
     <string name="reset_link_sent">Email sent to you Successfully! \nPlease, check your email inbox.</string>
     <string name="reset">Reset</string>
+    <string name="google_sign_in_failed">Google sign in failed!</string>
+    <string name="coming_soon">This feature will be activated soon…</string>
 </resources>

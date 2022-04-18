@@ -44,7 +44,7 @@ public class RegisterRepo implements RegisterRepoInterface {
 
     @Override
     public void insertUserToRoom(User user) {
-        localSourceUser.insertMedicine(user);
+        localSourceUser.insertUser(user);
     }
 
     @Override
