@@ -1,17 +1,15 @@
 package com.ahmdalii.medicinereminder.splash.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentContainerView;
-
 import android.content.Context;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentContainerView;
+
 import com.ahmdalii.medicinereminder.ConnectivityReceiver;
 import com.ahmdalii.medicinereminder.R;
-
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements ConnectivityReceiver.NetworkStateReceiverListener {
 
