@@ -1,10 +1,14 @@
 package com.ahmdalii.medicinereminder.login.presenter;
 
+import android.app.Activity;
+
 import com.ahmdalii.medicinereminder.login.repository.LoginRepoInterface;
 import com.ahmdalii.medicinereminder.login.view.LoginFragmentInterface;
-import com.ahmdalii.medicinereminder.network.NetworkDelegate;
+import com.ahmdalii.medicinereminder.model.User;
+import com.ahmdalii.medicinereminder.network.NetworkLoginDelegate;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 
-public class LoginPresenter implements LoginPresenterInterface, NetworkDelegate {
+public class LoginPresenter implements LoginPresenterInterface, NetworkLoginDelegate {
 
     private final LoginFragmentInterface viewFragmentInterface;
     private final LoginRepoInterface repoInterface;
@@ -20,10 +24,26 @@ public class LoginPresenter implements LoginPresenterInterface, NetworkDelegate 
     }
 
     @Override
+    public GoogleSignInClient getGoogleSignInClient(Activity activity) {
+        return repoInterface.getGoogleSignInClient(activity);
+    }
+
+    @Override
+    public void signInWithGoogle(String idToken) {
+        repoInterface.signInWithGoogle(this, idToken);
+    }
+
+    @Override
     public void onResponse() {
         repoInterface.setUserLogin(true);
         viewFragmentInterface.hideProgressbar();
         viewFragmentInterface.navigateToHomeScreen();
+    }
+
+    @Override
+    public void onResponse(User user) {
+        repoInterface.insertUserToRoom(user);
+        onResponse();
     }
 
     @Override

@@ -1,11 +1,18 @@
 package com.ahmdalii.medicinereminder.network;
 
+import android.app.Activity;
 import android.net.Uri;
 
+import com.ahmdalii.medicinereminder.R;
 import com.ahmdalii.medicinereminder.model.User;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -79,7 +86,7 @@ public class FirebaseClient implements RemoteSource {
 
     // login user with email and password
     @Override
-    public void enqueueCall(NetworkDelegate networkDelegate, String email, String password) {
+    public void enqueueCall(NetworkLoginDelegate networkDelegate, String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -97,6 +104,35 @@ public class FirebaseClient implements RemoteSource {
                     if (task.isSuccessful()) {
                         networkDelegate.onResponse();
                     }
+                })
+                .addOnFailureListener(e -> networkDelegate.onFailure(e.getMessage()));
+    }
+
+    @Override
+    public GoogleSignInClient getGoogleSignInClient(Activity activity) {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(activity.getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        return GoogleSignIn.getClient(activity, gso);
+    }
+
+    @Override
+    public void signInWithGoogle(NetworkLoginDelegate networkDelegate, String idToken) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        mAuth.signInWithCredential(credential)
+                .addOnSuccessListener(authResult -> {
+                    String uid = Objects.requireNonNull(authResult.getUser()).getUid();
+                    String displayName = authResult.getUser().getDisplayName();
+                    String email = authResult.getUser().getEmail();
+                    String photo_uri = Objects.requireNonNull(authResult.getUser().getPhotoUrl()).toString();
+
+                    databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+                    User user = new User(uid, displayName, email, null, photo_uri, null);
+                    databaseReference.child(uid).setValue(user)
+                            .addOnCompleteListener(task2 -> networkDelegate.onResponse(user))
+                            .addOnFailureListener(e -> networkDelegate.onFailure(e.getMessage()));
                 })
                 .addOnFailureListener(e -> networkDelegate.onFailure(e.getMessage()));
     }
