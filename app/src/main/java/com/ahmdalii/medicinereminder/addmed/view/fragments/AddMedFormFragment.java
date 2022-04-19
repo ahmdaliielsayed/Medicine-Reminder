@@ -48,7 +48,8 @@ public class AddMedFormFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        ((TextView) view.findViewById(R.id.text_view_toolbar_title)).setText("Medication Form");
+        String toolbarTitle = ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().getName();
+        ((TextView) view.findViewById(R.id.text_view_toolbar_title)).setText(toolbarTitle);
         ((TextView) view.findViewById(R.id.text_view_add_header)).setText("What form is the med?");
         this.savedInstanceState = savedInstanceState;
 

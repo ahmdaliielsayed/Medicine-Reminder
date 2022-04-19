@@ -41,7 +41,8 @@ public class AddMedTimeFrequencyFragment extends Fragment implements View.OnClic
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        ((TextView) view.findViewById(R.id.text_view_toolbar_title)).setText("Medication Frequency");
+        String toolbarTitle = ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().getName();
+        ((TextView) view.findViewById(R.id.text_view_toolbar_title)).setText(toolbarTitle);
         ((TextView) view.findViewById(R.id.text_view_add_header)).setText("How much do you take this med?");
 
 

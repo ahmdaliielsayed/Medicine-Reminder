@@ -1,6 +1,11 @@
 package com.ahmdalii.medicinereminder.addmed.view.fragments;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -10,55 +15,43 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import com.ahmdalii.medicinereminder.R;
 import com.ahmdalii.medicinereminder.addmed.view.AddMedActivityInterface;
 
+public class AddMedEveryNumberOfDaysFragment extends Fragment {
 
-public class AddMedReasonFragment extends Fragment {
-
-
-
-
-    public AddMedReasonFragment() {
+    public AddMedEveryNumberOfDaysFragment() {
         // Required empty public constructor
     }
 
-    public static AddMedReasonFragment newInstance(String param1, String param2) {
-        AddMedReasonFragment fragment = new AddMedReasonFragment();
-
+    public static AddMedEveryNumberOfDaysFragment newInstance(String param1, String param2) {
+        AddMedEveryNumberOfDaysFragment fragment = new AddMedEveryNumberOfDaysFragment();
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_med_reason, container, false);
+        return inflater.inflate(R.layout.fragment_add_med_every_number_of_days, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
         String toolbarTitle = ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().getName();
         ((TextView) view.findViewById(R.id.text_view_toolbar_title)).setText(toolbarTitle);
-        ((TextView) view.findViewById(R.id.text_view_add_header)).setText("What are you taking it for?");
-        EditText reasonEditText = view.findViewById(R.id.edit_text_med_reason_add_med);
-        Button nextButton = view.findViewById(R.id.button_next_add_med);
+        ((TextView) view.findViewById(R.id.text_view_add_header)).setText("How much days between 2 doses?");
 
+        Button nextButton = ((Button) view.findViewById(R.id.button_next_add_med));
         nextButton.setVisibility(View.GONE);
+        EditText numEditText = ((EditText) view.findViewById(R.id.edit_text_every_number_of_days_add_med));
 
-        reasonEditText.addTextChangedListener(new TextWatcher() {
+        numEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -74,17 +67,17 @@ public class AddMedReasonFragment extends Fragment {
                 if(editable.toString().length() == 0) {
                     nextButton.setVisibility(View.GONE);
                 }
-                else{
+                else {
                     nextButton.setVisibility(View.VISIBLE);
                 }
             }
         });
 
-        view.findViewById(R.id.button_next_add_med).setOnClickListener(new View.OnClickListener() {
+        nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().setReason(reasonEditText.getText().toString());
-                ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedDayFrequenceFragment());
+                ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setDaysBetweenDoses(Integer.parseInt(numEditText.getText().toString()));
+                ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedTimesFragment());
             }
         });
     }

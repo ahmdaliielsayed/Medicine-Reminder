@@ -42,8 +42,8 @@ public class AddMedDayFrequenceFragment extends Fragment implements View.OnClick
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-        ((TextView) view.findViewById(R.id.text_view_toolbar_title)).setText("Medication Frequency");
+        String toolbarTitle = ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().getName();
+        ((TextView) view.findViewById(R.id.text_view_toolbar_title)).setText(toolbarTitle);
         ((TextView) view.findViewById(R.id.text_view_add_header)).setText("How much do you take this med?");
 
         this.savedInstanceState = savedInstanceState;
@@ -57,18 +57,17 @@ public class AddMedDayFrequenceFragment extends Fragment implements View.OnClick
     public void onClick(View v) {
         if(((TextView) v).getId() == R.id.text_view_everyday_add_med) {
             ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setDayFrequency(MedicineDayFrequency.EVERYDAY);
-            ((AddMedActivityInterface) getActivity()).setMaxNumberOfSteps(11);
             ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedTimeFrequencyFragment());
         }
         else if(((TextView) v).getId() == R.id.text_view_specific_days_of_the_week_add_med) {
+            ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setTimeFrequency(1);
             ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setDayFrequency(MedicineDayFrequency.SPECIFIC_DAYS);
-            ((AddMedActivityInterface) getActivity()).setMaxNumberOfSteps(11);
             ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedWeekDaysFragment());
         }
         else if(((TextView) v).getId() == R.id.text_view_every_number_of_days_add_med) {
+            ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setTimeFrequency(1);
             ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setDayFrequency(MedicineDayFrequency.EVERY_NUMBER_OF_DAYS);
-            ((AddMedActivityInterface) getActivity()).setMaxNumberOfSteps(10);
-            ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedTimesFragment());
+            ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedEveryNumberOfDaysFragment());
         }
     }
 }

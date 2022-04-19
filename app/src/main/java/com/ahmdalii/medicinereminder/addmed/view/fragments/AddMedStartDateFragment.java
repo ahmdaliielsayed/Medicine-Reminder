@@ -20,6 +20,7 @@ import com.ahmdalii.medicinereminder.addmed.view.AddMedActivityInterface;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Locale;
 
 
@@ -51,17 +52,19 @@ public class AddMedStartDateFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        ((TextView) view.findViewById(R.id.text_view_toolbar_title)).setText("Medication Start Date");
+        String toolbarTitle = ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().getName();
+        ((TextView) view.findViewById(R.id.text_view_toolbar_title)).setText(toolbarTitle);
         ((TextView) view.findViewById(R.id.text_view_add_header)).setText("When do you need to start taking this med?");
 
         DatePicker startDatePicker = view.findViewById(R.id.date_picker_start_date_add_med);
+        startDatePicker.setMinDate(System.currentTimeMillis());
 
         view.findViewById(R.id.button_next_add_med).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Date pickerStartDate = new Date(startDatePicker.getYear() - 1900, startDatePicker.getMonth(), startDatePicker.getDayOfMonth());
-                DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
-                String startDate = dateFormat.format(pickerStartDate);
+                LocalDate pickerStartDate = LocalDate.of(startDatePicker.getYear(), startDatePicker.getMonth() + 1 , startDatePicker.getDayOfMonth());
+                String startDate = pickerStartDate.toString();
+                ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setStartDate(pickerStartDate);
                 ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().setStartDate(startDate);
                 ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedEndDateFragment());
             }

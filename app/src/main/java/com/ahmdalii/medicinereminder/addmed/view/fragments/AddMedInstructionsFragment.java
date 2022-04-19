@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.ahmdalii.medicinereminder.R;
+import com.ahmdalii.medicinereminder.addmed.model.MedicineInstruction;
 import com.ahmdalii.medicinereminder.addmed.view.AddMedActivityInterface;
 
 
@@ -43,11 +45,9 @@ public class AddMedInstructionsFragment extends Fragment implements View.OnClick
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         this.savedInstanceState = savedInstanceState;
-
-        ((TextView) view.findViewById(R.id.text_view_toolbar_title)).setText("Medication Refill Reminder");
+        String toolbarTitle = ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().getName();
+        ((TextView) view.findViewById(R.id.text_view_toolbar_title)).setText(toolbarTitle);
         ((TextView) view.findViewById(R.id.text_view_add_header)).setText("Medication Refill Reminder");
-
-
 
         view.findViewById(R.id.text_view_before_eating_add_med_instructions).setOnClickListener(this);
         view.findViewById(R.id.text_view_while_eating_add_med_instructions).setOnClickListener(this);
@@ -57,15 +57,15 @@ public class AddMedInstructionsFragment extends Fragment implements View.OnClick
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.text_view_before_eating_add_med_instructions) {
-
+            ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().setInstructions(MedicineInstruction.BEFORE_EATING.getInstruction());
         }
         else if(v.getId() == R.id.text_view_while_eating_add_med_instructions) {
-
+            ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().setInstructions(MedicineInstruction.WHILE_EATING.getInstruction());
         }
         else if(v.getId() == R.id.text_view_after_eating_add_med_instructions) {
-
+            ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().setInstructions(MedicineInstruction.AFTER_EATING.getInstruction());
         }
 
-        ((AddMedActivityInterface) getActivity()).addMedFinished();
+        ((AddMedActivityInterface) getActivity()).getAddMedPresenter().addMedFinished();
     }
 }

@@ -25,6 +25,7 @@ public class AddMedTimesFragment extends Fragment implements AddMedTimesFragment
 
     private int timeFrequency = 1;
     private ArrayList<Integer> amounts;
+    private ArrayList<Time> times;
 
     Button nextButton;
 
@@ -51,7 +52,8 @@ public class AddMedTimesFragment extends Fragment implements AddMedTimesFragment
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        ((TextView) view.findViewById(R.id.text_view_toolbar_title)).setText("Medication Times");
+        String toolbarTitle = ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().getName();
+        ((TextView) view.findViewById(R.id.text_view_toolbar_title)).setText(toolbarTitle);
         ((TextView) view.findViewById(R.id.text_view_add_header)).setText("When do you need to take this med?");
         nextButton = view.findViewById(R.id.button_next_add_med);
         nextButton.setVisibility(View.GONE);
@@ -59,6 +61,9 @@ public class AddMedTimesFragment extends Fragment implements AddMedTimesFragment
         MedicineDayFrequency dayFrequency = ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getDayFrequency();
         if(dayFrequency == MedicineDayFrequency.EVERYDAY) {
             timeFrequency = ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getTimeFrequency();
+        }
+        else {
+
         }
 
         initDoseAmount();
@@ -68,10 +73,21 @@ public class AddMedTimesFragment extends Fragment implements AddMedTimesFragment
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                times = ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getTimes();
+                setUnchangedTimes();
+                ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setAmounts(amounts);
                 ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedStartDateFragment());
             }
         });
 
+    }
+
+    private void setUnchangedTimes() {
+        for(int i = 0; i < times.size(); i++) {
+            if(times.get(i) == null) {
+                times.set(i, new Time(System.currentTimeMillis()));
+            }
+        }
     }
 
     private void initDoseAmount() {

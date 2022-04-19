@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".AddMedRefillReminderFragment">
+    >
 
     <include layout="@layout/add_med_toolbar"/>
 
@@ -28,7 +28,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/text_view_remind_me_at_refill_reminder_add_med"
-        app:layout_constraintTop_toBottomOf="@+id/edit_text_remind_me_when_refill_reminder_add_med" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_remind_me_when_refill_reminder_add_med"
+        />
 
     <include layout="@layout/add_med_next_button"/>
 

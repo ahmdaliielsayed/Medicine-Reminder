@@ -3,6 +3,7 @@ package com.ahmdalii.medicinereminder.addmed.view.adapters;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,8 +29,6 @@ public class MedTimesAdapter extends RecyclerView.Adapter<MedTimesAdapter.ViewHo
     int count;
     AddMedTimesFragmentInterface fragment;
 
-//    ArrayList<Time> dosesTimes;
-//    ArrayList<Integer> dosesValues;
 
     public MedTimesAdapter(Context context, int count, AddMedTimesFragmentInterface fragment) {
         this.context = context;
@@ -80,7 +79,6 @@ public class MedTimesAdapter extends RecyclerView.Adapter<MedTimesAdapter.ViewHo
                     fragment.putAmount(i, null);
                 } else {
                     fragment.putAmount(i, Integer.parseInt(s.toString()));
-
                 }
             }
         });
@@ -89,7 +87,8 @@ public class MedTimesAdapter extends RecyclerView.Adapter<MedTimesAdapter.ViewHo
         holder.timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                fragment.putTime(i, new Time(TimeUnit.HOURS.toMillis(hourOfDay) + TimeUnit.MINUTES.toMillis(minute)));
+                Log.i("FINISH", "onTimeChanged: " + hourOfDay);
+                fragment.putTime(i, new Time(holder.timePicker.getHour(), holder.timePicker.getMinute(), 0));
             }
         });
 

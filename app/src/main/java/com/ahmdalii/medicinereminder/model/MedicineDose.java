@@ -95,4 +95,18 @@ public class MedicineDose {
     public void setSync(Boolean sync) {
         isSync = sync;
     }
+
+    @Override
+    public String toString() {
+        return "MedicineDose{" +
+                "id='" + id + '\'' +
+                ", medID='" + medID + '\'' +
+                ", day='" + day + '\'' +
+                ", time='" + time + '\'' +
+                ", amount=" + amount +
+                ", status='" + status + '\'' +
+                ", giverID='" + giverID + '\'' +
+                ", isSync=" + isSync +
+                '}';
+    }
 }

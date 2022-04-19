@@ -2,32 +2,33 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraint_layout_add_med_times"
+    android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    >
+    tools:context=".addmed.view.fragments.AddMedEveryNumberOfDaysFragment">
 
-    <include layout="@layout/add_med_toolbar"/>
+    <include layout="@layout/add_med_toolbar" />
 
     <include
-        android:id="@+id/include7"
+        android:id="@+id/include12"
         layout="@layout/add_med_header"
         tools:layout_editor_absoluteY="56dp" />
 
-    <include layout="@layout/add_med_next_button"/>
+    <include layout="@layout/add_med_next_button" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_med_times_add_med"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
+    <EditText
+        android:id="@+id/edit_text_every_number_of_days_add_med"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="96dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:ems="10"
+        android:inputType="number"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include7" />
+        app:layout_constraintTop_toBottomOf="@+id/include12"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.ahmdalii.medicinereminder.db.room.medicine;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -25,7 +26,6 @@ public class ConcreteLocalSourceMedicine implements LocalSourceMedicine {
         if (localSource == null) {
             localSource = new ConcreteLocalSourceMedicine(context);
         }
-
         return localSource;
     }
 
@@ -33,6 +33,7 @@ public class ConcreteLocalSourceMedicine implements LocalSourceMedicine {
     public void insertMedicine(Medicine medicine) {
         new Thread(() -> {
             dao.insertMedicine(medicine);
+            Log.i("INSERT", "insertMedicine: ");
         }).start();
     }
 

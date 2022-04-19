@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.ahmdalii.medicinereminder.R;
 import com.ahmdalii.medicinereminder.addmed.presenter.AddMedPresenter;
@@ -95,13 +97,6 @@ public class AddMedActivity extends AppCompatActivity implements AddMedActivityI
         stepper.setStepsNumber(stepsNumber);
     }
 
-    public void addMedFinished() {
-
-    }
-
-    public void setMaxNumberOfSteps(int n) {
-        stepsNumber = n;
-    }
 
     @Override
     public AddMedPresenterInterface getAddMedPresenter() {
@@ -116,5 +111,20 @@ public class AddMedActivity extends AppCompatActivity implements AddMedActivityI
         else {
             finish();
         }
+    }
+
+    @Override
+    public void closeActivity() {
+        finish();
+    }
+
+    @Override
+    public void showToast(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 }

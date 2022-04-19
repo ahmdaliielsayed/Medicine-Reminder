@@ -10,9 +10,5 @@ import com.ahmdalii.medicinereminder.addmed.presenter.AddMedPresenterInterface;
 public interface AddMedActivityInterface {
     void nextStep(Bundle savedInstanceState, Fragment fragment);
 
-    void addMedFinished();
-
-    void setMaxNumberOfSteps(int n);
-
     AddMedPresenterInterface getAddMedPresenter();
 }

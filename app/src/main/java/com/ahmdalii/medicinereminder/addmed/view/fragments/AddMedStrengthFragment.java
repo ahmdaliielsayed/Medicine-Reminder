@@ -61,7 +61,8 @@ public class AddMedStrengthFragment extends Fragment implements AddMedStrengthFr
         unit = units.get(0);
         setupRecyclerView(view);
 
-        ((TextView) view.findViewById(R.id.text_view_toolbar_title)).setText("Medication Strength");
+        String toolbarTitle = ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().getName();
+        ((TextView) view.findViewById(R.id.text_view_toolbar_title)).setText(toolbarTitle);
         ((TextView) view.findViewById(R.id.text_view_add_header)).setText("What strength is the med?");
         unitTextView = view.findViewById(R.id.text_view_unit_add_med_strength);
         EditText strengthEditText = view.findViewById(R.id.edit_text_strength_add_med);
@@ -96,6 +97,7 @@ public class AddMedStrengthFragment extends Fragment implements AddMedStrengthFr
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                strength = Integer.parseInt(strengthEditText.getText().toString());
                 ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().setUnit(unit);
                 ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().setStrength(strength);
                 ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedReasonFragment());

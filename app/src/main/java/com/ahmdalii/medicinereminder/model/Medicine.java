@@ -1,6 +1,7 @@
 package com.ahmdalii.medicinereminder.model;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -8,22 +9,35 @@ import androidx.room.PrimaryKey;
 public class Medicine {
     @PrimaryKey
     @NonNull
+    @ColumnInfo(name = "id")
     private String id;
+    @ColumnInfo(name = "name")
     private String name;
+    @ColumnInfo(name = "form")
     private String form;
+    @ColumnInfo(name = "unit")
     private String unit;
+    @ColumnInfo(name = "strength")
     private Integer strength;
+    @ColumnInfo(name = "reason")
     private String reason;
-    private String daySchedulerID;
+    @ColumnInfo(name = "instructions")
     private String instructions;
-    private Integer imageResourceID;
+    @ColumnInfo(name = "startDate")
     private String startDate;
+    @ColumnInfo(name = "endDate")
     private String endDate;
+    @ColumnInfo(name = "remainingMedAmount")
     private Integer remainingMedAmount;
+    @ColumnInfo(name = "reminderMedAmount")
     private Integer reminderMedAmount;
+    @ColumnInfo(name = "refillReminderTime")
     private String refillReminderTime;
+    @ColumnInfo(name = "isActivated")
     private Boolean isActivated;
+    @ColumnInfo(name = "isSync")
     private Boolean isSync;
+    @ColumnInfo(name = "userID")
     private String userID;
 
     public Medicine() {
@@ -78,28 +92,12 @@ public class Medicine {
         this.reason = reason;
     }
 
-    public String getDaySchedulerID() {
-        return daySchedulerID;
-    }
-
-    public void setDaySchedulerID(String daySchedulerID) {
-        this.daySchedulerID = daySchedulerID;
-    }
-
     public String getInstructions() {
         return instructions;
     }
 
     public void setInstructions(String instructions) {
         this.instructions = instructions;
-    }
-
-    public Integer getImageResourceID() {
-        return imageResourceID;
-    }
-
-    public void setImageResourceID(Integer imageResourceID) {
-        this.imageResourceID = imageResourceID;
     }
 
     public String getStartDate() {
@@ -164,5 +162,27 @@ public class Medicine {
 
     public void setUserID(String userID) {
         this.userID = userID;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Medicine{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", form='" + form + '\'' +
+                ", unit='" + unit + '\'' +
+                ", strength=" + strength +
+                ", reason='" + reason + '\'' +
+                ", instructions='" + instructions + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", remainingMedAmount=" + remainingMedAmount +
+                ", reminderMedAmount=" + reminderMedAmount +
+                ", refillReminderTime='" + refillReminderTime + '\'' +
+                ", isActivated=" + isActivated +
+                ", isSync=" + isSync +
+                ", userID='" + userID + '\'' +
+                '}';
     }
 }

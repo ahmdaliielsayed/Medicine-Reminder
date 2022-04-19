@@ -3,6 +3,7 @@ package com.ahmdalii.medicinereminder.model;
 public enum DoseStatus {
     TAKEN("taken"),
     SKIPPED("skipped"),
+    FUTURE("future"),
     UNKNOWN("unknown");
 
     private String status;
