@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".AddMedInstructionsFragment">
+>
 
     <include layout="@layout/add_med_toolbar"/>
 
@@ -14,10 +14,6 @@
         android:id="@+id/include11"
         layout="@layout/add_med_header"
         tools:layout_editor_absoluteY="56dp" />
-
-
-
-    <include layout="@layout/add_med_next_button"/>
 
     <ScrollView
         android:layout_width="0dp"

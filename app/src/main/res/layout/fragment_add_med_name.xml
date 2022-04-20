@@ -22,7 +22,6 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:textColor="@color/dodger_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraint_layout_add_header"

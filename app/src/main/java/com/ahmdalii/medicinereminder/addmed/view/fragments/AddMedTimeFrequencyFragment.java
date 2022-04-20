@@ -1,4 +1,4 @@
-package com.ahmdalii.medicinereminder.addmed.view;
+package com.ahmdalii.medicinereminder.addmed.view.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.ahmdalii.medicinereminder.R;
+import com.ahmdalii.medicinereminder.addmed.view.AddMedActivityInterface;
 
 
 public class AddMedTimeFrequencyFragment extends Fragment implements View.OnClickListener {
@@ -40,7 +41,8 @@ public class AddMedTimeFrequencyFragment extends Fragment implements View.OnClic
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        ((TextView) view.findViewById(R.id.text_view_toolbar_title)).setText("Medication Frequency");
+        String toolbarTitle = ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().getName();
+        ((TextView) view.findViewById(R.id.text_view_toolbar_title)).setText(toolbarTitle);
         ((TextView) view.findViewById(R.id.text_view_add_header)).setText("How much do you take this med?");
 
 
@@ -56,17 +58,17 @@ public class AddMedTimeFrequencyFragment extends Fragment implements View.OnClic
     @Override
     public void onClick(View v) {
         if(((TextView) v).getId() == R.id.text_view_once_daily_add_med_time_frequency) {
-
+            ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setTimeFrequency(1);
         }
         else if(((TextView) v).getId() == R.id.text_view_twice_daily_add_med_time_frequency) {
-
+            ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setTimeFrequency(2);
         }
         else if(((TextView) v).getId() == R.id.text_view_3_times_a_day_add_med_time_frequency) {
-
+            ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setTimeFrequency(3);
         }
         else if(((TextView) v).getId() == R.id.text_view_4_times_a_day_add_med_time_frequency) {
-
+            ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setTimeFrequency(4);
         }
-        ((AddMedActivity) getActivity()).nextStep(savedInstanceState, new AddMedTimesFragment());
+        ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedTimesFragment());
     }
 }

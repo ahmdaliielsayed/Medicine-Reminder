@@ -62,7 +62,7 @@ public class MedicationsSubAdapter extends RecyclerView.Adapter<MedicationsSubAd
             @Override
             public void onClick(View view) {
                 Log.i("emy", "onClick: you clicked a medication row " + data.get(position).getName());
-                //weite your code here
+
             }
         });
 

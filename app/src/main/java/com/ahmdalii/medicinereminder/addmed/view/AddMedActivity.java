@@ -6,14 +6,21 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.ahmdalii.medicinereminder.R;
+import com.ahmdalii.medicinereminder.addmed.presenter.AddMedPresenter;
+import com.ahmdalii.medicinereminder.addmed.presenter.AddMedPresenterInterface;
+import com.ahmdalii.medicinereminder.addmed.view.fragments.AddMedNameFragment;
 import com.shuhart.stepview.StepView;
 
 import java.util.ArrayList;
 
-public class AddMedActivity extends AppCompatActivity {
+public class AddMedActivity extends AppCompatActivity implements AddMedActivityInterface, AddMedView {
+
+    private AddMedPresenterInterface addMedPresenter;
 
     StepView stepper;
 
@@ -25,22 +32,22 @@ public class AddMedActivity extends AppCompatActivity {
     int stepIndex = 0;
     int stepsNumber = 11;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_med);
 
-        Toolbar toolbar = findViewById(R.id.toolbar_add_med);
-
-        setSupportActionBar(null);
-        setSupportActionBar(toolbar);
+        addMedPresenter = new AddMedPresenter(this);
 
         stepper = findViewById(R.id.stepper_add_med);
-
-        fragments = new ArrayList<>();
-        fragments.add(new AddMedNameFragment());
-
+        initToolbar();
         manager = getSupportFragmentManager();
+        initFragmentsList();
+        initStepper();
+    }
+
+    private void initStepper() {
         stepper.getState()
                 .animationType(StepView.ANIMATION_ALL)
                 .stepsNumber(stepsNumber)
@@ -48,15 +55,28 @@ public class AddMedActivity extends AppCompatActivity {
                 .commit();
     }
 
+    private void initFragmentsList() {
+        fragments = new ArrayList<>();
+        fragments.add(new AddMedNameFragment());
+    }
+
+    private void initToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar_add_med);
+
+        setSupportActionBar(null);
+        setSupportActionBar(toolbar);
+    }
+
     public void nextStep(Bundle savedInstanceState, Fragment fragment) {
         if(savedInstanceState == null) {
             stepIndex++;
-            stepper.setStepsNumber(stepsNumber);
+            activeFragment = fragment;
             fragments.add(fragment);
             transaction = manager.beginTransaction();
             transaction.setReorderingAllowed(true);
             transaction.add(R.id.fragment_container_view_add_med, fragment, "fragment" + stepIndex);
             transaction.commit();
+            stepper.setStepsNumber(stepsNumber);
         }
         else {
             activeFragment = manager.findFragmentByTag("fragment" + stepIndex);
@@ -64,11 +84,47 @@ public class AddMedActivity extends AppCompatActivity {
         stepper.go(stepIndex, true);
     }
 
-    public void addMedFinished() {
-
+    public void prevStep(Fragment fragment) {
+        stepIndex--;
+        activeFragment = fragment;
+        fragments.remove(fragment);
+        activeFragment = fragments.get(fragments.size() - 1);
+        transaction = manager.beginTransaction();
+        transaction.setReorderingAllowed(true);
+        transaction.remove(fragment);
+        transaction.commit();
+        stepper.go(stepIndex, true);
+        stepper.setStepsNumber(stepsNumber);
     }
 
-    public void decrementMaxNumberOfSteps() {
-        stepsNumber--;
+
+    @Override
+    public AddMedPresenterInterface getAddMedPresenter() {
+        return addMedPresenter;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(stepIndex != 0) {
+            prevStep(activeFragment);
+        }
+        else {
+            finish();
+        }
+    }
+
+    @Override
+    public void closeActivity() {
+        finish();
+    }
+
+    @Override
+    public void showToast(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 }

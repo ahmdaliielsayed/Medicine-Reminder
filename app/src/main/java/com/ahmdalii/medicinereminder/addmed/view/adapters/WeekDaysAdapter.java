@@ -1,4 +1,4 @@
-package com.ahmdalii.medicinereminder.addmed.view;
+package com.ahmdalii.medicinereminder.addmed.view.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -13,25 +13,20 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ahmdalii.medicinereminder.R;
+import com.ahmdalii.medicinereminder.addmed.view.fragments.AddMedWeekDaysFragmentInterface;
 
 import java.util.ArrayList;
 
 public class WeekDaysAdapter extends RecyclerView.Adapter<WeekDaysAdapter.ViewHolder> {
 
-    ArrayList<Pair<String, Boolean>> days;
+
 
     Context context;
+    AddMedWeekDaysFragmentInterface fragment;
 
-    public WeekDaysAdapter(Context context) {
+    public WeekDaysAdapter(Context context, AddMedWeekDaysFragmentInterface fragment) {
         this.context = context;
-        days = new ArrayList<>();
-        days.add(new Pair<>("Saturday", false));
-        days.add(new Pair<>("Sunday", false));
-        days.add(new Pair<>("Monday", false));
-        days.add(new Pair<>("Tuesday", false));
-        days.add(new Pair<>("Wednesday", false));
-        days.add(new Pair<>("Thursday", false));
-        days.add(new Pair<>("Friday", false));
+        this.fragment = fragment;
     }
 
     @NonNull
@@ -45,13 +40,13 @@ public class WeekDaysAdapter extends RecyclerView.Adapter<WeekDaysAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         int i = position;
-        holder.dayTextView.setText(days.get(i).first);
+        holder.dayTextView.setText(fragment.getDays().get(i).first.getDay());
 
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                days.set(i, new Pair<>(days.get(i).first, !days.get(i).second));
-                if(days.get(i).second == true) {
+                fragment.setDay(i, !fragment.getDays().get(i).second);
+                if(fragment.getDays().get(i).second) {
                     holder.dayTextView.setBackgroundColor(context.getResources().getColor(R.color.dodger_blue));
                     holder.dayTextView.setTextColor(Color.WHITE);
                 }

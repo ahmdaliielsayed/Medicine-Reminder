@@ -2,12 +2,18 @@ package com.ahmdalii.medicinereminder.network;
 
 import android.app.Activity;
 import android.net.Uri;
+import android.util.Log;
 
 import com.ahmdalii.medicinereminder.R;
+import com.ahmdalii.medicinereminder.model.Medicine;
+import com.ahmdalii.medicinereminder.model.MedicineDose;
 import com.ahmdalii.medicinereminder.model.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,6 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class FirebaseClient implements RemoteSource {
@@ -135,5 +143,40 @@ public class FirebaseClient implements RemoteSource {
                             .addOnFailureListener(e -> networkDelegate.onFailure(e.getMessage()));
                 })
                 .addOnFailureListener(e -> networkDelegate.onFailure(e.getMessage()));
+    }
+
+    @Override
+    public void enqueueCall(AddMedicineNetworkDelegate networkDelegate, Medicine medicine, ArrayList<MedicineDose> doses) {
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        String medID = databaseReference.child("medicine").push().getKey();
+
+        medicine.setUserID(uid);
+        databaseReference.child("medicine").child(medID).setValue(medicine).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                for(int i = 0; i < doses.size(); i++) {
+                    doses.get(i).setMedID(medID);
+                    databaseReference.child("dose").push().setValue(doses.get(i)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            networkDelegate.onFailure();
+                        }
+                    });
+                }
+                networkDelegate.onSuccess(medicine, doses);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                networkDelegate.onFailure();
+            }
+        });
+
     }
 }

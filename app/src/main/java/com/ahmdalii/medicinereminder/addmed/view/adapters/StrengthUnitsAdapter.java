@@ -1,4 +1,4 @@
-package com.ahmdalii.medicinereminder.addmed.view;
+package com.ahmdalii.medicinereminder.addmed.view.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ahmdalii.medicinereminder.R;
+import com.ahmdalii.medicinereminder.addmed.view.fragments.AddMedStrengthFragmentInterface;
 
 import java.util.ArrayList;
 
@@ -18,10 +19,12 @@ public class StrengthUnitsAdapter extends RecyclerView.Adapter<StrengthUnitsAdap
 
     Context context;
     ArrayList<String> units;
+    AddMedStrengthFragmentInterface fragment;
 
-    public StrengthUnitsAdapter(Context context, ArrayList<String> units) {
+    public StrengthUnitsAdapter(Context context, ArrayList<String> units, AddMedStrengthFragmentInterface fragment) {
         this.context = context;
         this.units = units;
+        this.fragment = fragment;
     }
 
     @NonNull
@@ -39,7 +42,7 @@ public class StrengthUnitsAdapter extends RecyclerView.Adapter<StrengthUnitsAdap
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Call a method in fragment to set the text view with the new unit
+                fragment.setUnit(units.get(i));
             }
         });
     }

@@ -1,4 +1,4 @@
-package com.ahmdalii.medicinereminder.addmed.view;
+package com.ahmdalii.medicinereminder.addmed.view.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.ahmdalii.medicinereminder.R;
+import com.ahmdalii.medicinereminder.addmed.model.MedicineDayFrequency;
+import com.ahmdalii.medicinereminder.addmed.view.AddMedActivityInterface;
 
 
 public class AddMedDayFrequenceFragment extends Fragment implements View.OnClickListener {
@@ -40,8 +42,8 @@ public class AddMedDayFrequenceFragment extends Fragment implements View.OnClick
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-        ((TextView) view.findViewById(R.id.text_view_toolbar_title)).setText("Medication Frequency");
+        String toolbarTitle = ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().getName();
+        ((TextView) view.findViewById(R.id.text_view_toolbar_title)).setText(toolbarTitle);
         ((TextView) view.findViewById(R.id.text_view_add_header)).setText("How much do you take this med?");
 
         this.savedInstanceState = savedInstanceState;
@@ -54,14 +56,18 @@ public class AddMedDayFrequenceFragment extends Fragment implements View.OnClick
     @Override
     public void onClick(View v) {
         if(((TextView) v).getId() == R.id.text_view_everyday_add_med) {
-            ((AddMedActivity) getActivity()).nextStep(savedInstanceState, new AddMedTimeFrequencyFragment());
+            ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setDayFrequency(MedicineDayFrequency.EVERYDAY);
+            ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedTimeFrequencyFragment());
         }
         else if(((TextView) v).getId() == R.id.text_view_specific_days_of_the_week_add_med) {
-            ((AddMedActivity) getActivity()).nextStep(savedInstanceState, new AddMedWeekDaysFragment());
+            ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setTimeFrequency(1);
+            ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setDayFrequency(MedicineDayFrequency.SPECIFIC_DAYS);
+            ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedWeekDaysFragment());
         }
         else if(((TextView) v).getId() == R.id.text_view_every_number_of_days_add_med) {
-            ((AddMedActivity) getActivity()).decrementMaxNumberOfSteps();
-            ((AddMedActivity) getActivity()).nextStep(savedInstanceState, new AddMedTimesFragment());
+            ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setTimeFrequency(1);
+            ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setDayFrequency(MedicineDayFrequency.EVERY_NUMBER_OF_DAYS);
+            ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedEveryNumberOfDaysFragment());
         }
     }
 }

@@ -1,8 +1,9 @@
-package com.ahmdalii.medicinereminder.addmed.view;
+package com.ahmdalii.medicinereminder.addmed.view.adapters;
 
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ahmdalii.medicinereminder.R;
+import com.ahmdalii.medicinereminder.addmed.view.fragments.AddMedTimesFragmentInterface;
 
 import java.sql.Time;
 import java.util.ArrayList;
@@ -25,19 +27,13 @@ public class MedTimesAdapter extends RecyclerView.Adapter<MedTimesAdapter.ViewHo
 
     Context context;
     int count;
+    AddMedTimesFragmentInterface fragment;
 
-    ArrayList<Time> dosesTimes;
-    ArrayList<Integer> dosesValues;
 
-    public MedTimesAdapter(Context context, int count) {
+    public MedTimesAdapter(Context context, int count, AddMedTimesFragmentInterface fragment) {
         this.context = context;
         this.count = count;
-        dosesTimes = new ArrayList<>(count);
-        dosesValues = new ArrayList<>(count);
-        for(int i = 0; i < count; i++) {
-            dosesTimes.add(null);
-            dosesValues.add(null);
-        }
+        this.fragment = fragment;
     }
 
     @NonNull
@@ -79,7 +75,11 @@ public class MedTimesAdapter extends RecyclerView.Adapter<MedTimesAdapter.ViewHo
 
             @Override
             public void afterTextChanged(Editable s) {
-                dosesValues.set(i, Integer.parseInt(s.toString()));
+                if (s.toString().length() == 0) {
+                    fragment.putAmount(i, null);
+                } else {
+                    fragment.putAmount(i, Integer.parseInt(s.toString()));
+                }
             }
         });
 
@@ -87,7 +87,8 @@ public class MedTimesAdapter extends RecyclerView.Adapter<MedTimesAdapter.ViewHo
         holder.timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                dosesTimes.set(i, new Time(TimeUnit.HOURS.toMillis(hourOfDay) + TimeUnit.MINUTES.toMillis(minute)));
+                Log.i("FINISH", "onTimeChanged: " + hourOfDay);
+                fragment.putTime(i, new Time(holder.timePicker.getHour(), holder.timePicker.getMinute(), 0));
             }
         });
 
