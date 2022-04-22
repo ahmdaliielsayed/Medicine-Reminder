@@ -27,4 +27,9 @@ public class ConcreteLocalSourceUser implements LocalSourceUser {
     public void insertUser(User user) {
         new Thread(() -> dao.insertUser(user)).start();
     }
+
+    @Override
+    public User getUser(String userId) {
+        return dao.getUser(userId);
+    }
 }

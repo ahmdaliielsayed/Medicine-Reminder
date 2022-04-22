@@ -56,4 +56,9 @@ public class LoginRepo implements LoginRepoInterface {
     public void insertUserToRoom(User user) {
         localSourceUser.insertUser(user);
     }
+
+    @Override
+    public void setUserId(String userId) {
+        SharedPrefManager.getInstance(context, Constants.USERS_FILE).setValue(Constants.USER_ID_KEY, userId);
+    }
 }

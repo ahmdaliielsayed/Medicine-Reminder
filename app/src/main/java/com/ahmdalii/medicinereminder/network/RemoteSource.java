@@ -24,4 +24,6 @@ public interface RemoteSource {
     void enqueueCall(AddMedicineNetworkDelegate networkDelegate, Medicine medicine, ArrayList<MedicineDose> doses);
     void enqueueCall(DisplayMedNetworkDelegate networkDelegate, String medID);
 
+
+    void signOut();
 }

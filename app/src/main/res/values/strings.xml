@@ -49,4 +49,9 @@
     <string name="reset">Reset</string>
     <string name="google_sign_in_failed">Google sign in failed!</string>
     <string name="coming_soon">This feature will be activated soon…</string>
+    <string name="add_dependent">Add Dependent</string>
+    <string name="invite_med_friend">Invite med friend</string>
+    <string name="logout">Logout</string>
+    <string name="profiles">Profiles</string>
+    <string name="med_friends">Med friends</string>
 </resources>

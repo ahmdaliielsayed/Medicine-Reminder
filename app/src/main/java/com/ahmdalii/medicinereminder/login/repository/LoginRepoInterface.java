@@ -13,4 +13,5 @@ public interface LoginRepoInterface {
     GoogleSignInClient getGoogleSignInClient(Activity activity);
     void signInWithGoogle(NetworkLoginDelegate networkDelegate, String idToken);
     void insertUserToRoom(User user);
+    void setUserId(String userId);
 }

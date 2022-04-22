@@ -14,4 +14,5 @@ public interface RegisterRepoInterface {
     void insertUserToRoom(User user);
 
     void setUserLogin(boolean isLogin);
+    void setUserId(String userId);
 }
