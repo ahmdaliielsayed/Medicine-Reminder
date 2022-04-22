@@ -51,4 +51,9 @@ public class RegisterRepo implements RegisterRepoInterface {
     public void setUserLogin(boolean isLogin) {
         SharedPrefManager.getInstance(context, Constants.USERS_FILE).setValue(Constants.USER_LOGIN_KEY, isLogin);
     }
+
+    @Override
+    public void setUserId(String userId) {
+        SharedPrefManager.getInstance(context, Constants.USERS_FILE).setValue(Constants.USER_ID_KEY, userId);
+    }
 }

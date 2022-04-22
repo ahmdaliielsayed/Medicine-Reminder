@@ -50,6 +50,7 @@ public class RegisterPresenter implements RegisterPresenterInterface, NetworkIma
     public void onResponse(String userId) {
         repoInterface.insertUserToRoom(new User(userId, name, email, password, profileImageURI, null));
         repoInterface.setUserLogin(true);
+        repoInterface.setUserId(userId);
         viewFragmentInterface.hideProgressbar();
         viewFragmentInterface.navigateToHomeScreen();
     }

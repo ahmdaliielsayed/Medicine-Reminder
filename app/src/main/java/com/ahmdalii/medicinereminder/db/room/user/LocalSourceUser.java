@@ -5,4 +5,5 @@ import com.ahmdalii.medicinereminder.model.User;
 public interface LocalSourceUser {
 
     void insertUser(User user);
+    User getUser(String userId);
 }

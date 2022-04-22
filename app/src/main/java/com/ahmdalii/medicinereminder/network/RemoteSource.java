@@ -14,4 +14,6 @@ public interface RemoteSource {
 
     GoogleSignInClient getGoogleSignInClient(Activity activity);
     void signInWithGoogle(NetworkLoginDelegate networkDelegate, String idToken);
+
+    void signOut();
 }

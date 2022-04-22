@@ -3,6 +3,8 @@ package com.ahmdalii.medicinereminder.network;
 import android.app.Activity;
 import android.net.Uri;
 
+import androidx.annotation.NonNull;
+
 import com.ahmdalii.medicinereminder.R;
 import com.ahmdalii.medicinereminder.model.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -14,8 +16,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -90,10 +95,30 @@ public class FirebaseClient implements RemoteSource {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        networkDelegate.onResponse();
+                        getUser(networkDelegate, Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
                     }
                 })
                 .addOnFailureListener(e -> networkDelegate.onFailure(e.getMessage()));
+    }
+
+    private void getUser(NetworkLoginDelegate networkDelegate, String uid) {
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    User value = dataSnapshot.getValue(User.class);
+                    if (Objects.requireNonNull(value).getUserId().equals(uid)) {
+                        networkDelegate.onResponse(value);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                networkDelegate.onFailure(error.getMessage());
+            }
+        });
     }
 
     // reset password
@@ -135,5 +160,10 @@ public class FirebaseClient implements RemoteSource {
                             .addOnFailureListener(e -> networkDelegate.onFailure(e.getMessage()));
                 })
                 .addOnFailureListener(e -> networkDelegate.onFailure(e.getMessage()));
+    }
+
+    @Override
+    public void signOut() {
+        mAuth.signOut();
     }
 }

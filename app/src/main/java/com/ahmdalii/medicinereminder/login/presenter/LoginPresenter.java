@@ -34,8 +34,9 @@ public class LoginPresenter implements LoginPresenterInterface, NetworkLoginDele
     }
 
     @Override
-    public void onResponse() {
+    public void onResponse(String userId) {
         repoInterface.setUserLogin(true);
+        repoInterface.setUserId(userId);
         viewFragmentInterface.hideProgressbar();
         viewFragmentInterface.navigateToHomeScreen();
     }
@@ -43,7 +44,7 @@ public class LoginPresenter implements LoginPresenterInterface, NetworkLoginDele
     @Override
     public void onResponse(User user) {
         repoInterface.insertUserToRoom(user);
-        onResponse();
+        onResponse(user.getUserId());
     }
 
     @Override

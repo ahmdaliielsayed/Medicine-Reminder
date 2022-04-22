@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/group2"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/medFriends"
+            android:title="@string/med_friends">
+
+            <menu>
+                <item
+                    android:id="@+id/itemInviteMedFriend"
+                    android:icon="@drawable/ic_baseline_add_circle_dogger_blue_24"
+                    android:title="@string/invite_med_friend" />
+            </menu>
+        </item>
+    </group>
+
+    <item
+        android:id="@+id/itemLogout"
+        android:icon="@drawable/ic_logout"
+        android:title="@string/logout" />
+</menu>
