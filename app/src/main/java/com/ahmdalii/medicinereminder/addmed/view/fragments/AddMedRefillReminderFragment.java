@@ -1,5 +1,6 @@
 package com.ahmdalii.medicinereminder.addmed.view.fragments;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,6 +14,7 @@ import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.ahmdalii.medicinereminder.R;
@@ -22,6 +24,7 @@ import com.google.android.material.timepicker.TimeFormat;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -30,7 +33,7 @@ public class AddMedRefillReminderFragment extends Fragment {
 
     EditText remainingAmountEditText;
     EditText refillAmountEditText;
-    Time time;
+    LocalTime time;
 
     public AddMedRefillReminderFragment() {
         // Required empty public constructor
@@ -113,12 +116,13 @@ public class AddMedRefillReminderFragment extends Fragment {
         });
 
         nextButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
                 int remainingAmount = Integer.parseInt(remainingAmountEditText.getText().toString());
                 int refillAmount = Integer.parseInt(refillAmountEditText.getText().toString());
 
-                time = new Time(timePicker.getHour(), timePicker.getMinute(), 0);
+                time = LocalTime.of(timePicker.getHour(), timePicker.getMinute(), 0);
 
                 ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().setRemainingMedAmount(remainingAmount);
                 ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().setReminderMedAmount(refillAmount);

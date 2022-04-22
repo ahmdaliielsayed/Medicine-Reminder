@@ -8,6 +8,7 @@ import com.ahmdalii.medicinereminder.model.MedicineDose;
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public interface AddMedPresenterInterface {
@@ -20,9 +21,9 @@ public interface AddMedPresenterInterface {
     void setDaysBetweenDoses(Integer daysBetweenDoses);
     void setTimeFrequency(int frequency);
     int getTimeFrequency();
-    void putTime(int index, Time time);
+    void putTime(int index, LocalTime time);
     void setAmounts(ArrayList<Integer> amounts);
-    ArrayList<Time> getTimes();
+    ArrayList<LocalTime> getTimes();
     void setDays(ArrayList<WeekDays> days);
     LocalDate getStartDate();
     void setStartDate(LocalDate startDate);

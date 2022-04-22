@@ -1,6 +1,7 @@
 package com.ahmdalii.medicinereminder.addmed.view.adapters;
 
 import android.content.Context;
+import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +21,7 @@ import com.ahmdalii.medicinereminder.R;
 import com.ahmdalii.medicinereminder.addmed.view.fragments.AddMedTimesFragmentInterface;
 
 import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -85,10 +88,11 @@ public class MedTimesAdapter extends RecyclerView.Adapter<MedTimesAdapter.ViewHo
 
         holder.timePicker.setIs24HourView(true);
         holder.timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
                 Log.i("FINISH", "onTimeChanged: " + hourOfDay);
-                fragment.putTime(i, new Time(holder.timePicker.getHour(), holder.timePicker.getMinute(), 0));
+                fragment.putTime(i, LocalTime.of(holder.timePicker.getHour(), holder.timePicker.getMinute(), 0));
             }
         });
 

@@ -44,7 +44,7 @@ public class AddMedPresenter implements AddMedPresenterInterface, AddMedicineNet
     MedicineDayFrequency dayFrequency;
     Integer daysBetweenDoses;
     int timeFrequency;
-    ArrayList<Time> times;
+    ArrayList<LocalTime> times;
     ArrayList<Integer> amounts;
     ArrayList<WeekDays> days;
     LocalDate startDate;
@@ -127,7 +127,7 @@ public class AddMedPresenter implements AddMedPresenterInterface, AddMedicineNet
     }
 
     @Override
-    public void putTime(int index, Time time) {
+    public void putTime(int index, LocalTime time) {
         times.set(index, time);
     }
 
@@ -137,7 +137,7 @@ public class AddMedPresenter implements AddMedPresenterInterface, AddMedicineNet
     }
 
     @Override
-    public ArrayList<Time> getTimes() {
+    public ArrayList<LocalTime> getTimes() {
         return times;
     }
 
@@ -190,9 +190,9 @@ public class AddMedPresenter implements AddMedPresenterInterface, AddMedicineNet
         while(!startDate.isAfter(endDate)) {
 
             for(int i = 0; i < timeFrequency; i++) {
-                //if(times.get(i).after(new Date())) {
+                if(times.get(i).isAfter(LocalTime.now())) {
                     addDose(i);
-                //}
+                }
             }
             startDate = startDate.plusDays(1);
         }
@@ -203,9 +203,9 @@ public class AddMedPresenter implements AddMedPresenterInterface, AddMedicineNet
         while(!startDate.isAfter(endDate)) {
 
             for(int i = 0; i < timeFrequency; i++) {
-                //if(times.get(i).after(new Date())) {
+                if(times.get(i).isAfter(LocalTime.now())) {
                     addDose(i);
-                //}
+                }
             }
             startDate = startDate.plusDays(daysBetweenDoses);
         }
@@ -216,9 +216,9 @@ public class AddMedPresenter implements AddMedPresenterInterface, AddMedicineNet
         while(!startDate.isAfter(endDate)) {
             if(isSelectedDay()) {
                 for (int i = 0; i < timeFrequency; i++) {
-                    //if(times.get(i).after(new Date())) {
+                    if(times.get(i).isAfter(LocalTime.now())) {
                         addDose(i);
-                    //}
+                    }
                 }
             }
             startDate = startDate.plusDays(1);
