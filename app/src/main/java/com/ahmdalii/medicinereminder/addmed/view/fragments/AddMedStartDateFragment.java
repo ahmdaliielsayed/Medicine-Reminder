@@ -64,6 +64,7 @@ public class AddMedStartDateFragment extends Fragment {
             public void onClick(View v) {
                 LocalDate pickerStartDate = LocalDate.of(startDatePicker.getYear(), startDatePicker.getMonth() + 1 , startDatePicker.getDayOfMonth());
                 String startDate = pickerStartDate.toString();
+                ((AddMedActivityInterface) getActivity()).closeKeyboard(view);
                 ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setStartDate(pickerStartDate);
                 ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().setStartDate(startDate);
                 ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedEndDateFragment());

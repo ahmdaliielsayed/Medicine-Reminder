@@ -3,10 +3,12 @@ package com.ahmdalii.medicinereminder.displaymed.view;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -28,6 +30,7 @@ import com.ahmdalii.medicinereminder.model.DoseStatus;
 import com.ahmdalii.medicinereminder.model.Medicine;
 import com.ahmdalii.medicinereminder.model.MedicineDose;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 
@@ -57,6 +60,7 @@ public class DisplayMedFragment extends Fragment implements DisplayMedFragmentIn
         return inflater.inflate(R.layout.fragment_display_med, container, false);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
@@ -70,6 +74,7 @@ public class DisplayMedFragment extends Fragment implements DisplayMedFragmentIn
         displayMedPresenter.setMedicine((Medicine) getArguments().getSerializable("medicine"));
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void setUI() {
 
         ((TextView) view.findViewById(R.id.text_view_med_name_display_med)).setText(displayMedPresenter.getMedicine().getName());
@@ -150,7 +155,7 @@ public class DisplayMedFragment extends Fragment implements DisplayMedFragmentIn
         for(int i = doses.size() - 1; i >= 0; i--) {
             if(doses.get(i).getStatus().equals(DoseStatus.TAKEN.getStatus())) {
                 Log.i("TAG", "setLastTakenTextView: ");
-                lastTakenString = doses.get(i).getTime() + ", " + doses.get(i).getDay();
+                lastTakenString = doses.get(i).getTime();
                 break;
             }
         }
@@ -158,11 +163,12 @@ public class DisplayMedFragment extends Fragment implements DisplayMedFragmentIn
         ((TextView) view.findViewById(R.id.text_view_last_taken_display_med)).setText(lastTakenString);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void setTimesTextViews(@NonNull View view, ArrayList<MedicineDose> doses) {
         ArrayList<String> dosesTimes = new ArrayList<>();
-        String firstDay = doses.get(0).getDay();
+        String firstDay = LocalDateTime.parse(doses.get(0).getTime()).toLocalDate().toString();
         for(MedicineDose dose: doses) {
-            if(firstDay.equals(dose.getDay())) {
+            if(firstDay.equals(LocalDateTime.parse(dose.getTime()).toLocalDate().toString())) {
                 dosesTimes.add(dose.getTime());
             }
         }
@@ -193,11 +199,12 @@ public class DisplayMedFragment extends Fragment implements DisplayMedFragmentIn
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void setAmountsTextViews(@NonNull View view, ArrayList<MedicineDose> doses) {
         ArrayList<Integer> dosesAmounts = new ArrayList<>();
-        String firstDay = doses.get(0).getDay();
+        String firstDay = LocalDateTime.parse(doses.get(0).getTime()).toLocalDate().toString();
         for(MedicineDose dose: doses) {
-            if(firstDay.equals(dose.getDay())) {
+            if(firstDay.equals(LocalDateTime.parse(dose.getTime()).toLocalDate().toString())) {
                 dosesAmounts.add(dose.getAmount());
             }
         }
@@ -240,6 +247,7 @@ public class DisplayMedFragment extends Fragment implements DisplayMedFragmentIn
         return getContext();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void refreshView() {
         setUI();
     }

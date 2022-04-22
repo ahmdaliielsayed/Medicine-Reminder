@@ -24,6 +24,8 @@ import com.google.android.material.timepicker.TimeFormat;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -33,7 +35,7 @@ public class AddMedRefillReminderFragment extends Fragment {
 
     EditText remainingAmountEditText;
     EditText refillAmountEditText;
-    LocalTime time;
+    LocalDateTime time;
 
     public AddMedRefillReminderFragment() {
         // Required empty public constructor
@@ -122,8 +124,9 @@ public class AddMedRefillReminderFragment extends Fragment {
                 int remainingAmount = Integer.parseInt(remainingAmountEditText.getText().toString());
                 int refillAmount = Integer.parseInt(refillAmountEditText.getText().toString());
 
-                time = LocalTime.of(timePicker.getHour(), timePicker.getMinute(), 0);
+                time = LocalDateTime.of(LocalDate.now(), LocalTime.of(timePicker.getHour(), timePicker.getMinute(), 0));
 
+                ((AddMedActivityInterface) getActivity()).closeKeyboard(view);
                 ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().setRemainingMedAmount(remainingAmount);
                 ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().setReminderMedAmount(refillAmount);
                 ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().setRefillReminderTime(time.toString());

@@ -21,6 +21,7 @@ import com.ahmdalii.medicinereminder.addmed.view.AddMedActivityInterface;
 import com.ahmdalii.medicinereminder.addmed.view.adapters.MedTimesAdapter;
 
 import java.sql.Time;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -28,7 +29,7 @@ public class AddMedTimesFragment extends Fragment implements AddMedTimesFragment
 
     private int timeFrequency = 1;
     private ArrayList<Integer> amounts;
-    private ArrayList<LocalTime> times;
+    private ArrayList<LocalDateTime> times;
 
     Button nextButton;
 
@@ -76,6 +77,7 @@ public class AddMedTimesFragment extends Fragment implements AddMedTimesFragment
             public void onClick(View v) {
                 times = ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getTimes();
                 setUnchangedTimes();
+                ((AddMedActivityInterface) getActivity()).closeKeyboard(view);
                 ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setAmounts(amounts);
                 ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedStartDateFragment());
             }
@@ -87,7 +89,7 @@ public class AddMedTimesFragment extends Fragment implements AddMedTimesFragment
     private void setUnchangedTimes() {
         for(int i = 0; i < times.size(); i++) {
             if(times.get(i) == null) {
-                times.set(i, LocalTime.now());
+                times.set(i, LocalDateTime.now());
             }
         }
     }
@@ -123,7 +125,7 @@ public class AddMedTimesFragment extends Fragment implements AddMedTimesFragment
     }
 
     @Override
-    public void putTime(int index, LocalTime time) {
+    public void putTime(int index, LocalDateTime time) {
         ((AddMedActivityInterface) getActivity()).getAddMedPresenter().putTime(index, time);
     }
 

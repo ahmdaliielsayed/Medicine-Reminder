@@ -8,6 +8,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.ahmdalii.medicinereminder.R;
@@ -126,5 +128,10 @@ public class AddMedActivity extends AppCompatActivity implements AddMedActivityI
     @Override
     public Context getContext() {
         return this;
+    }
+
+    public void closeKeyboard(View view) {
+        InputMethodManager manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

@@ -61,9 +61,7 @@ public class DisplayMedPresenter implements DisplayMedPresenterInterface, Displa
     @Override
     public void addOneTimeWorkRequest() {
         MedicineDose upcomingDose = repo.getUpcomingDose();
-        LocalDate date = LocalDate.parse(upcomingDose.getDay());
-        LocalTime time = LocalTime.parse(upcomingDose.getTime());
-        LocalDateTime dateTime = LocalDateTime.of(date, time);
+        LocalDateTime dateTime = LocalDateTime.parse(upcomingDose.getTime());
         @SuppressLint("RestrictedApi") Data data = new Data.Builder()
                 .put("medicine", JSONSerializer.serializeMedicine(repo.getMedicine()))
                 .put("dose", JSONSerializer.serializeMedicineDose(repo.getUpcomingDose()))

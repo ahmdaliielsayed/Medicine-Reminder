@@ -44,7 +44,7 @@ public class AddMedPresenter implements AddMedPresenterInterface, AddMedicineNet
     MedicineDayFrequency dayFrequency;
     Integer daysBetweenDoses;
     int timeFrequency;
-    ArrayList<LocalTime> times;
+    ArrayList<LocalDateTime> times;
     ArrayList<Integer> amounts;
     ArrayList<WeekDays> days;
     LocalDate startDate;
@@ -127,7 +127,7 @@ public class AddMedPresenter implements AddMedPresenterInterface, AddMedicineNet
     }
 
     @Override
-    public void putTime(int index, LocalTime time) {
+    public void putTime(int index, LocalDateTime time) {
         times.set(index, time);
     }
 
@@ -137,7 +137,7 @@ public class AddMedPresenter implements AddMedPresenterInterface, AddMedicineNet
     }
 
     @Override
-    public ArrayList<LocalTime> getTimes() {
+    public ArrayList<LocalDateTime> getTimes() {
         return times;
     }
 
@@ -190,7 +190,7 @@ public class AddMedPresenter implements AddMedPresenterInterface, AddMedicineNet
         while(!startDate.isAfter(endDate)) {
 
             for(int i = 0; i < timeFrequency; i++) {
-                if(times.get(i).isAfter(LocalTime.now())) {
+                if(times.get(i).isAfter(LocalDateTime.now())) {
                     addDose(i);
                 }
             }
@@ -203,7 +203,7 @@ public class AddMedPresenter implements AddMedPresenterInterface, AddMedicineNet
         while(!startDate.isAfter(endDate)) {
 
             for(int i = 0; i < timeFrequency; i++) {
-                if(times.get(i).isAfter(LocalTime.now())) {
+                if(times.get(i).isAfter(LocalDateTime.now())) {
                     addDose(i);
                 }
             }
@@ -216,7 +216,7 @@ public class AddMedPresenter implements AddMedPresenterInterface, AddMedicineNet
         while(!startDate.isAfter(endDate)) {
             if(isSelectedDay()) {
                 for (int i = 0; i < timeFrequency; i++) {
-                    if(times.get(i).isAfter(LocalTime.now())) {
+                    if(times.get(i).isAfter(LocalDateTime.now())) {
                         addDose(i);
                     }
                 }
@@ -225,10 +225,11 @@ public class AddMedPresenter implements AddMedPresenterInterface, AddMedicineNet
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void addDose(int i) {
         MedicineDose dose = new MedicineDose();
-        dose.setDay(startDate.toString());
-        dose.setTime(times.get(i).toString());
+        LocalDateTime time = LocalDateTime.of(startDate, times.get(i).toLocalTime());
+        dose.setTime(time.toString());
         dose.setAmount(amounts.get(i));
         dose.setStatus(DoseStatus.FUTURE.getStatus());
         dose.setSync(false);
@@ -263,10 +264,8 @@ public class AddMedPresenter implements AddMedPresenterInterface, AddMedicineNet
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void createWorkRequest() {
-
-        LocalDate date = LocalDate.parse(doses.get(0).getDay());
-        LocalTime time = LocalTime.parse(doses.get(0).getTime());
-        LocalDateTime dateTime = LocalDateTime.of(date, time);
+        
+        LocalDateTime dateTime = LocalDateTime.parse(doses.get(0).getTime());
 
         @SuppressLint("RestrictedApi") Data data = new Data.Builder()
                 .put("medicine", JSONSerializer.serializeMedicine(medicine))

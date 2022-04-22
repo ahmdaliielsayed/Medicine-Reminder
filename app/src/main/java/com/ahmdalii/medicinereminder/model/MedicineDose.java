@@ -15,7 +15,6 @@ public class MedicineDose implements Serializable {
     @NonNull
     private String id;
     private String medID;
-    private String day;
     private String time;
     private Integer amount;
     private String status;
@@ -25,10 +24,9 @@ public class MedicineDose implements Serializable {
     public MedicineDose() {
     }
 
-    public MedicineDose(@NonNull String id, String medID, String day, String time, Integer amount, String status, String giverID, Boolean isSync) {
+    public MedicineDose(@NonNull String id, String medID, String time, Integer amount, String status, String giverID, Boolean isSync) {
         this.id = id;
         this.medID = medID;
-        this.day = day;
         this.time = time;
         this.amount = amount;
         this.status = status;
@@ -52,14 +50,6 @@ public class MedicineDose implements Serializable {
 
     public void setMedID(String medID) {
         this.medID = medID;
-    }
-
-    public String getDay() {
-        return day;
-    }
-
-    public void setDay(String day) {
-        this.day = day;
     }
 
     public String getTime() {
@@ -107,7 +97,6 @@ public class MedicineDose implements Serializable {
         return "MedicineDose{" +
                 "id='" + id + '\'' +
                 ", medID='" + medID + '\'' +
-                ", day='" + day + '\'' +
                 ", time='" + time + '\'' +
                 ", amount=" + amount +
                 ", status='" + status + '\'' +

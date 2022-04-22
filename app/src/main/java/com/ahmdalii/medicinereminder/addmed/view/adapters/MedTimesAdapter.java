@@ -21,6 +21,8 @@ import com.ahmdalii.medicinereminder.R;
 import com.ahmdalii.medicinereminder.addmed.view.fragments.AddMedTimesFragmentInterface;
 
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -92,7 +94,7 @@ public class MedTimesAdapter extends RecyclerView.Adapter<MedTimesAdapter.ViewHo
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
                 Log.i("FINISH", "onTimeChanged: " + hourOfDay);
-                fragment.putTime(i, LocalTime.of(holder.timePicker.getHour(), holder.timePicker.getMinute(), 0));
+                fragment.putTime(i, LocalDateTime.of(LocalDate.now(), LocalTime.of(holder.timePicker.getHour(), holder.timePicker.getMinute(), 0)));
             }
         });
 

@@ -149,7 +149,6 @@ public class FirebaseClient implements RemoteSource {
                         if(((MedicineDoseTemp) dosesMap.values().toArray()[i]).getMedID().equals(medID)) {
                             MedicineDose dose = new MedicineDose();
                             dose.setId((String) dosesMap.keySet().toArray()[i]);
-                            dose.setDay(((MedicineDoseTemp) dosesMap.values().toArray()[i]).getDay());
                             dose.setTime(((MedicineDoseTemp) dosesMap.values().toArray()[i]).getTime());
                             dose.setAmount(((MedicineDoseTemp) dosesMap.values().toArray()[i]).getAmount());
                             dose.setStatus(((MedicineDoseTemp) dosesMap.values().toArray()[i]).getStatus());
