@@ -14,6 +14,14 @@
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.ahmdalii.medicinereminder.medications.view.MedicationsFragment"
-        android:label="@string/title_dashboard" />
+        android:label="@string/title_dashboard" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_displayMedFragment"
+            app:destination="@id/displayMedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/displayMedFragment"
+        android:name="com.ahmdalii.medicinereminder.displaymed.view.DisplayMedFragment"
+        android:label="DisplayMedFragment" />
 
 </navigation>

@@ -34,11 +34,21 @@ public class ConcreteLocalSourceMedicineDose implements LocalSourceMedicineDose 
 
     @Override
     public void insertMedicineDose(MedicineDose medicineDose) {
-
+        new Thread() {
+            @Override
+            public void run() {
+                dao.insertMedicineDose(medicineDose);
+            }
+        }.start();
     }
 
     @Override
     public void deleteMedicineDose(MedicineDose medicineDose) {
-
+        new Thread() {
+            @Override
+            public void run() {
+                dao.deleteMedicineDose(medicineDose);
+            }
+        }.start();
     }
 }

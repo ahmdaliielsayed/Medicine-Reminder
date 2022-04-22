@@ -1,11 +1,16 @@
 package com.ahmdalii.medicinereminder.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "medicine_dose")
-public class MedicineDose {
+public class MedicineDose implements Serializable {
     @PrimaryKey
     @NonNull
     private String id;
@@ -30,6 +35,7 @@ public class MedicineDose {
         this.giverID = giverID;
         this.isSync = isSync;
     }
+
 
     @NonNull
     public String getId() {

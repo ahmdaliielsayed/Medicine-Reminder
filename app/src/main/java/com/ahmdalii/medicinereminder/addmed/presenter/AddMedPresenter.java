@@ -1,33 +1,37 @@
 package com.ahmdalii.medicinereminder.addmed.presenter;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.RequiresApi;
+import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
+import com.ahmdalii.medicinereminder.JSONSerializer;
 import com.ahmdalii.medicinereminder.addmed.model.MedicineDayFrequency;
 import com.ahmdalii.medicinereminder.addmed.model.WeekDays;
 import com.ahmdalii.medicinereminder.addmed.model.repo.AddMedRepo;
 import com.ahmdalii.medicinereminder.addmed.model.repo.AddMedRepoInterface;
 import com.ahmdalii.medicinereminder.addmed.view.AddMedView;
 import com.ahmdalii.medicinereminder.db.room.medicine.ConcreteLocalSourceMedicine;
-import com.ahmdalii.medicinereminder.db.room.medicine.LocalSourceMedicine;
 import com.ahmdalii.medicinereminder.db.room.medicinedose.ConcreteLocalSourceMedicineDose;
 import com.ahmdalii.medicinereminder.model.DoseStatus;
 import com.ahmdalii.medicinereminder.model.Medicine;
 import com.ahmdalii.medicinereminder.model.MedicineDose;
-import com.ahmdalii.medicinereminder.network.AddMedicineNetworkDelegate;
 import com.ahmdalii.medicinereminder.network.FirebaseClient;
-import com.ahmdalii.medicinereminder.network.NetworkDelegate;
+import com.ahmdalii.medicinereminder.workmanager.MedicineWorkManager;
 
-import java.sql.Date;
 import java.sql.Time;
-import java.time.DayOfWeek;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class AddMedPresenter implements AddMedPresenterInterface, AddMedicineNetworkDelegate {
 
@@ -53,7 +57,6 @@ public class AddMedPresenter implements AddMedPresenterInterface, AddMedicineNet
         this.addMedView = addMedView;
         medicine = new Medicine();
         repo = AddMedRepo.getInstance(
-                addMedView.getContext(),
                 FirebaseClient.getInstance(),
                 ConcreteLocalSourceMedicine.getInstance(addMedView.getContext()),
                 ConcreteLocalSourceMedicineDose.getInstance(addMedView.getContext())
@@ -187,7 +190,9 @@ public class AddMedPresenter implements AddMedPresenterInterface, AddMedicineNet
         while(!startDate.isAfter(endDate)) {
 
             for(int i = 0; i < timeFrequency; i++) {
-                addDose(i);
+                //if(times.get(i).after(new Date())) {
+                    addDose(i);
+                //}
             }
             startDate = startDate.plusDays(1);
         }
@@ -198,7 +203,9 @@ public class AddMedPresenter implements AddMedPresenterInterface, AddMedicineNet
         while(!startDate.isAfter(endDate)) {
 
             for(int i = 0; i < timeFrequency; i++) {
-                addDose(i);
+                //if(times.get(i).after(new Date())) {
+                    addDose(i);
+                //}
             }
             startDate = startDate.plusDays(daysBetweenDoses);
         }
@@ -209,7 +216,9 @@ public class AddMedPresenter implements AddMedPresenterInterface, AddMedicineNet
         while(!startDate.isAfter(endDate)) {
             if(isSelectedDay()) {
                 for (int i = 0; i < timeFrequency; i++) {
-                    addDose(i);
+                    //if(times.get(i).after(new Date())) {
+                        addDose(i);
+                    //}
                 }
             }
             startDate = startDate.plusDays(1);
@@ -234,15 +243,44 @@ public class AddMedPresenter implements AddMedPresenterInterface, AddMedicineNet
         return false;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onSuccess(Medicine medicine, ArrayList<MedicineDose> doses) {
+        Log.i("INSER", "onSuccess: " + medicine);
+        Log.i("INSER", "onSuccess: " + doses);
         repo.insertMedicineInRoom(medicine, doses);
+
+        createWorkRequest();
+
         addMedView.showToast("Medicine Added Successfully");
-        //addMedView.closeActivity();
+        addMedView.closeActivity();
     }
 
     @Override
     public void onFailure() {
         addMedView.showToast("Can't Add Medicine");
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void createWorkRequest() {
+
+        LocalDate date = LocalDate.parse(doses.get(0).getDay());
+        LocalTime time = LocalTime.parse(doses.get(0).getTime());
+        LocalDateTime dateTime = LocalDateTime.of(date, time);
+
+        @SuppressLint("RestrictedApi") Data data = new Data.Builder()
+                .put("medicine", JSONSerializer.serializeMedicine(medicine))
+                .put("dose", JSONSerializer.serializeMedicineDose(doses.get(0)))
+                .build();
+
+        OneTimeWorkRequest addMedRequest = new OneTimeWorkRequest.Builder(MedicineWorkManager.class)
+                .setInitialDelay(Duration.between(LocalDateTime.now(), dateTime).toMillis(), TimeUnit.MILLISECONDS)
+                .setInputData(data)
+                .addTag(medicine.getId())
+                .build();
+
+        WorkManager worker = WorkManager.getInstance(addMedView.getContext());
+        worker.enqueue(addMedRequest);
+    }
+
 }

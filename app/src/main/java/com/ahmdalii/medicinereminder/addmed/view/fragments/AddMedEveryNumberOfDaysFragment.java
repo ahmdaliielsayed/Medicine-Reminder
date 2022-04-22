@@ -77,6 +77,7 @@ public class AddMedEveryNumberOfDaysFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setDaysBetweenDoses(Integer.parseInt(numEditText.getText().toString()));
+                ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().setEveryNDays(Integer.parseInt(numEditText.getText().toString()));
                 ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedTimesFragment());
             }
         });
