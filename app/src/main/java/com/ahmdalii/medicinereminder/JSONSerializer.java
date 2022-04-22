@@ -24,8 +24,19 @@ public class JSONSerializer {
         return gson.toJson(dose);
     }
 
-    public static MedicineDose deserializeMedicineDoses(String jsonString) {
+    public static MedicineDose deserializeMedicineDose(String jsonString) {
         Gson gson = new Gson();
         return gson.fromJson(jsonString, MedicineDose.class);
+    }
+
+    public static String serializeMedicineDoses(ArrayList<MedicineDose> doses) {
+        Gson gson = new Gson();
+        return gson.toJson(doses);
+    }
+
+    public static ArrayList<MedicineDose> deserializeMedicineDoses(String jsonString) {
+        Gson gson = new Gson();
+        Type listOfMedicineDose = new TypeToken<ArrayList<MedicineDose>>() {}.getType();
+        return gson.fromJson(jsonString, listOfMedicineDose);
     }
 }

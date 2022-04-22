@@ -29,7 +29,7 @@ public class MedicineWorkManager extends Worker {
 
         Map<String, Object> map =  getInputData().getKeyValueMap();
         Medicine medicine = JSONSerializer.deserializeMedicine((String) map.get("medicine"));
-        MedicineDose dose = JSONSerializer.deserializeMedicineDoses((String) map.get("dose"));
+        MedicineDose dose = JSONSerializer.deserializeMedicineDose((String) map.get("dose"));
 
         Log.i("TAG", "doWork: " + medicine);
         Log.i("TAG", "doWork: " + dose);
