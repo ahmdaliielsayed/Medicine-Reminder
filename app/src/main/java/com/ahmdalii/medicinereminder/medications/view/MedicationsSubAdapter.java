@@ -34,7 +34,7 @@ public class MedicationsSubAdapter extends RecyclerView.Adapter<MedicationsSubAd
             super(itemView);
             imageView = itemView.findViewById(R.id.imageViewId);
             nameText = itemView.findViewById(R.id.textView1);
-            strengthText = itemView.findViewById(R.id.textView2);
+            strengthText = itemView.findViewById(R.id.text_view_med_name_display_med);
             pillText = itemView.findViewById(R.id.textView3);
             layout = itemView.findViewById(R.id.innerRowId);
         }

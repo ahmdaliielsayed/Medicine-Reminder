@@ -98,6 +98,7 @@ public class AddMedStrengthFragment extends Fragment implements AddMedStrengthFr
             @Override
             public void onClick(View v) {
                 strength = Integer.parseInt(strengthEditText.getText().toString());
+                ((AddMedActivityInterface) getActivity()).closeKeyboard(view);
                 ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().setUnit(unit);
                 ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().setStrength(strength);
                 ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedReasonFragment());

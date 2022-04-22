@@ -1,4 +1,4 @@
-package com.ahmdalii.medicinereminder.network;
+package com.ahmdalii.medicinereminder.addmed.presenter;
 
 import com.ahmdalii.medicinereminder.model.Medicine;
 import com.ahmdalii.medicinereminder.model.MedicineDose;

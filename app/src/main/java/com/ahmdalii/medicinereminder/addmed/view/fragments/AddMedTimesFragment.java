@@ -1,5 +1,6 @@
 package com.ahmdalii.medicinereminder.addmed.view.fragments;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,13 +21,15 @@ import com.ahmdalii.medicinereminder.addmed.view.AddMedActivityInterface;
 import com.ahmdalii.medicinereminder.addmed.view.adapters.MedTimesAdapter;
 
 import java.sql.Time;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class AddMedTimesFragment extends Fragment implements AddMedTimesFragmentInterface {
 
     private int timeFrequency = 1;
     private ArrayList<Integer> amounts;
-    private ArrayList<Time> times;
+    private ArrayList<LocalDateTime> times;
 
     Button nextButton;
 
@@ -62,19 +66,18 @@ public class AddMedTimesFragment extends Fragment implements AddMedTimesFragment
         if(dayFrequency == MedicineDayFrequency.EVERYDAY) {
             timeFrequency = ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getTimeFrequency();
         }
-        else {
-
-        }
 
         initDoseAmount();
 
         setupRecyclerView(view);
 
         nextButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
                 times = ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getTimes();
                 setUnchangedTimes();
+                ((AddMedActivityInterface) getActivity()).closeKeyboard(view);
                 ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setAmounts(amounts);
                 ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedStartDateFragment());
             }
@@ -82,10 +85,11 @@ public class AddMedTimesFragment extends Fragment implements AddMedTimesFragment
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void setUnchangedTimes() {
         for(int i = 0; i < times.size(); i++) {
             if(times.get(i) == null) {
-                times.set(i, new Time(System.currentTimeMillis()));
+                times.set(i, LocalDateTime.now());
             }
         }
     }
@@ -121,7 +125,7 @@ public class AddMedTimesFragment extends Fragment implements AddMedTimesFragment
     }
 
     @Override
-    public void putTime(int index, Time time) {
+    public void putTime(int index, LocalDateTime time) {
         ((AddMedActivityInterface) getActivity()).getAddMedPresenter().putTime(index, time);
     }
 

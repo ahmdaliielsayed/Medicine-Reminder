@@ -57,6 +57,7 @@ public class AddMedEndDateFragment extends Fragment {
         DatePicker endDatePicker = view.findViewById(R.id.date_picker_end_date_add_med);
 
         LocalDate startDate = ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getStartDate();
+        startDate = startDate.plusDays(1);
         endDatePicker.setMinDate(startDate.toEpochDay()*24*60*60*1000);
 
         LocalDate maxDate = startDate.plusYears(1);
@@ -68,6 +69,7 @@ public class AddMedEndDateFragment extends Fragment {
             public void onClick(View v) {
                 LocalDate pickerEndDate = LocalDate.of(endDatePicker.getYear(), endDatePicker.getMonth() + 1, endDatePicker.getDayOfMonth());
                 String endDate = pickerEndDate.toString();
+                ((AddMedActivityInterface) getActivity()).closeKeyboard(view);
                 ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setEndDate(pickerEndDate);
                 ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().setEndDate(endDate);
                 ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedRefillReminderFragment());

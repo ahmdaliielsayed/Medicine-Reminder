@@ -83,6 +83,7 @@ public class AddMedReasonFragment extends Fragment {
         view.findViewById(R.id.button_next_add_med).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((AddMedActivityInterface) getActivity()).closeKeyboard(view);
                 ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().setReason(reasonEditText.getText().toString());
                 ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedDayFrequenceFragment());
             }

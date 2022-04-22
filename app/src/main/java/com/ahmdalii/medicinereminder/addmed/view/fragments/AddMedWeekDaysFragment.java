@@ -67,12 +67,17 @@ public class AddMedWeekDaysFragment extends Fragment implements AddMedWeekDaysFr
             @Override
             public void onClick(View v) {
                 ArrayList<WeekDays> selectedDays = new ArrayList<>();
+                StringBuilder selectedWeekDaysStr = new StringBuilder("");
                 for(int i = 0; i < days.size(); i++) {
                     if(days.get(i).second) {
                         selectedDays.add(days.get(i).first);
+                        selectedWeekDaysStr.append(days.get(i).first.getDay() + ", ");
                     }
                 }
+                selectedWeekDaysStr.delete(0, selectedWeekDaysStr.length() - 2);
+                ((AddMedActivityInterface) getActivity()).closeKeyboard(view);
                 ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setDays(selectedDays);
+                ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().setWeekDays(selectedWeekDaysStr.toString());
                 ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedTimesFragment());
             }
         });

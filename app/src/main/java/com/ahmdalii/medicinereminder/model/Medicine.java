@@ -5,39 +5,29 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "medicine")
-public class Medicine {
+public class Medicine implements Serializable {
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "id")
     private String id;
-    @ColumnInfo(name = "name")
     private String name;
-    @ColumnInfo(name = "form")
     private String form;
-    @ColumnInfo(name = "unit")
     private String unit;
-    @ColumnInfo(name = "strength")
     private Integer strength;
-    @ColumnInfo(name = "reason")
     private String reason;
-    @ColumnInfo(name = "instructions")
     private String instructions;
-    @ColumnInfo(name = "startDate")
+    private String dayFrequency;
+    private Integer everyNDays;
+    private String weekDays;
     private String startDate;
-    @ColumnInfo(name = "endDate")
     private String endDate;
-    @ColumnInfo(name = "remainingMedAmount")
     private Integer remainingMedAmount;
-    @ColumnInfo(name = "reminderMedAmount")
     private Integer reminderMedAmount;
-    @ColumnInfo(name = "refillReminderTime")
     private String refillReminderTime;
-    @ColumnInfo(name = "isActivated")
     private Boolean isActivated;
-    @ColumnInfo(name = "isSync")
     private Boolean isSync;
-    @ColumnInfo(name = "userID")
     private String userID;
 
     public Medicine() {
@@ -98,6 +88,30 @@ public class Medicine {
 
     public void setInstructions(String instructions) {
         this.instructions = instructions;
+    }
+
+    public String getDayFrequency() {
+        return dayFrequency;
+    }
+
+    public void setDayFrequency(String dayFrequency) {
+        this.dayFrequency = dayFrequency;
+    }
+
+    public Integer getEveryNDays() {
+        return everyNDays;
+    }
+
+    public void setEveryNDays(Integer everyNDays) {
+        this.everyNDays = everyNDays;
+    }
+
+    public String getWeekDays() {
+        return weekDays;
+    }
+
+    public void setWeekDays(String weekDays) {
+        this.weekDays = weekDays;
     }
 
     public String getStartDate() {

@@ -2,7 +2,7 @@ package com.ahmdalii.medicinereminder.addmed.model.repo;
 
 import com.ahmdalii.medicinereminder.model.Medicine;
 import com.ahmdalii.medicinereminder.model.MedicineDose;
-import com.ahmdalii.medicinereminder.network.AddMedicineNetworkDelegate;
+import com.ahmdalii.medicinereminder.addmed.presenter.AddMedicineNetworkDelegate;
 
 import java.util.ArrayList;
 

@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
+    android:id="@+id/constraint_layout_display_med"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintBottom_toTopOf="@+id/button_add_dose_display_med"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,54 +25,65 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView25"
+                android:id="@+id/text_view_remind_me_label_display_med"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Refill reminder: When I have 1 pill remaining"
+                android:text="Remind me when remaining:"
                 android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="@+id/textView19"
-                app:layout_constraintTop_toBottomOf="@+id/textView19" />
+                app:layout_constraintStart_toStartOf="@+id/text_view_remaining_amount_display_med"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_remaining_amount_display_med" />
 
             <TextView
-                android:id="@+id/textView24"
+                android:id="@+id/text_view_remind_count_display_med"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="1"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_remind_me_label_display_med"
+                app:layout_constraintStart_toEndOf="@+id/text_view_remind_me_label_display_med"
+                app:layout_constraintTop_toTopOf="@+id/text_view_remind_me_label_display_med" />
+
+            <TextView
+                android:id="@+id/text_view_time_4_display_med"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="04:00"
                 android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="@+id/textView22"
-                app:layout_constraintTop_toBottomOf="@+id/textView22" />
+                app:layout_constraintStart_toStartOf="@+id/text_view_time_3_display_med"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_time_3_display_med" />
 
             <TextView
-                android:id="@+id/textView23"
+                android:id="@+id/text_view_take_4_display_med"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="take 1 Pill"
+                android:text="take"
                 android:textColor="@color/grey"
-                app:layout_constraintBottom_toBottomOf="@+id/textView24"
-                app:layout_constraintStart_toStartOf="@+id/textView20"
-                app:layout_constraintTop_toTopOf="@+id/textView24" />
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_time_4_display_med"
+                app:layout_constraintStart_toStartOf="@+id/text_view_take_3_display_med"
+                app:layout_constraintTop_toTopOf="@+id/text_view_time_4_display_med" />
 
             <TextView
-                android:id="@+id/textView22"
+                android:id="@+id/text_view_time_3_display_med"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="22:00"
                 android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="@+id/textView16"
-                app:layout_constraintTop_toBottomOf="@+id/textView16" />
+                app:layout_constraintStart_toStartOf="@+id/text_view_time_2_display_med"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_time_2_display_med" />
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/text_view_take_2_display_med"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="take 1 Pill"
+                android:text="take"
                 android:textColor="@color/grey"
-                app:layout_constraintBottom_toBottomOf="@+id/textView16"
-                app:layout_constraintStart_toStartOf="@+id/textView15"
-                app:layout_constraintTop_toTopOf="@+id/textView16"
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_time_2_display_med"
+                app:layout_constraintStart_toStartOf="@+id/text_view_take_1_display_med"
+                app:layout_constraintTop_toTopOf="@+id/text_view_time_2_display_med"
                 app:layout_constraintVertical_bias="1.0" />
 
             <TextView
@@ -87,7 +98,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/text_view_last_taken_display_med"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -103,11 +114,11 @@
                 android:layout_marginTop="64dp"
                 android:text="Reminders"
                 android:textColor="@color/grey"
-                app:layout_constraintStart_toStartOf="@+id/textView11"
-                app:layout_constraintTop_toBottomOf="@+id/textView11" />
+                app:layout_constraintStart_toStartOf="@+id/text_view_last_taken_display_med"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_last_taken_display_med" />
 
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/text_view_day_frequency_display_med"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -117,24 +128,24 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/text_view_time_1_display_med"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="10:00"
                 android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="@+id/textView13"
-                app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                app:layout_constraintStart_toStartOf="@+id/text_view_day_frequency_display_med"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_day_frequency_display_med" />
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/text_view_time_2_display_med"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="16:00"
                 android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="@+id/textView14"
-                app:layout_constraintTop_toBottomOf="@+id/textView14" />
+                app:layout_constraintStart_toStartOf="@+id/text_view_time_1_display_med"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_time_1_display_med" />
 
             <TextView
                 android:id="@+id/textView18"
@@ -143,42 +154,94 @@
                 android:layout_marginTop="64dp"
                 android:text="Prescription Refill"
                 android:textColor="@color/grey"
-                app:layout_constraintStart_toStartOf="@+id/textView16"
-                app:layout_constraintTop_toBottomOf="@+id/textView24" />
+                app:layout_constraintStart_toStartOf="@+id/text_view_time_2_display_med"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_time_4_display_med" />
 
             <TextView
-                android:id="@+id/textView19"
+                android:id="@+id/text_view_remaining_amount_display_med"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="7 pills left"
+                android:text="7"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="@+id/textView18"
                 app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
             <TextView
-                android:id="@+id/textView20"
+                android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="take 1 Pill"
-                android:textColor="@color/grey"
-                app:layout_constraintBottom_toBottomOf="@+id/textView22"
-                app:layout_constraintStart_toStartOf="@+id/textView21"
-                app:layout_constraintTop_toTopOf="@+id/textView22" />
+                android:layout_marginStart="16dp"
+                android:text="left"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_remaining_amount_display_med"
+                app:layout_constraintStart_toEndOf="@+id/text_view_remaining_amount_display_med"
+                app:layout_constraintTop_toTopOf="@+id/text_view_remaining_amount_display_med" />
 
             <TextView
-                android:id="@+id/textView15"
+                android:id="@+id/text_view_take_3_display_med"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="take 1 Pill"
+                android:text="take"
                 android:textColor="@color/grey"
-                app:layout_constraintBottom_toBottomOf="@+id/textView14"
-                app:layout_constraintStart_toEndOf="@+id/textView14"
-                app:layout_constraintTop_toTopOf="@+id/textView14" />
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_time_3_display_med"
+                app:layout_constraintStart_toStartOf="@+id/text_view_take_2_display_med"
+                app:layout_constraintTop_toTopOf="@+id/text_view_time_3_display_med" />
+
+            <TextView
+                android:id="@+id/text_view_take_1_display_med"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:text="take"
+                android:textColor="@color/grey"
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_time_1_display_med"
+                app:layout_constraintStart_toEndOf="@+id/text_view_time_1_display_med"
+                app:layout_constraintTop_toTopOf="@+id/text_view_time_1_display_med" />
+
+            <TextView
+                android:id="@+id/text_view_dose_amount_1_display_med"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="1"
+                android:textColor="@color/grey"
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_take_1_display_med"
+                app:layout_constraintStart_toEndOf="@+id/text_view_take_1_display_med"
+                app:layout_constraintTop_toTopOf="@+id/text_view_take_1_display_med" />
+
+            <TextView
+                android:id="@+id/text_view_dose_amount_2_display_med"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textColor="@color/grey"
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_take_2_display_med"
+                app:layout_constraintStart_toStartOf="@+id/text_view_dose_amount_1_display_med"
+                app:layout_constraintTop_toTopOf="@+id/text_view_take_2_display_med" />
+
+            <TextView
+                android:id="@+id/text_view_dose_amount_3_display_med"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textColor="@color/grey"
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_take_3_display_med"
+                app:layout_constraintStart_toStartOf="@+id/text_view_dose_amount_1_display_med"
+                app:layout_constraintTop_toTopOf="@+id/text_view_take_3_display_med" />
+
+            <TextView
+                android:id="@+id/text_view_dose_amount_4_display_med"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textColor="@color/grey"
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_take_4_display_med"
+                app:layout_constraintStart_toStartOf="@+id/text_view_dose_amount_1_display_med"
+                app:layout_constraintTop_toTopOf="@+id/text_view_take_4_display_med" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/button_suspend_display_med"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
@@ -193,7 +256,7 @@
                 tools:ignore="TouchTargetSizeCheck" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/button_refill_display_med"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
@@ -201,16 +264,27 @@
                 android:text="REFILL"
                 android:textColor="@color/dodger_blue"
                 app:layout_constraintBottom_toBottomOf="@+id/textView18"
-                app:layout_constraintEnd_toEndOf="@+id/button"
+                app:layout_constraintEnd_toEndOf="@+id/button_suspend_display_med"
                 app:layout_constraintTop_toTopOf="@+id/textView18"
                 app:strokeColor="@color/dodger_blue"
                 tools:ignore="TouchTargetSizeCheck" />
+
+            <ProgressBar
+                android:id="@+id/progress_bar_display_med"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/text_view_remind_me_label_display_med"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/button_add_dose_display_med"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
@@ -232,7 +306,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView11"
+            android:id="@+id/image_view_med_icon_display_med"
             android:layout_width="42dp"
             android:layout_height="81dp"
             android:layout_marginStart="16dp"
@@ -242,7 +316,7 @@
             app:srcCompat="@android:drawable/btn_default_small" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/text_view_med_name_display_med"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -251,18 +325,18 @@
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/imageView11"
-            app:layout_constraintTop_toTopOf="@+id/imageView11" />
+            app:layout_constraintStart_toEndOf="@+id/image_view_med_icon_display_med"
+            app:layout_constraintTop_toTopOf="@+id/image_view_med_icon_display_med" />
 
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/text_view_strength_display_med"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="1000 mg"
             android:textColor="#FFFFFF"
-            app:layout_constraintStart_toStartOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintStart_toStartOf="@+id/text_view_med_name_display_med"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_med_name_display_med" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

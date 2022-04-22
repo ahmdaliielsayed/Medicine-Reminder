@@ -57,15 +57,18 @@ public class AddMedDayFrequenceFragment extends Fragment implements View.OnClick
     public void onClick(View v) {
         if(((TextView) v).getId() == R.id.text_view_everyday_add_med) {
             ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setDayFrequency(MedicineDayFrequency.EVERYDAY);
+            ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().setDayFrequency(MedicineDayFrequency.EVERYDAY.getFrequency());
             ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedTimeFrequencyFragment());
         }
         else if(((TextView) v).getId() == R.id.text_view_specific_days_of_the_week_add_med) {
             ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setTimeFrequency(1);
+            ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().setDayFrequency(MedicineDayFrequency.SPECIFIC_DAYS.getFrequency());
             ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setDayFrequency(MedicineDayFrequency.SPECIFIC_DAYS);
             ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedWeekDaysFragment());
         }
         else if(((TextView) v).getId() == R.id.text_view_every_number_of_days_add_med) {
             ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setTimeFrequency(1);
+            ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().setDayFrequency(MedicineDayFrequency.EVERY_NUMBER_OF_DAYS.getFrequency());
             ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setDayFrequency(MedicineDayFrequency.EVERY_NUMBER_OF_DAYS);
             ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedEveryNumberOfDaysFragment());
         }

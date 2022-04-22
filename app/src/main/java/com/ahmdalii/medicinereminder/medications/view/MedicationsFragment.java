@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,11 +16,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.ahmdalii.medicinereminder.JSONSerializer;
 import com.ahmdalii.medicinereminder.R;
+import com.ahmdalii.medicinereminder.addmed.model.MedicineDayFrequency;
+import com.ahmdalii.medicinereminder.addmed.model.MedicineForm;
 import com.ahmdalii.medicinereminder.addmed.view.AddMedActivity;
+import com.ahmdalii.medicinereminder.editmed.view.EditMedActivity;
 import com.ahmdalii.medicinereminder.medications.repository.MedicationsPojo;
 import com.ahmdalii.medicinereminder.medications.repository.MedicationsSectionPojo;
+import com.ahmdalii.medicinereminder.model.DoseStatus;
+import com.ahmdalii.medicinereminder.model.Medicine;
+import com.ahmdalii.medicinereminder.model.MedicineDose;
+import com.ahmdalii.medicinereminder.model.MedicineUnit;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -57,6 +67,10 @@ public class MedicationsFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerViewId);
         addMedBtn = view.findViewById(R.id.addMedId);
 
+        //testNavigationToDisplay(view);
+        testNavigationToEdit();
+
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
@@ -76,5 +90,57 @@ public class MedicationsFragment extends Fragment {
             }
         });
 
+    }
+
+    private void testNavigationToEdit() {
+        Medicine medicine = new Medicine();
+        medicine.setName("Panadol");
+        medicine.setUserID("asdf");
+        medicine.setSync(true);
+        medicine.setActivated(true);
+        medicine.setInstructions("Before eating");
+        medicine.setReminderMedAmount(2);
+        medicine.setReason("Covid");
+        medicine.setStartDate("2022-04-19");
+        medicine.setStrength(2);
+        medicine.setUnit(MedicineUnit.g.getUnit());
+        medicine.setRefillReminderTime("20:15:00");
+        medicine.setForm(MedicineForm.INHALER.getForm());
+        medicine.setEndDate("2022-05-19");
+        medicine.setRemainingMedAmount(20);
+        medicine.setDayFrequency(MedicineDayFrequency.SPECIFIC_DAYS.getFrequency());
+        medicine.setWeekDays("saturday, wednesday, friday");
+        medicine.setId("-N0DkpUyInw379jDwsap");
+
+        Intent intent = new Intent(getActivity(), EditMedActivity.class);
+        intent.putExtra("medicine", medicine);
+        startActivity(intent);
+
+
+    }
+
+    private void testNavigationToDisplay(@NonNull View view) {
+        Bundle args = new Bundle();
+        Medicine medicine = new Medicine();
+        medicine.setName("Panadol");
+        medicine.setUserID("asdf");
+        medicine.setSync(true);
+        medicine.setActivated(true);
+        medicine.setInstructions("Before eating");
+        medicine.setReminderMedAmount(2);
+        medicine.setReason("Covid");
+        medicine.setStartDate("2022-04-19");
+        medicine.setStrength(2);
+        medicine.setUnit(MedicineUnit.g.getUnit());
+        medicine.setRefillReminderTime("20:15:00");
+        medicine.setForm(MedicineForm.INHALER.getForm());
+        medicine.setEndDate("2022-05-19");
+        medicine.setRemainingMedAmount(20);
+        medicine.setDayFrequency(MedicineDayFrequency.SPECIFIC_DAYS.getFrequency());
+        medicine.setWeekDays("saturday, wednesday, friday");
+        medicine.setId("-N07sFZYrJYuGhYN3T-c");
+
+        args.putSerializable("medicine", medicine);
+        Navigation.findNavController(view).navigate(R.id.action_navigation_dashboard_to_displayMedFragment, args);
     }
 }
