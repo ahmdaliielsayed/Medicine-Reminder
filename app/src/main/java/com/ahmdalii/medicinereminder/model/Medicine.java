@@ -21,6 +21,7 @@ public class Medicine implements Serializable {
     private String dayFrequency;
     private Integer everyNDays;
     private String weekDays;
+    private Integer timeFrequency;
     private String startDate;
     private String endDate;
     private Integer remainingMedAmount;
@@ -114,6 +115,14 @@ public class Medicine implements Serializable {
         this.weekDays = weekDays;
     }
 
+    public Integer getTimeFrequency() {
+        return timeFrequency;
+    }
+
+    public void setTimeFrequency(Integer timeFrequency) {
+        this.timeFrequency = timeFrequency;
+    }
+
     public String getStartDate() {
         return startDate;
     }
@@ -178,7 +187,6 @@ public class Medicine implements Serializable {
         this.userID = userID;
     }
 
-
     @Override
     public String toString() {
         return "Medicine{" +
@@ -189,6 +197,10 @@ public class Medicine implements Serializable {
                 ", strength=" + strength +
                 ", reason='" + reason + '\'' +
                 ", instructions='" + instructions + '\'' +
+                ", dayFrequency='" + dayFrequency + '\'' +
+                ", everyNDays=" + everyNDays +
+                ", weekDays='" + weekDays + '\'' +
+                ", timeFrequency=" + timeFrequency +
                 ", startDate='" + startDate + '\'' +
                 ", endDate='" + endDate + '\'' +
                 ", remainingMedAmount=" + remainingMedAmount +

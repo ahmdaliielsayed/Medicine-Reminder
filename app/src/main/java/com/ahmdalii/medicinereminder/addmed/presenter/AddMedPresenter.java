@@ -10,6 +10,7 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
 import com.ahmdalii.medicinereminder.JSONSerializer;
+import com.ahmdalii.medicinereminder.WorkRequestManager;
 import com.ahmdalii.medicinereminder.addmed.model.MedicineDayFrequency;
 import com.ahmdalii.medicinereminder.addmed.model.WeekDays;
 import com.ahmdalii.medicinereminder.addmed.model.repo.AddMedRepo;
@@ -164,7 +165,7 @@ public class AddMedPresenter implements AddMedPresenterInterface, AddMedicineNet
     public void addMedFinished() {
 
         medicine.setActivated(true);
-        medicine.setSync(false);
+        medicine.setSync(true);
 
         createSchedule();
 
@@ -232,7 +233,7 @@ public class AddMedPresenter implements AddMedPresenterInterface, AddMedicineNet
         dose.setTime(time.toString());
         dose.setAmount(amounts.get(i));
         dose.setStatus(DoseStatus.FUTURE.getStatus());
-        dose.setSync(false);
+        dose.setSync(true);
         doses.add(dose);
     }
 
@@ -267,19 +268,9 @@ public class AddMedPresenter implements AddMedPresenterInterface, AddMedicineNet
         
         LocalDateTime dateTime = LocalDateTime.parse(doses.get(0).getTime());
 
-        @SuppressLint("RestrictedApi") Data data = new Data.Builder()
-                .put("medicine", JSONSerializer.serializeMedicine(medicine))
-                .put("dose", JSONSerializer.serializeMedicineDose(doses.get(0)))
-                .build();
-
-        OneTimeWorkRequest addMedRequest = new OneTimeWorkRequest.Builder(MedicineWorkManager.class)
-                .setInitialDelay(Duration.between(LocalDateTime.now(), dateTime).toMillis(), TimeUnit.MILLISECONDS)
-                .setInputData(data)
-                .addTag(medicine.getId())
-                .build();
-
-        WorkManager worker = WorkManager.getInstance(addMedView.getContext());
-        worker.enqueue(addMedRequest);
+        WorkRequestManager.createWorkRequest(doses.get(0), medicine, addMedView.getContext());
     }
+
+
 
 }

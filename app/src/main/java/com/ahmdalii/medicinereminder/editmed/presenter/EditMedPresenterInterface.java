@@ -10,4 +10,6 @@ public interface EditMedPresenterInterface {
     void setMedicine(Medicine medicine);
     ArrayList<MedicineDose> getDoses();
     void setDoses(ArrayList<MedicineDose> doses);
+    void addDose(MedicineDose dose);
+    void submitUpdates();
 }

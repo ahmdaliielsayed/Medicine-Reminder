@@ -25,4 +25,5 @@
 
     <color name="grey">#777777</color>
     <color name="alto">#DCDCDC</color>
+    <color name="light_grey">#eeeeee</color>
 </resources>

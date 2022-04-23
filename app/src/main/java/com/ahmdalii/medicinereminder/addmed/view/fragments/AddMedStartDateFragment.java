@@ -2,7 +2,6 @@ package com.ahmdalii.medicinereminder.addmed.view.fragments;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.ahmdalii.medicinereminder.R;
 import com.ahmdalii.medicinereminder.addmed.view.AddMedActivityInterface;
 
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Locale;
 
 
 public class AddMedStartDateFragment extends Fragment {
@@ -59,7 +54,7 @@ public class AddMedStartDateFragment extends Fragment {
         DatePicker startDatePicker = view.findViewById(R.id.date_picker_start_date_add_med);
         startDatePicker.setMinDate(System.currentTimeMillis());
 
-        view.findViewById(R.id.button_next_add_med).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.button_submit_edit_med).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LocalDate pickerStartDate = LocalDate.of(startDatePicker.getYear(), startDatePicker.getMonth() + 1 , startDatePicker.getDayOfMonth());

@@ -17,7 +17,7 @@ public interface MedicineDAO {
     @Query("SELECT * FROM medicine")
     LiveData<List<Medicine>> getAllMedicines();
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertMedicine(Medicine medicine);
 
     @Delete

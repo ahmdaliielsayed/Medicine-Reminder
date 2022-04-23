@@ -19,16 +19,10 @@ import androidx.fragment.app.Fragment;
 
 import com.ahmdalii.medicinereminder.R;
 import com.ahmdalii.medicinereminder.addmed.view.AddMedActivityInterface;
-import com.google.android.material.timepicker.TimeFormat;
 
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
 
 public class AddMedRefillReminderFragment extends Fragment {
@@ -66,7 +60,7 @@ public class AddMedRefillReminderFragment extends Fragment {
         remainingAmountEditText = view.findViewById(R.id.edit_text_remaining_amount_refill_reminder_add_med);
         refillAmountEditText = view.findViewById(R.id.edit_text_remind_me_when_refill_reminder_add_med);
         TimePicker timePicker = view.findViewById(R.id.time_picker_refill_reminder_add_med);
-        Button nextButton = view.findViewById(R.id.button_next_add_med);
+        Button nextButton = view.findViewById(R.id.button_submit_edit_med);
         nextButton.setVisibility(View.GONE);
 
         timePicker.setIs24HourView(true);

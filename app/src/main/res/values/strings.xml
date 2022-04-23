@@ -54,4 +54,10 @@
     <string name="logout">Logout</string>
     <string name="profiles">Profiles</string>
     <string name="med_friends">Med friends</string>
+    <string-array name="time_frequency_array">
+        <item>Once Daily</item>
+        <item>Twice Daily</item>
+        <item>3 Times a Day</item>
+        <item>4 Times a Day</item>
+    </string-array>
 </resources>
