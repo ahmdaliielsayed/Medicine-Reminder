@@ -20,7 +20,6 @@ public interface RemoteSource {
 
     GoogleSignInClient getGoogleSignInClient(Activity activity);
     void signInWithGoogle(NetworkLoginDelegate networkDelegate, String idToken);
-    void enqueueCall(NetworkDelegate networkDelegate, String name, String email, String password, String profileImageURI);
     void enqueueCall(AddMedicineNetworkDelegate networkDelegate, Medicine medicine, ArrayList<MedicineDose> doses);
     void enqueueCall(DisplayMedNetworkDelegate networkDelegate, String medID);
 

@@ -10,10 +10,7 @@ import androidx.work.WorkerParameters;
 import com.ahmdalii.medicinereminder.JSONSerializer;
 import com.ahmdalii.medicinereminder.model.Medicine;
 import com.ahmdalii.medicinereminder.model.MedicineDose;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.Map;
 
 public class MedicineWorkManager extends Worker {
