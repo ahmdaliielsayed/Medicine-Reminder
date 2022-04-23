@@ -21,4 +21,8 @@ public interface MedicineDoseDAO {
 
     @Delete
     void deleteMedicineDose(MedicineDose medicineDose);
+
+//    //          dose_id   med_id  time_onCard (كاام حبااية) (DoseStatus)  med_name  الوحدة (جم / ملغم)MedicineUnit  500 gm الكمية نفسهاا
+//    @Query("SELECT md.id, md.medID, md.time, md.amount, md.status, medicine.name, medicine.unit, medicine.strength FROM medicine_dose AS md INNER JOIN medicine ON medID = medicine.id")
+//    LiveData<List<POJO>> getAllDosesWithMedicineName();
 }
