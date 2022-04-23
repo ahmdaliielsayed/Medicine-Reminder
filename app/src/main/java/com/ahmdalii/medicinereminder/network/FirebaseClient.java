@@ -126,12 +126,16 @@ public class FirebaseClient implements RemoteSource {
 
     @Override
     public GoogleSignInClient getGoogleSignInClient(Activity activity) {
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(activity.getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
 
         return GoogleSignIn.getClient(activity, gso);
+
+
+        //return null;
     }
 
     @Override
@@ -153,20 +157,27 @@ public class FirebaseClient implements RemoteSource {
                 .addOnFailureListener(e -> networkDelegate.onFailure(e.getMessage()));
     }
 
+    //Add Medicine and its doses
     @Override
     public void enqueueCall(AddMedicineNetworkDelegate networkDelegate, Medicine medicine, ArrayList<MedicineDose> doses) {
         databaseReference = FirebaseDatabase.getInstance().getReference();
         String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-        String medID = databaseReference.child("medicine").push().getKey();
-
+        String medID = medicine.getId();
+        if(medID == null || medID.equals("")) {
+            medID = databaseReference.child("medicine").push().getKey();
+        }
         medicine.setUserID(uid);
         medicine.setId(medID);
+        String finalMedID = medID;
         databaseReference.child("medicine").child(medID).setValue(medicine).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 for(int i = 0; i < doses.size(); i++) {
-                    doses.get(i).setMedID(medID);
-                    String doseID = databaseReference.child("dose").push().getKey();
+                    doses.get(i).setMedID(finalMedID);
+                    String doseID = doses.get(i).getId();
+                    if(doseID == null || doseID.equals("")) {
+                        doseID = databaseReference.child("dose").push().getKey();
+                    }
                     doses.get(i).setId(doseID);
                     databaseReference.child("dose").child(doseID).setValue(doses.get(i)).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -190,6 +201,7 @@ public class FirebaseClient implements RemoteSource {
         });
     }
 
+    //Get doses of a certain medicine
     @Override
     public void enqueueCall(DisplayMedNetworkDelegate networkDelegate, String medID) {
         databaseReference = FirebaseDatabase.getInstance().getReference();

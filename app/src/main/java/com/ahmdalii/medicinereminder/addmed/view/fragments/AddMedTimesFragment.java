@@ -20,9 +20,7 @@ import com.ahmdalii.medicinereminder.addmed.model.MedicineDayFrequency;
 import com.ahmdalii.medicinereminder.addmed.view.AddMedActivityInterface;
 import com.ahmdalii.medicinereminder.addmed.view.adapters.MedTimesAdapter;
 
-import java.sql.Time;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class AddMedTimesFragment extends Fragment implements AddMedTimesFragmentInterface {
@@ -59,7 +57,7 @@ public class AddMedTimesFragment extends Fragment implements AddMedTimesFragment
         String toolbarTitle = ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().getName();
         ((TextView) view.findViewById(R.id.text_view_toolbar_title)).setText(toolbarTitle);
         ((TextView) view.findViewById(R.id.text_view_add_header)).setText("When do you need to take this med?");
-        nextButton = view.findViewById(R.id.button_next_add_med);
+        nextButton = view.findViewById(R.id.button_submit_edit_med);
         nextButton.setVisibility(View.GONE);
 
         MedicineDayFrequency dayFrequency = ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getDayFrequency();

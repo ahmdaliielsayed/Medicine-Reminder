@@ -54,7 +54,7 @@ public class AddMedReasonFragment extends Fragment {
         ((TextView) view.findViewById(R.id.text_view_toolbar_title)).setText(toolbarTitle);
         ((TextView) view.findViewById(R.id.text_view_add_header)).setText("What are you taking it for?");
         EditText reasonEditText = view.findViewById(R.id.edit_text_med_reason_add_med);
-        Button nextButton = view.findViewById(R.id.button_next_add_med);
+        Button nextButton = view.findViewById(R.id.button_submit_edit_med);
 
         nextButton.setVisibility(View.GONE);
 
@@ -80,7 +80,7 @@ public class AddMedReasonFragment extends Fragment {
             }
         });
 
-        view.findViewById(R.id.button_next_add_med).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.button_submit_edit_med).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((AddMedActivityInterface) getActivity()).closeKeyboard(view);

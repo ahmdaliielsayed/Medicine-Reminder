@@ -55,7 +55,7 @@ public class AddMedWeekDaysFragment extends Fragment implements AddMedWeekDaysFr
         ((TextView) view.findViewById(R.id.text_view_toolbar_title)).setText(toolbarTitle);
         ((TextView) view.findViewById(R.id.text_view_add_header)).setText("Choose days");
 
-        nextButton = view.findViewById(R.id.button_next_add_med);
+        nextButton = view.findViewById(R.id.button_submit_edit_med);
         nextButton.setVisibility(View.GONE);
 
 

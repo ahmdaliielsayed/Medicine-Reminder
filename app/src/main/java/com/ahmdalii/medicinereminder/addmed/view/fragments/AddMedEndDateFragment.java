@@ -2,7 +2,6 @@ package com.ahmdalii.medicinereminder.addmed.view.fragments;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.ahmdalii.medicinereminder.R;
 import com.ahmdalii.medicinereminder.addmed.view.AddMedActivityInterface;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Locale;
 
 
 public class AddMedEndDateFragment extends Fragment {
@@ -63,7 +58,7 @@ public class AddMedEndDateFragment extends Fragment {
         LocalDate maxDate = startDate.plusYears(1);
         endDatePicker.setMaxDate(maxDate.toEpochDay()*24*60*60*1000);
 
-        view.findViewById(R.id.button_next_add_med).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.button_submit_edit_med).setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {

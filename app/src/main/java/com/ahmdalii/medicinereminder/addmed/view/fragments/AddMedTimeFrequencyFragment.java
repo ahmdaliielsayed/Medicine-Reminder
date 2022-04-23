@@ -58,15 +58,19 @@ public class AddMedTimeFrequencyFragment extends Fragment implements View.OnClic
     @Override
     public void onClick(View v) {
         if(((TextView) v).getId() == R.id.text_view_once_daily_add_med_time_frequency) {
+            ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().setTimeFrequency(1);
             ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setTimeFrequency(1);
         }
         else if(((TextView) v).getId() == R.id.text_view_twice_daily_add_med_time_frequency) {
+            ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().setTimeFrequency(2);
             ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setTimeFrequency(2);
         }
         else if(((TextView) v).getId() == R.id.text_view_3_times_a_day_add_med_time_frequency) {
+            ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().setTimeFrequency(3);
             ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setTimeFrequency(3);
         }
         else if(((TextView) v).getId() == R.id.text_view_4_times_a_day_add_med_time_frequency) {
+            ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().setTimeFrequency(4);
             ((AddMedActivityInterface) getActivity()).getAddMedPresenter().setTimeFrequency(4);
         }
         ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedTimesFragment());

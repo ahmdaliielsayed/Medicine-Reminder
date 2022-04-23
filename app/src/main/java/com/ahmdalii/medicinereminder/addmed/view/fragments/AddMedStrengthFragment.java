@@ -66,7 +66,7 @@ public class AddMedStrengthFragment extends Fragment implements AddMedStrengthFr
         ((TextView) view.findViewById(R.id.text_view_add_header)).setText("What strength is the med?");
         unitTextView = view.findViewById(R.id.text_view_unit_add_med_strength);
         EditText strengthEditText = view.findViewById(R.id.edit_text_strength_add_med);
-        Button nextButton = view.findViewById(R.id.button_next_add_med);
+        Button nextButton = view.findViewById(R.id.button_submit_edit_med);
 
         nextButton.setVisibility(View.GONE);
 

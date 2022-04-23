@@ -47,7 +47,7 @@ public class AddMedEveryNumberOfDaysFragment extends Fragment {
         ((TextView) view.findViewById(R.id.text_view_toolbar_title)).setText(toolbarTitle);
         ((TextView) view.findViewById(R.id.text_view_add_header)).setText("How much days between 2 doses?");
 
-        Button nextButton = ((Button) view.findViewById(R.id.button_next_add_med));
+        Button nextButton = ((Button) view.findViewById(R.id.button_submit_edit_med));
         nextButton.setVisibility(View.GONE);
         EditText numEditText = ((EditText) view.findViewById(R.id.edit_text_every_number_of_days_add_med));
 

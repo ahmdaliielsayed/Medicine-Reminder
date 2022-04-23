@@ -49,4 +49,10 @@
     <string name="reset">Reset</string>
     <string name="google_sign_in_failed">Google sign in failed!</string>
     <string name="coming_soon">This feature will be activated soon…</string>
+    <string-array name="time_frequency_array">
+        <item>Once Daily</item>
+        <item>Twice Daily</item>
+        <item>3 Times a Day</item>
+        <item>4 Times a Day</item>
+    </string-array>
 </resources>

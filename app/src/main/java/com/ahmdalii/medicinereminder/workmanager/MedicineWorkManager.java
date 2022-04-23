@@ -25,14 +25,14 @@ public class MedicineWorkManager extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        Log.i("TAG", "doWork: WORKING");
+        Log.i("TAGS", "doWork: WORKING");
 
         Map<String, Object> map =  getInputData().getKeyValueMap();
         Medicine medicine = JSONSerializer.deserializeMedicine((String) map.get("medicine"));
         MedicineDose dose = JSONSerializer.deserializeMedicineDose((String) map.get("dose"));
 
-        Log.i("TAG", "doWork: " + medicine);
-        Log.i("TAG", "doWork: " + dose);
+        Log.i("TAGS", "doWork: " + medicine);
+        Log.i("TAGS", "doWork: " + dose);
         return null;
     }
 }

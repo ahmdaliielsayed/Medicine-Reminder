@@ -8,13 +8,15 @@
         <entry key="..\:/Studies/ITI/Courses/21. Android with Java/Project/Medicine-Reminder/app/src/main/res/drawable/btn_round.xml" value="0.1875" />
         <entry key="..\:/Studies/ITI/Courses/21. Android with Java/Project/Medicine-Reminder/app/src/main/res/drawable/top_round_corners.xml" value="0.1875" />
         <entry key="..\:/Studies/ITI/Courses/21. Android with Java/Project/Medicine-Reminder/app/src/main/res/layout/activity_add_med.xml" value="0.18795289855072464" />
-        <entry key="..\:/Studies/ITI/Courses/21. Android with Java/Project/Medicine-Reminder/app/src/main/res/layout/activity_edit_med.xml" value="0.18795289855072464" />
+        <entry key="..\:/Studies/ITI/Courses/21. Android with Java/Project/Medicine-Reminder/app/src/main/res/layout/activity_edit_med.xml" value="0.264" />
         <entry key="..\:/Studies/ITI/Courses/21. Android with Java/Project/Medicine-Reminder/app/src/main/res/layout/activity_home.xml" value="0.22327898550724637" />
         <entry key="..\:/Studies/ITI/Courses/21. Android with Java/Project/Medicine-Reminder/app/src/main/res/layout/add_med.xml" value="0.18795289855072464" />
         <entry key="..\:/Studies/ITI/Courses/21. Android with Java/Project/Medicine-Reminder/app/src/main/res/layout/add_med_header.xml" value="0.17135416666666667" />
+        <entry key="..\:/Studies/ITI/Courses/21. Android with Java/Project/Medicine-Reminder/app/src/main/res/layout/add_med_next_button.xml" value="0.23596014492753623" />
         <entry key="..\:/Studies/ITI/Courses/21. Android with Java/Project/Medicine-Reminder/app/src/main/res/layout/add_med_strength_unit_cell.xml" value="0.22327898550724637" />
         <entry key="..\:/Studies/ITI/Courses/21. Android with Java/Project/Medicine-Reminder/app/src/main/res/layout/add_med_toolbar.xml" value="0.21875" />
         <entry key="..\:/Studies/ITI/Courses/21. Android with Java/Project/Medicine-Reminder/app/src/main/res/layout/display_med.xml" value="0.22418478260869565" />
+        <entry key="..\:/Studies/ITI/Courses/21. Android with Java/Project/Medicine-Reminder/app/src/main/res/layout/edit_dose_dialog.xml" value="0.23596014492753623" />
         <entry key="..\:/Studies/ITI/Courses/21. Android with Java/Project/Medicine-Reminder/app/src/main/res/layout/fragment_add_med_day_frequence.xml" value="0.25416666666666665" />
         <entry key="..\:/Studies/ITI/Courses/21. Android with Java/Project/Medicine-Reminder/app/src/main/res/layout/fragment_add_med_end_date.xml" value="0.22327898550724637" />
         <entry key="..\:/Studies/ITI/Courses/21. Android with Java/Project/Medicine-Reminder/app/src/main/res/layout/fragment_add_med_every_number_of_days.xml" value="0.264" />
@@ -30,6 +32,7 @@
         <entry key="..\:/Studies/ITI/Courses/21. Android with Java/Project/Medicine-Reminder/app/src/main/res/layout/fragment_display_med.xml" value="0.176" />
         <entry key="..\:/Studies/ITI/Courses/21. Android with Java/Project/Medicine-Reminder/app/src/main/res/layout/med_time_row.xml" value="0.23143115942028986" />
         <entry key="..\:/Studies/ITI/Courses/21. Android with Java/Project/Medicine-Reminder/app/src/main/res/layout/refill_amount_dialog.xml" value="0.2" />
+        <entry key="..\:/Studies/ITI/Courses/21. Android with Java/Project/Medicine-Reminder/app/src/main/res/layout/refill_reminder_time_picker_dialog.xml" value="0.23596014492753623" />
         <entry key="..\:/Studies/ITI/Courses/21. Android with Java/Project/Medicine-Reminder/app/src/main/res/layout/week_day_row.xml" value="0.21875" />
         <entry key="..\:/Studies/ITI/Courses/21. Android with Java/Project/Medicine-Reminder/app/src/main/res/menu/app_bar.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/MedicineReminder/app/src/main/res/drawable/btn_round_left_side.xml" value="0.2890625" />
@@ -57,7 +60,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
