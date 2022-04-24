@@ -22,7 +22,8 @@ public class WorkRequestManager {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static void createWorkRequest(MedicineDose dose, Medicine medicine, Context context) {
 
-        @SuppressLint("RestrictedApi") Data data = new Data.Builder()
+        @SuppressLint("RestrictedApi")
+        Data data = new Data.Builder()
                 .put("medicine", JSONSerializer.serializeMedicine(medicine))
                 .put("dose", JSONSerializer.serializeMedicineDose(dose))
                 .build();

@@ -1,20 +1,29 @@
 package com.ahmdalii.medicinereminder.medications.view;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.ahmdalii.medicinereminder.JSONSerializer;
 import com.ahmdalii.medicinereminder.R;
@@ -22,6 +31,7 @@ import com.ahmdalii.medicinereminder.addmed.model.MedicineDayFrequency;
 import com.ahmdalii.medicinereminder.addmed.model.MedicineForm;
 import com.ahmdalii.medicinereminder.addmed.view.AddMedActivity;
 import com.ahmdalii.medicinereminder.editmed.view.EditMedActivity;
+import com.ahmdalii.medicinereminder.medicationreminder.view.MedicationReminderActivity;
 import com.ahmdalii.medicinereminder.medications.repository.MedicationsPojo;
 import com.ahmdalii.medicinereminder.medications.repository.MedicationsSectionPojo;
 import com.ahmdalii.medicinereminder.model.DoseStatus;
@@ -32,6 +42,7 @@ import com.ahmdalii.medicinereminder.model.MedicineUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 
 public class MedicationsFragment extends Fragment {
@@ -42,6 +53,7 @@ public class MedicationsFragment extends Fragment {
     RecyclerView recyclerView;
 
     Button addMedBtn;
+    View view;
 
     public MedicationsFragment() {
         // Required empty public constructor
@@ -64,6 +76,9 @@ public class MedicationsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        this.view = view;
+
         recyclerView = view.findViewById(R.id.recyclerViewId);
         addMedBtn = view.findViewById(R.id.addMedId);
 
@@ -77,7 +92,7 @@ public class MedicationsFragment extends Fragment {
 
         activeData = Arrays.asList(new MedicationsPojo("Clobex", "3 mg", 10, R.drawable.temppill), new MedicationsPojo("Clobex", "3 mg", 10, R.drawable.temppill), new MedicationsPojo("Clobex", "3 mg", 10, R.drawable.temppill), new MedicationsPojo("Clobex", "3 mg", 10, R.drawable.temppill), new MedicationsPojo("Clobex", "3 mg", 10, R.drawable.temppill), new MedicationsPojo("Clobex", "3 mg", 10, R.drawable.temppill), new MedicationsPojo("Clobex", "3 mg", 10, R.drawable.temppill), new MedicationsPojo("Lopid", "5 mg", 5, R.drawable.temppill));
         inactiveData = Arrays.asList(new MedicationsPojo("Balmex", "7 mg", 9, R.drawable.temppill), new MedicationsPojo("Balmex", "7 mg", 9, R.drawable.temppill), new MedicationsPojo("Balmex", "7 mg", 9, R.drawable.temppill), new MedicationsPojo("Plavix", "7 mg", 9, R.drawable.temppill));
-        data =  Arrays.asList(new MedicationsSectionPojo("Active meds", activeData), new MedicationsSectionPojo("Inactive meds", inactiveData));
+        data = Arrays.asList(new MedicationsSectionPojo("Active meds", activeData), new MedicationsSectionPojo("Inactive meds", inactiveData));
 
         MedicationsMainAdapter mainAdapter = new MedicationsMainAdapter(data);
         recyclerView.setAdapter(mainAdapter);
@@ -86,7 +101,21 @@ public class MedicationsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.i("emy", "onClick: you clicked");
-                startActivity(new Intent(getContext(), AddMedActivity.class));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && !Settings.canDrawOverlays(view.getContext())) {
+                    new AlertDialog.Builder(view.getContext())
+                            .setTitle(R.string.warning)
+                            .setMessage(R.string.error_msg_permission_required)
+                            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    RuntimePermissionForUser();
+                                }
+                            })
+                            .setIcon(R.drawable.ic_warning)
+                            .show();
+                } else {
+                    startActivity(new Intent(getContext(), AddMedActivity.class));
+                }
             }
         });
 
@@ -143,4 +172,18 @@ public class MedicationsFragment extends Fragment {
         args.putSerializable("medicine", medicine);
         Navigation.findNavController(view).navigate(R.id.action_navigation_dashboard_to_displayMedFragment, args);
     }
+
+    public void RuntimePermissionForUser() {
+        Intent permissionIntent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                Uri.parse("package:" + view.getContext().getPackageName()));
+
+        runtimePermissionResultLauncher.launch(permissionIntent);
+    }
+
+    private final ActivityResultLauncher<Intent> runtimePermissionResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+
+            }
+    );
 }

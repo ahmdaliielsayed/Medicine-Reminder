@@ -26,4 +26,6 @@
     <color name="grey">#777777</color>
     <color name="alto">#DCDCDC</color>
     <color name="light_grey">#eeeeee</color>
+
+    <color name="mine_shaft">#414141</color>
 </resources>
