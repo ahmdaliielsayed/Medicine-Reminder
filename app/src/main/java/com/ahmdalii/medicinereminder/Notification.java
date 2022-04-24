@@ -67,7 +67,7 @@ public class Notification extends ContextWrapper {
 
         return new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
                 .setContentTitle(medicine.getName())
-                .setContentText(getText(R.string.open_dialogue))
+                .setContentText(medicine.getInstructions()) // getText(R.string.open_dialogue)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT) // you can delete this line
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)

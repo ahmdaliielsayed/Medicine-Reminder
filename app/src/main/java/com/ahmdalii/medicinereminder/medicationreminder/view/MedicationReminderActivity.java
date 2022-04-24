@@ -1,6 +1,7 @@
 package com.ahmdalii.medicinereminder.medicationreminder.view;
 
 import android.content.DialogInterface;
+import android.graphics.PixelFormat;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.os.Looper;
 import android.provider.Settings;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +59,17 @@ public class MedicationReminderActivity extends AppCompatActivity implements Med
         //                              width                               height
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         setFinishOnTouchOutside(false);
+        /*mParams = new WindowManager.LayoutParams(
+                // Shrink the window to wrap the content rather
+                // than filling the screen
+                WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT,
+                // Display it on top of other application windows
+                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+                // Don't let it grab the input focus
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                // Make the underlying application window visible
+                // through any transparent parts
+                PixelFormat.TRANSLUCENT);*/
 
         initComponents();
         presenterInterface.getUserFromRoom(this);
