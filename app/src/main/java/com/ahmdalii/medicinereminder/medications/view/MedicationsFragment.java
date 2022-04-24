@@ -42,6 +42,7 @@ import com.ahmdalii.medicinereminder.model.MedicineUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 
@@ -102,17 +103,7 @@ public class MedicationsFragment extends Fragment {
             public void onClick(View view) {
                 Log.i("emy", "onClick: you clicked");
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && !Settings.canDrawOverlays(view.getContext())) {
-                    new AlertDialog.Builder(view.getContext())
-                            .setTitle(R.string.warning)
-                            .setMessage(R.string.error_msg_permission_required)
-                            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    RuntimePermissionForUser();
-                                }
-                            })
-                            .setIcon(R.drawable.ic_warning)
-                            .show();
+                    runtimePermissionForUser();
                 } else {
                     startActivity(new Intent(getContext(), AddMedActivity.class));
                 }
@@ -173,11 +164,34 @@ public class MedicationsFragment extends Fragment {
         Navigation.findNavController(view).navigate(R.id.action_navigation_dashboard_to_displayMedFragment, args);
     }
 
-    public void RuntimePermissionForUser() {
-        Intent permissionIntent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                Uri.parse("package:" + view.getContext().getPackageName()));
+    public void runtimePermissionForUser() {
+        if (!Settings.canDrawOverlays(view.getContext())) {
+            if ("xiaomi".equals(Build.MANUFACTURER.toLowerCase(Locale.ROOT))) {
+                final Intent intent = new Intent("miui.intent.action.APP_PERM_EDITOR");
+                intent.setClassName("com.miui.securitycenter",
+                        "com.miui.permcenter.permissions.PermissionsEditorActivity");
+                intent.putExtra("extra_pkgname", view.getContext().getPackageName());
 
-        runtimePermissionResultLauncher.launch(permissionIntent);
+                new AlertDialog.Builder(view.getContext())
+                        .setTitle(R.string.additional_permissions)
+                        .setMessage(R.string.additional_permissions_description)
+                        .setPositiveButton(R.string.go_to_settings, (dialog, which) -> startActivity(intent))
+                        .setIcon(R.drawable.ic_warning)
+                        .show();
+            } else {
+                new AlertDialog.Builder(view.getContext())
+                        .setTitle(R.string.warning)
+                        .setMessage(R.string.error_msg_permission_required)
+                        .setPositiveButton(R.string.ok, (dialogInterface, i) -> {
+                            Intent permissionIntent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                                    Uri.parse("package:" + view.getContext().getPackageName()));
+
+                            runtimePermissionResultLauncher.launch(permissionIntent);
+                        })
+                        .setIcon(R.drawable.ic_warning)
+                        .show();
+            }
+        }
     }
 
     private final ActivityResultLauncher<Intent> runtimePermissionResultLauncher = registerForActivityResult(

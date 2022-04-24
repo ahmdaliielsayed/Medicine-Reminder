@@ -73,6 +73,9 @@
     <string name="meds">meds</string>
     <string name="before_eating">before eating \nOriginally scheduled for</string>
     <string name="warning">Warning</string>
+    <string name="additional_permissions">Please Enable the additional permissions</string>
+    <string name="additional_permissions_description">You will not receive notifications while the app is in background if you disable these permissions.\n\nEnable…\n1) Display pop-up windows while running in the background \n2) Display pop-up window</string>
+    <string name="go_to_settings">Go to Settings</string>
     <string name="error_msg_permission_required">Permission required!\nPlease, give the permission to work correctly!</string>
     <string name="snooze_for_five_minutes">Snooze for 5 minutes</string>
 </resources>

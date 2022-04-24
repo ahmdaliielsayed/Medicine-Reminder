@@ -9,6 +9,7 @@
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/MedicineReminder/app/src/main/res/drawable/ic_baseline_add_circle_dogger_blue_24.xml" value="0.2846153846153846" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/MedicineReminder/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.2890625" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/MedicineReminder/app/src/main/res/drawable/ic_logout.xml" value="0.2846153846153846" />
+        <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/MedicineReminder/app/src/main/res/drawable/round_corners.xml" value="0.2890625" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/MedicineReminder/app/src/main/res/drawable/selected_dot.xml" value="0.2890625" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/MedicineReminder/app/src/main/res/drawable/tab_selector.xml" value="0.2890625" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/MedicineReminder/app/src/main/res/layout/activity_add_med.xml" value="0.27291666666666664" />
@@ -16,7 +17,7 @@
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/MedicineReminder/app/src/main/res/layout/activity_login.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/MedicineReminder/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/MedicineReminder/app/src/main/res/layout/activity_maps.xml" value="0.1" />
-        <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/MedicineReminder/app/src/main/res/layout/activity_medication_reminder.xml" value="0.33" />
+        <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/MedicineReminder/app/src/main/res/layout/activity_medication_reminder.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/MedicineReminder/app/src/main/res/layout/connection_lost.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/MedicineReminder/app/src/main/res/layout/dialog.xml" value="0.25" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/MedicineReminder/app/src/main/res/layout/fragment_add_med_day_frequence.xml" value="0.27291666666666664" />
