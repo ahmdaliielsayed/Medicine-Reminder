@@ -5,6 +5,8 @@ import android.content.Context;
 import androidx.lifecycle.LiveData;
 
 import com.ahmdalii.medicinereminder.db.room.AppDataBase;
+import com.ahmdalii.medicinereminder.model.DoseStatus;
+import com.ahmdalii.medicinereminder.model.Medicine;
 import com.ahmdalii.medicinereminder.model.MedicineDose;
 
 import java.util.List;
@@ -50,5 +52,21 @@ public class ConcreteLocalSourceMedicineDose implements LocalSourceMedicineDose 
                 dao.deleteMedicineDose(medicineDose);
             }
         }.start();
+    }
+
+    @Override
+    public void updateMedicineDose(MedicineDose medicineDose) {
+//        new Thread(() -> dao.updateMedicineDose(medicineDose)).start();
+        dao.updateMedicineDose(medicineDose);
+    }
+
+    @Override
+    public MedicineDose getNextMedicineDose() {
+        return dao.getNextMedicineDose(DoseStatus.FUTURE.getStatus());
+    }
+
+    @Override
+    public Medicine getNextMedicine(String med_id) {
+        return dao.getNextMedicine(med_id);
     }
 }
