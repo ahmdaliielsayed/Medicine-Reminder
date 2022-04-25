@@ -34,6 +34,7 @@ import com.ahmdalii.medicinereminder.home.presenter.HomeFragmentPresenterInterfa
 import com.ahmdalii.medicinereminder.home.repository.HomeFragmentRepo;
 import com.ahmdalii.medicinereminder.model.Medicine;
 import com.ahmdalii.medicinereminder.model.MedicineDose;
+import com.ahmdalii.medicinereminder.notificationdialog.view.NotificationDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.DateFormat;
@@ -191,7 +192,8 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
 
     @Override
     public void onCardClick(Medicine medicine, MedicineDose medicineDose) {
-        Toast.makeText(view.getContext(), medicine.getName() + "\n" + medicineDose.getStatus(), Toast.LENGTH_SHORT).show();
+        NotificationDialog dialog = new NotificationDialog(getContext(), medicine, medicineDose);
+        dialog.show();
     }
 
     public void runtimePermissionForUser() {

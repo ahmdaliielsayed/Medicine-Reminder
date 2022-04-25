@@ -94,15 +94,6 @@
         app:layout_constraintTop_toBottomOf="@+id/image_view_calendar_notification_dialog"
         app:srcCompat="@android:drawable/ic_menu_help" />
 
-    <ImageView
-        android:id="@+id/image_view_clock_notification_dialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/image_view_quantity_notification_dialog"
-        app:layout_constraintTop_toBottomOf="@+id/image_view_quantity_notification_dialog"
-        app:srcCompat="@android:drawable/ic_menu_recent_history" />
-
     <TextView
         android:id="@+id/text_view_time_notification_dialog"
         android:layout_width="wrap_content"
@@ -124,16 +115,6 @@
         app:layout_constraintStart_toStartOf="@+id/text_view_time_notification_dialog"
         app:layout_constraintTop_toTopOf="@+id/image_view_quantity_notification_dialog" />
 
-    <TextView
-        android:id="@+id/text_view_last_taken_notification_dialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Last taken at 16: 00, Sat. 9 Apr"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/image_view_clock_notification_dialog"
-        app:layout_constraintStart_toStartOf="@+id/text_view_quantity_notification_dialog"
-        app:layout_constraintTop_toTopOf="@+id/image_view_clock_notification_dialog" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="409dp"
         android:layout_height="wrap_content"
@@ -142,7 +123,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_view_clock_notification_dialog"
+        app:layout_constraintTop_toBottomOf="@+id/image_view_quantity_notification_dialog"
         app:layout_constraintVertical_bias="1.0">
 
         <androidx.cardview.widget.CardView
