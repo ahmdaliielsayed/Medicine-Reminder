@@ -14,7 +14,7 @@
         android:padding="2dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/temppill" />
+        app:srcCompat="@drawable/ic_pills" />
 
     <TextView
         android:id="@+id/textView1"

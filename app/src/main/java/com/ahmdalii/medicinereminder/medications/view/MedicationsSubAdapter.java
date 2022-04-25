@@ -20,10 +20,11 @@ import com.ahmdalii.medicinereminder.medications.repository.MedsPojo;
 import com.ahmdalii.medicinereminder.model.Medicine;
 import com.ahmdalii.medicinereminder.model.MedicineUnit;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MedicationsSubAdapter extends RecyclerView.Adapter<MedicationsSubAdapter.ViewHolder>{
-    List<MedsPojo> data;
+    List<MedsPojo> data = new ArrayList<>();
 
     public MedicationsSubAdapter(List<MedsPojo> data) {
         //this.context = context;

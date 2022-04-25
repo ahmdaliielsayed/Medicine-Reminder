@@ -83,4 +83,6 @@
     <string name="connection_lost">Connection Lost</string>
     <string name="connection_back">Connection Back</string>
     <string name="medicine_time">Hello, it\'s time to take your medicine.</string>
+    <string name="healthTakerDesc">A health taker is a family member or a friend that helps you remember/take your meds in case you forget</string>
+    <string name="send">Send</string>
 </resources>
