@@ -85,4 +85,11 @@
     <string name="medicine_time">Hello, it\'s time to take your medicine.</string>
     <string name="healthTakerDesc">A health taker is a family member or a friend that helps you remember/take your meds in case you forget</string>
     <string name="send">Send</string>
+    <string name="time_card">03:30</string>
+    <string name="cefroxin">Cefroxin</string>
+    <string name="strength_unit">50mg</string>
+    <string name="everyday">everyday</string>
+    <string name="after_eating">after_eating</string>
+    <string name="future">future</string>
+    <string name="amount_form">2 Solution</string>
 </resources>
