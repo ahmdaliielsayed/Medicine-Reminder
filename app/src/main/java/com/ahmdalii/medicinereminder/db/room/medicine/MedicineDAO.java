@@ -33,4 +33,6 @@ public interface MedicineDAO {
     @Query("SELECT name, strength, remainingMedAmount, form FROM medicine where isActivated = 0")
     LiveData<List<MedsPojo>> getInactiveMeds();
 
+    @Query("SELECT * FROM medicine WHERE isSync = 0")
+    LiveData<List<Medicine>> getAllUnSyncMedicines();
 }

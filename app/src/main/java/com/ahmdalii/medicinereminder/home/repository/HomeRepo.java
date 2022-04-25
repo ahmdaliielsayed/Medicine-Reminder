@@ -2,27 +2,39 @@ package com.ahmdalii.medicinereminder.home.repository;
 
 import android.content.Context;
 
+import androidx.lifecycle.LiveData;
+
 import com.ahmdalii.medicinereminder.Constants;
+import com.ahmdalii.medicinereminder.db.room.medicine.LocalSourceMedicine;
+import com.ahmdalii.medicinereminder.db.room.medicinedose.LocalSourceMedicineDose;
 import com.ahmdalii.medicinereminder.db.room.user.LocalSourceUser;
 import com.ahmdalii.medicinereminder.db.sharedpreference.SharedPrefManager;
+import com.ahmdalii.medicinereminder.model.Medicine;
+import com.ahmdalii.medicinereminder.model.MedicineDose;
 import com.ahmdalii.medicinereminder.model.User;
 import com.ahmdalii.medicinereminder.network.NetworkDelegate;
 import com.ahmdalii.medicinereminder.network.RemoteSource;
+
+import java.util.List;
 
 public class HomeRepo implements HomeRepoInterface {
 
     RemoteSource remoteSource;
     LocalSourceUser localSourceUser;
+    LocalSourceMedicine localSourceMedicine;
+    LocalSourceMedicineDose localSourceMedicineDose;
     private static HomeRepo homeRepo = null;
 
-    private HomeRepo(LocalSourceUser localSourceUser, RemoteSource remoteSource) {
+    private HomeRepo(LocalSourceUser localSourceUser, LocalSourceMedicine localSourceMedicine, LocalSourceMedicineDose localSourceMedicineDose, RemoteSource remoteSource) {
         this.localSourceUser = localSourceUser;
         this.remoteSource = remoteSource;
+        this.localSourceMedicine = localSourceMedicine;
+        this.localSourceMedicineDose = localSourceMedicineDose;
     }
 
-    public static HomeRepo getInstance(LocalSourceUser localSourceUser, RemoteSource remoteSource) {
+    public static HomeRepo getInstance(LocalSourceUser localSourceUser, LocalSourceMedicine localSourceMedicine, LocalSourceMedicineDose localSourceMedicineDose, RemoteSource remoteSource) {
         if (homeRepo == null) {
-            homeRepo = new HomeRepo(localSourceUser, remoteSource);
+            homeRepo = new HomeRepo(localSourceUser, localSourceMedicine, localSourceMedicineDose, remoteSource);
         }
 
         return homeRepo;
@@ -39,5 +51,25 @@ public class HomeRepo implements HomeRepoInterface {
     public void signOut(Context context) {
         remoteSource.signOut();
         SharedPrefManager.getInstance(context, Constants.USERS_FILE).setValue(Constants.USER_LOGIN_KEY, false);
+    }
+
+    @Override
+    public LiveData<List<Medicine>> getAllUnSyncMedicines() {
+        return localSourceMedicine.getAllUnSyncMedicines();
+    }
+
+    @Override
+    public LiveData<List<MedicineDose>> getAllUnSyncMedicineDoses() {
+        return localSourceMedicineDose.getAllUnSyncMedicineDoses();
+    }
+
+    @Override
+    public void syncMedicineListToFirebase(NetworkDelegate networkDelegate, List<Medicine> unSyncedMedicines) {
+        remoteSource.syncMedicineListToFirebase(networkDelegate, unSyncedMedicines);
+    }
+
+    @Override
+    public void syncMedicineDosesListToFirebase(NetworkDelegate networkDelegate, List<MedicineDose> unSyncedMedicineDoses) {
+        remoteSource.syncMedicineDosesListToFirebase(networkDelegate, unSyncedMedicineDoses);
     }
 }

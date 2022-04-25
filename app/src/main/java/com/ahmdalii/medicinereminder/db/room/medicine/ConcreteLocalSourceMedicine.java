@@ -15,11 +15,13 @@ public class ConcreteLocalSourceMedicine implements LocalSourceMedicine {
     private MedicineDAO dao;
     private static ConcreteLocalSourceMedicine localSource = null;
     private LiveData<List<Medicine>> storedMedicinesLiveData;
+    private LiveData<List<Medicine>> allUnSyncMedicines;
 
     private ConcreteLocalSourceMedicine(Context context) {
         AppDataBase dataBase = AppDataBase.getInstance(context.getApplicationContext());
         dao = dataBase.medicineDAO();
         storedMedicinesLiveData = dao.getAllMedicines();
+        allUnSyncMedicines = dao.getAllUnSyncMedicines();
     }
 
     public static ConcreteLocalSourceMedicine getInstance(Context context) {
@@ -52,5 +54,9 @@ public class ConcreteLocalSourceMedicine implements LocalSourceMedicine {
     @Override
     public LiveData<Medicine> getMedicine(String medID) {
         return dao.getMedicine(medID);
+    }
+    
+    public LiveData<List<Medicine>> getAllUnSyncMedicines() {
+        return allUnSyncMedicines;
     }
 }

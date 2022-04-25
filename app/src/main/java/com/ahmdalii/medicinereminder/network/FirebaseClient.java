@@ -7,6 +7,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.ahmdalii.medicinereminder.R;
+
 import androidx.annotation.NonNull;
 
 import com.ahmdalii.medicinereminder.addmed.presenter.AddMedicineNetworkDelegate;
@@ -190,7 +191,7 @@ public class FirebaseClient implements RemoteSource {
         databaseReference = FirebaseDatabase.getInstance().getReference();
         String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         String medID = medicine.getId();
-        if(medID == null || medID.equals("")) {
+        if (medID == null || medID.equals("")) {
             medID = databaseReference.child("medicine").push().getKey();
         }
         medicine.setUserID(uid);
@@ -199,10 +200,10 @@ public class FirebaseClient implements RemoteSource {
         databaseReference.child("medicine").child(medID).setValue(medicine).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                for(int i = 0; i < doses.size(); i++) {
+                for (int i = 0; i < doses.size(); i++) {
                     doses.get(i).setMedID(finalMedID);
                     String doseID = doses.get(i).getId();
-                    if(doseID == null || doseID.equals("")) {
+                    if (doseID == null || doseID.equals("")) {
                         doseID = databaseReference.child("dose").push().getKey();
                     }
                     doses.get(i).setId(doseID);
@@ -236,16 +237,17 @@ public class FirebaseClient implements RemoteSource {
 
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if(task.isSuccessful()) {
+                if (task.isSuccessful()) {
 
-                    GenericTypeIndicator<Map<String, MedicineDoseTemp>> t = new GenericTypeIndicator<Map<String, MedicineDoseTemp>>() {};
+                    GenericTypeIndicator<Map<String, MedicineDoseTemp>> t = new GenericTypeIndicator<Map<String, MedicineDoseTemp>>() {
+                    };
                     Map<String, MedicineDoseTemp> dosesMap = task.getResult().getValue(t);
 
                     ArrayList<MedicineDose> doses = new ArrayList<>();
 
 
-                    for(int i = 0; i < dosesMap.size(); i++) {
-                        if(((MedicineDoseTemp) dosesMap.values().toArray()[i]).getMedID().equals(medID)) {
+                    for (int i = 0; i < dosesMap.size(); i++) {
+                        if (((MedicineDoseTemp) dosesMap.values().toArray()[i]).getMedID().equals(medID)) {
                             MedicineDose dose = new MedicineDose();
                             dose.setId((String) dosesMap.keySet().toArray()[i]);
                             dose.setTime(((MedicineDoseTemp) dosesMap.values().toArray()[i]).getTime());
@@ -259,14 +261,13 @@ public class FirebaseClient implements RemoteSource {
                     }
                     networkDelegate.onSuccess(doses);
 
-                }
-                else {
+                } else {
                     networkDelegate.onFailure();
                 }
             }
         });
     }
-    
+
     public void signOut() {
         mAuth.signOut();
     }
@@ -306,5 +307,28 @@ public class FirebaseClient implements RemoteSource {
                 networkDelegate.onFailure();
             }
         });
+    }
+    
+    public void syncMedicineListToFirebase(NetworkDelegate networkDelegate, List<Medicine> unSyncedMedicines) {
+        databaseReference = FirebaseDatabase.getInstance().getReference("medicine");
+        for (Medicine medicine : unSyncedMedicines) {
+            databaseReference.child(medicine.getId()).setValue(medicine)
+                    .addOnSuccessListener(unused -> {
+
+                    })
+                    .addOnFailureListener(e -> networkDelegate.onFailure(e.getMessage()));
+        }
+    }
+
+    @Override
+    public void syncMedicineDosesListToFirebase(NetworkDelegate networkDelegate, List<MedicineDose> unSyncedMedicinesDoses) {
+        databaseReference = FirebaseDatabase.getInstance().getReference("dose");
+        for (MedicineDose medicineDose : unSyncedMedicinesDoses) {
+            databaseReference.child(medicineDose.getId()).setValue(medicineDose)
+                    .addOnSuccessListener(unused -> {
+
+                    })
+                    .addOnFailureListener(e -> networkDelegate.onFailure(e.getMessage()));
+        }
     }
 }

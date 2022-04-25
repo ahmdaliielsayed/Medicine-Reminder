@@ -2,6 +2,7 @@ package com.ahmdalii.medicinereminder.home.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,15 +17,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ahmdalii.medicinereminder.R;
 import com.ahmdalii.medicinereminder.model.Medicine;
 import com.ahmdalii.medicinereminder.model.MedicineDose;
+import com.bumptech.glide.Glide;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -35,7 +39,9 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentAdapte
     List<Medicine> keysList = new ArrayList<>();
     List<MedicineDose> dosesList = new ArrayList<>();
 //    private OnFavoriteClickListener onFavoriteClickListener;
-//
+
+    Set<String> timeSlot = new HashSet<>();
+
     public HomeFragmentAdapter(Context context, Map<Medicine, MedicineDose> allDosesWithMedicineName/*, OnFavoriteClickListener onFavoriteClickListener*/) {
         this.context = context;
         this.allDosesWithMedicineName = allDosesWithMedicineName;
@@ -48,20 +54,26 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentAdapte
         allDosesWithMedicineName = sortByValue(allDosesWithMedicineName);
         keysList.clear();
         dosesList.clear();
+        timeSlot.clear();
 
         for (Map.Entry<Medicine, MedicineDose> entries : allDosesWithMedicineName.entrySet()) {
+            timeSlot.add(entries.getValue().getTime().split("T")[1]);
+
             Medicine key = entries.getKey();
             keysList.add(key);
             MedicineDose value = entries.getValue();
             dosesList.add(value);
         }
+        for (String time : timeSlot) {
+            Log.d("setcount:", time);
+        }
+        Log.d("setset:", String.valueOf(timeSlot.size()));
     }
 
     private static Map<Medicine, MedicineDose> sortByValue(Map<Medicine, MedicineDose> unsortMap) {
 
         // 1. Convert Map to List of Map
-        List<Map.Entry<Medicine, MedicineDose>> list =
-                new LinkedList<>(unsortMap.entrySet());
+        List<Map.Entry<Medicine, MedicineDose>> list = new LinkedList<>(unsortMap.entrySet());
 
         // 2. Sort list with Collections.sort(), provide a custom Comparator
         //    Try switch the o1 o2 position for a different order
@@ -71,6 +83,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentAdapte
                 return (o1.getValue().getTime()).compareTo(o2.getValue().getTime());
             }
         });
+
         // 3. Loop the sorted list and put it into a new insertion order Map LinkedHashMap
         Map<Medicine, MedicineDose> sortedMap = new LinkedHashMap<Medicine, MedicineDose>();
         for (Map.Entry<Medicine, MedicineDose> entry : list) {
@@ -99,8 +112,30 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentAdapte
         holder.getTxtViewTime().setText(dosesList.get(position).getTime().split("T")[1]);
         holder.getTxtViewAmountForm().setText(String.valueOf(dosesList.get(position).getAmount()).concat(" ").concat(keysList.get(position).getForm()));
 
-//        Glide.with(context).load(movies.get(position).getImage()).into(holder.getIvPhoto());
-//
+        switch (keysList.get(position).getForm()) {
+            case "pills":
+                Glide.with(context).load(R.drawable.ic_pills).into(holder.getImgViewPill());
+                break;
+            case "solution":
+                Glide.with(context).load(R.drawable.ic_solution).into(holder.getImgViewPill());
+                break;
+            case "injection":
+                Glide.with(context).load(R.drawable.ic_injection).into(holder.getImgViewPill());
+                break;
+            case "powder":
+                Glide.with(context).load(R.drawable.ic_powder).into(holder.getImgViewPill());
+                break;
+            case "drops":
+                Glide.with(context).load(R.drawable.ic_drops).into(holder.getImgViewPill());
+                break;
+            case "inhaler":
+                Glide.with(context).load(R.drawable.ic_inhaler).into(holder.getImgViewPill());
+                break;
+            case "topical":
+                Glide.with(context).load(R.drawable.ic_topical).into(holder.getImgViewPill());
+                break;
+        }
+
 //        holder.getBtnAddToFavorite().setOnClickListener(view -> onFavoriteClickListener.onRemoveClick(movies.get(position)));
     }
 
