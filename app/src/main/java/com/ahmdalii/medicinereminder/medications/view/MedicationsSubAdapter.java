@@ -59,9 +59,22 @@ public class MedicationsSubAdapter extends RecyclerView.Adapter<MedicationsSubAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        //holder.imageView.setImageResource(data.get(position).getIcon());
-        //if(data.get(position).getForm())
-        holder.imageView.setImageResource(R.drawable.temppill);
+
+        if(data.get(position).getForm().toString().equals("topical"))
+            holder.imageView.setImageResource(R.drawable.ic_topical);
+        else if(data.get(position).getForm().toString().equals("solution"))
+            holder.imageView.setImageResource(R.drawable.ic_solution);
+        else if(data.get(position).getForm().toString().equals("injection"))
+            holder.imageView.setImageResource(R.drawable.ic_injection);
+        else if(data.get(position).getForm().toString().equals("powder"))
+            holder.imageView.setImageResource(R.drawable.ic_powder);
+        else if(data.get(position).getForm().toString().equals("drops"))
+            holder.imageView.setImageResource(R.drawable.ic_drops);
+        else if(data.get(position).getForm().toString().equals("inhaler"))
+            holder.imageView.setImageResource(R.drawable.ic_inhaler);
+        else
+            holder.imageView.setImageResource(R.drawable.ic_pills);
+
         holder.nameText.setText(data.get(position).getName());
         holder.strengthText.setText(data.get(position).getStrength().toString());
         holder.pillText.setText(data.get(position).getRemainingMedAmount().toString() + " Pill(s) left");
