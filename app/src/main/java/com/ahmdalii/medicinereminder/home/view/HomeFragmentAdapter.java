@@ -38,36 +38,29 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentAdapte
     Map<Medicine, MedicineDose> allDosesWithMedicineName;
     List<Medicine> keysList = new ArrayList<>();
     List<MedicineDose> dosesList = new ArrayList<>();
-//    private OnFavoriteClickListener onFavoriteClickListener;
+    private OnCardClickListener onCardClickListener;
 
-    Set<String> timeSlot = new HashSet<>();
+    String sectionTime = "";
 
-    public HomeFragmentAdapter(Context context, Map<Medicine, MedicineDose> allDosesWithMedicineName/*, OnFavoriteClickListener onFavoriteClickListener*/) {
+    public HomeFragmentAdapter(Context context, Map<Medicine, MedicineDose> allDosesWithMedicineName, OnCardClickListener onCardClickListener) {
         this.context = context;
         this.allDosesWithMedicineName = allDosesWithMedicineName;
 
         createKeysAndDosesLists(allDosesWithMedicineName);
-//        this.onFavoriteClickListener = onFavoriteClickListener;
+        this.onCardClickListener = onCardClickListener;
     }
 
     private void createKeysAndDosesLists(Map<Medicine, MedicineDose> allDosesWithMedicineName) {
         allDosesWithMedicineName = sortByValue(allDosesWithMedicineName);
         keysList.clear();
         dosesList.clear();
-        timeSlot.clear();
 
         for (Map.Entry<Medicine, MedicineDose> entries : allDosesWithMedicineName.entrySet()) {
-            timeSlot.add(entries.getValue().getTime().split("T")[1]);
-
             Medicine key = entries.getKey();
             keysList.add(key);
             MedicineDose value = entries.getValue();
             dosesList.add(value);
         }
-        for (String time : timeSlot) {
-            Log.d("setcount:", time);
-        }
-        Log.d("setset:", String.valueOf(timeSlot.size()));
     }
 
     private static Map<Medicine, MedicineDose> sortByValue(Map<Medicine, MedicineDose> unsortMap) {
@@ -103,6 +96,12 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.getTxtViewSectionTime().setText(dosesList.get(position).getTime().split("T")[1]);
+        if (sectionTime.equals(dosesList.get(position).getTime().split("T")[1])) {
+            holder.getTxtViewSectionTime().setVisibility(View.GONE);
+        } else {
+            holder.getTxtViewSectionTime().setVisibility(View.VISIBLE);
+        }
 
         holder.getTxtViewMedicineName().setText(keysList.get(position).getName());
         holder.getTxtViewStrengthUnit().setText(String.valueOf(keysList.get(position).getStrength()).concat(" ").concat(keysList.get(position).getUnit()));
@@ -136,7 +135,9 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentAdapte
                 break;
         }
 
-//        holder.getBtnAddToFavorite().setOnClickListener(view -> onFavoriteClickListener.onRemoveClick(movies.get(position)));
+        sectionTime = dosesList.get(position).getTime().split("T")[1];
+
+        holder.getCardView().setOnClickListener(view -> onCardClickListener.onCardClick(keysList.get(position), dosesList.get(position)));
     }
 
     @Override
@@ -155,7 +156,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentAdapte
 
         private CardView cardView;
         private CircleImageView imgViewPill;
-        private TextView txtViewMedicineName, txtViewStrengthUnit, txtViewDayFrequency, txtViewInstructions, txtViewStatus, txtViewTime, txtViewAmountForm;
+        private TextView txtViewMedicineName, txtViewStrengthUnit, txtViewDayFrequency, txtViewInstructions, txtViewStatus, txtViewTime, txtViewAmountForm, txtViewSectionTime;
 
         private ConstraintLayout constraint_layout;
         private View card_layout;
@@ -221,6 +222,12 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentAdapte
                 txtViewAmountForm = itemView.findViewById(R.id.txtViewAmountForm);
             }
             return txtViewAmountForm;
+        }
+        public TextView getTxtViewSectionTime() {
+            if (txtViewSectionTime == null) {
+                txtViewSectionTime = itemView.findViewById(R.id.txtViewSectionTime);
+            }
+            return txtViewSectionTime;
         }
     }
 }

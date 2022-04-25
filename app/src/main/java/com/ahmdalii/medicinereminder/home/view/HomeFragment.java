@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,7 +36,7 @@ import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.HorizontalCalendarView;
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
 
-public class HomeFragment extends Fragment implements HomeFragmentInterface {
+public class HomeFragment extends Fragment implements HomeFragmentInterface, OnCardClickListener {
 
     View view;
     Calendar selectedDate;
@@ -90,7 +91,7 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
 //        linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView.setLayoutManager(linearLayoutManager);
-        homeFragmentAdapter = new HomeFragmentAdapter(view.getContext(), new HashMap<>()/*, this*/);
+        homeFragmentAdapter = new HomeFragmentAdapter(view.getContext(), new HashMap<>(), this);
         recyclerView.setAdapter(homeFragmentAdapter);
 
         selectedDate = Calendar.getInstance();
@@ -140,5 +141,10 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface {
         }
 
         homeFragmentAdapter.setDataToAdapter(allDosesWithMedicineName);
+    }
+
+    @Override
+    public void onCardClick(Medicine medicine, MedicineDose medicineDose) {
+        Toast.makeText(view.getContext(), medicine.getName() + "\n" + medicineDose.getStatus(), Toast.LENGTH_SHORT).show();
     }
 }

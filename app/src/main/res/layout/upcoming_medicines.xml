@@ -1,127 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    app:cardElevation="5dp"
-    app:cardCornerRadius="10dp">
+    android:background="@color/gallery">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <TextView
+        android:id="@+id/txtViewSectionTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/txt_backgrund_dodger_bottom_corners"
+        android:gravity="center_horizontal"
+        android:text="@string/time_card"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewSectionTime">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imgViewPill"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/pills"
-            app:civ_border_color="@color/dodger_blue"
-            app:civ_border_width="1dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <View
-            android:id="@+id/view2"
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:background="@color/blue"
-            app:layout_constraintBottom_toBottomOf="@+id/imgViewPill"
-            app:layout_constraintStart_toEndOf="@+id/imgViewPill"
-            app:layout_constraintTop_toTopOf="@+id/imgViewPill" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgViewPill"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/pills"
+                app:civ_border_color="@color/dodger_blue"
+                app:civ_border_width="1dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/txtViewMedicineName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp"
-            android:text="Cefroxin"
-            android:textColor="@color/dodger_blue"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/txtViewStrengthUnit"
-            app:layout_constraintStart_toEndOf="@+id/view2"
-            app:layout_constraintTop_toTopOf="@+id/view2" />
+            <View
+                android:id="@+id/view2"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:background="@color/blue"
+                app:layout_constraintBottom_toBottomOf="@+id/imgViewPill"
+                app:layout_constraintStart_toEndOf="@+id/imgViewPill"
+                app:layout_constraintTop_toTopOf="@+id/imgViewPill" />
 
-        <TextView
-            android:id="@+id/txtViewStrengthUnit"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:text="50mg"
-            android:textColor="@color/dodger_blue"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/txtViewMedicineName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/txtViewMedicineName" />
+            <TextView
+                android:id="@+id/txtViewMedicineName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/cefroxin"
+                android:textColor="@color/dodger_blue"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/txtViewStrengthUnit"
+                app:layout_constraintStart_toEndOf="@+id/view2"
+                app:layout_constraintTop_toTopOf="@+id/view2" />
 
-        <TextView
-            android:id="@+id/txtViewDayFrequency"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/txt_backgrund_grey"
-            android:text="everyday"
-            android:textColor="@color/dodger_blue"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/txtViewMedicineName"
-            app:layout_constraintTop_toBottomOf="@+id/txtViewMedicineName" />
+            <TextView
+                android:id="@+id/txtViewStrengthUnit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="@string/strength_unit"
+                android:textColor="@color/dodger_blue"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtViewMedicineName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/txtViewMedicineName" />
 
-        <TextView
-            android:id="@+id/txtViewInstructions"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/txt_backgrund_grey"
-            android:text="after_eating"
-            android:textColor="@color/dodger_blue"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/txtViewDayFrequency"
-            app:layout_constraintTop_toBottomOf="@+id/txtViewDayFrequency" />
+            <TextView
+                android:id="@+id/txtViewDayFrequency"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/txt_backgrund_grey"
+                android:text="@string/everyday"
+                android:textColor="@color/dodger_blue"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/txtViewMedicineName"
+                app:layout_constraintTop_toBottomOf="@+id/txtViewMedicineName" />
 
-        <TextView
-            android:id="@+id/txtViewStatus"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/txt_backgrund_grey"
-            android:text="future"
-            android:textColor="@color/dodger_blue"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="@+id/txtViewAmountForm"
-            app:layout_constraintTop_toTopOf="@+id/txtViewInstructions" />
+            <TextView
+                android:id="@+id/txtViewInstructions"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/txt_backgrund_grey"
+                android:text="@string/after_eating"
+                android:textColor="@color/dodger_blue"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/txtViewDayFrequency"
+                app:layout_constraintTop_toBottomOf="@+id/txtViewDayFrequency" />
 
-        <TextView
-            android:id="@+id/txtViewTime"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/txt_backgrund_dodger_bottom_corners"
-            android:gravity="center_horizontal"
-            android:text="03:30"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtViewInstructions" />
+            <TextView
+                android:id="@+id/txtViewStatus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/txt_backgrund_grey"
+                android:text="@string/future"
+                android:textColor="@color/dodger_blue"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/txtViewAmountForm"
+                app:layout_constraintTop_toTopOf="@+id/txtViewInstructions" />
 
-        <TextView
-            android:id="@+id/txtViewAmountForm"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/txt_backgrund_dodger"
-            android:text="2 Solution"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="@+id/txtViewStrengthUnit"
-            app:layout_constraintTop_toTopOf="@+id/txtViewDayFrequency" />
+            <TextView
+                android:id="@+id/txtViewTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/txt_backgrund_dodger_bottom_corners"
+                android:gravity="center_horizontal"
+                android:text="@string/time_card"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtViewInstructions" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/txtViewAmountForm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/txt_backgrund_dodger"
+                android:text="@string/amount_form"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/txtViewStrengthUnit"
+                app:layout_constraintTop_toTopOf="@+id/txtViewDayFrequency" />
 
-</androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
