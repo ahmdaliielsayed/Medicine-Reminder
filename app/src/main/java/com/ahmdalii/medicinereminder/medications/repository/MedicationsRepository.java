@@ -24,7 +24,6 @@ public class MedicationsRepository implements MedicationsRepositoryInterface {
         return repo;
     }
 
-
     @Override
     public LiveData<List<MedsPojo>> getActiveMeds() {
         return localSource.getLocalActiveMeds();
