@@ -188,40 +188,46 @@ public class AddMedPresenter implements AddMedPresenterInterface, AddMedicineNet
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void createEverydaySchedule() {
+        boolean isFirstLoop = true;
         while(!startDate.isAfter(endDate)) {
 
             for(int i = 0; i < timeFrequency; i++) {
-                if(times.get(i).isAfter(LocalDateTime.now())) {
+                if(!isFirstLoop || times.get(i).isAfter(LocalDateTime.now())) {
                     addDose(i);
                 }
             }
+            isFirstLoop = false;
             startDate = startDate.plusDays(1);
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void createEveryNDaySchedule() {
+        boolean isFirstLoop = true;
         while(!startDate.isAfter(endDate)) {
 
             for(int i = 0; i < timeFrequency; i++) {
-                if(times.get(i).isAfter(LocalDateTime.now())) {
+                if(!isFirstLoop || times.get(i).isAfter(LocalDateTime.now())) {
                     addDose(i);
                 }
             }
+            isFirstLoop = false;
             startDate = startDate.plusDays(daysBetweenDoses);
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void createSpecificDaysSchedule() {
+        boolean isFirstLoop = true;
         while(!startDate.isAfter(endDate)) {
             if(isSelectedDay()) {
                 for (int i = 0; i < timeFrequency; i++) {
-                    if(times.get(i).isAfter(LocalDateTime.now())) {
+                    if(!isFirstLoop || times.get(i).isAfter(LocalDateTime.now())) {
                         addDose(i);
                     }
                 }
             }
+            isFirstLoop = false;
             startDate = startDate.plusDays(1);
         }
     }
