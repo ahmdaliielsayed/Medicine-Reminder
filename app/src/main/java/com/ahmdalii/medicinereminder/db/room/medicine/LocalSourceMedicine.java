@@ -13,4 +13,5 @@ public interface LocalSourceMedicine {
     LiveData<List<Medicine>> getAllStoredMedicines();
     LiveData<Medicine> getMedicine(String medID);
     LiveData<List<Medicine>> getAllUnSyncMedicines();
+    void updateMedicinesInRoom(Medicine updatedList);
 }

@@ -80,4 +80,11 @@ public class ConcreteLocalSourceMedicineDose implements LocalSourceMedicineDose 
     public LiveData<List<MedicineDose>> getAllUnSyncMedicineDoses() {
         return dao.getAllUnSyncMedicineDoses();
     }
+
+    @Override
+    public void updateMedicineDosesInRoom(MedicineDose updatedList) {
+        new Thread(() -> {
+            dao.updateMedicineDose(updatedList);
+        }).start();
+    }
 }

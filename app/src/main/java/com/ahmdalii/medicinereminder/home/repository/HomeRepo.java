@@ -13,6 +13,7 @@ import com.ahmdalii.medicinereminder.model.Medicine;
 import com.ahmdalii.medicinereminder.model.MedicineDose;
 import com.ahmdalii.medicinereminder.model.User;
 import com.ahmdalii.medicinereminder.network.NetworkDelegate;
+import com.ahmdalii.medicinereminder.network.NetworkSyncDelegate;
 import com.ahmdalii.medicinereminder.network.RemoteSource;
 
 import java.util.List;
@@ -64,12 +65,22 @@ public class HomeRepo implements HomeRepoInterface {
     }
 
     @Override
-    public void syncMedicineListToFirebase(NetworkDelegate networkDelegate, List<Medicine> unSyncedMedicines) {
+    public void syncMedicineListToFirebase(NetworkSyncDelegate networkDelegate, List<Medicine> unSyncedMedicines) {
         remoteSource.syncMedicineListToFirebase(networkDelegate, unSyncedMedicines);
     }
 
     @Override
-    public void syncMedicineDosesListToFirebase(NetworkDelegate networkDelegate, List<MedicineDose> unSyncedMedicineDoses) {
+    public void syncMedicineDosesListToFirebase(NetworkSyncDelegate networkDelegate, List<MedicineDose> unSyncedMedicineDoses) {
         remoteSource.syncMedicineDosesListToFirebase(networkDelegate, unSyncedMedicineDoses);
+    }
+
+    @Override
+    public void updateMedicinesInRoom(Medicine updatedList) {
+        localSourceMedicine.updateMedicinesInRoom(updatedList);
+    }
+
+    @Override
+    public void updateMedicineDosesInRoom(MedicineDose updatedList) {
+        localSourceMedicineDose.updateMedicineDosesInRoom(updatedList);
     }
 }
