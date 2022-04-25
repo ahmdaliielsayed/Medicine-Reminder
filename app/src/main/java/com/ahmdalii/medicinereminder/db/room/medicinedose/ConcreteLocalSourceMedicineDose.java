@@ -75,4 +75,9 @@ public class ConcreteLocalSourceMedicineDose implements LocalSourceMedicineDose 
     public Map<Medicine, List<MedicineDose>> getAllDosesWithMedicineName() {
         return dao.getAllDosesWithMedicineName();
     }
+
+    @Override
+    public LiveData<List<MedicineDose>> getAllUnSyncMedicineDoses() {
+        return dao.getAllUnSyncMedicineDoses();
+    }
 }

@@ -27,12 +27,14 @@ public class Notification extends ContextWrapper {
 
     Medicine medicine;
     MedicineDose dose;
+    String title;
 
-    public Notification(Context base, Medicine medicine, MedicineDose dose) {
+    public Notification(Context base, Medicine medicine, MedicineDose dose, String title) {
         super(base);
 
         this.medicine = medicine;
         this.dose = dose;
+        this.title = title;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createChannel();
@@ -66,8 +68,8 @@ public class Notification extends ContextWrapper {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, uniqueInt, intent, PendingIntent.FLAG_ONE_SHOT);
 
         return new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
-                .setContentTitle(medicine.getName())
-                .setContentText(medicine.getInstructions()) // getText(R.string.open_dialogue)
+                .setContentTitle(title)
+                .setContentText(medicine.getName().concat("\n").concat(medicine.getInstructions())) // getText(R.string.open_dialogue)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT) // you can delete this line
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)

@@ -11,4 +11,5 @@ public interface LocalSourceMedicine {
     void insertMedicine(Medicine medicine);
     void deleteMedicine(Medicine medicine);
     LiveData<List<Medicine>> getAllStoredMedicines();
+    LiveData<List<Medicine>> getAllUnSyncMedicines();
 }

@@ -25,11 +25,9 @@ import com.ahmdalii.medicinereminder.model.MedicineDose;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -66,6 +64,8 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface {
         this.view = view;
 
         initComponents();
+
+        presenterInterface.getAllDosesWithMedicineName(changeDateFormat(Calendar.getInstance(Locale.US).getTime()));
 
         horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
             @Override

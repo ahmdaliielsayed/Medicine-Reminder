@@ -22,4 +22,7 @@ public interface MedicineDAO {
 
     @Delete
     void deleteMedicine(Medicine medicine);
+
+    @Query("SELECT * FROM medicine WHERE isSync = 0")
+    LiveData<List<Medicine>> getAllUnSyncMedicines();
 }

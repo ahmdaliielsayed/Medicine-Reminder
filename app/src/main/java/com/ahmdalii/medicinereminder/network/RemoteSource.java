@@ -10,6 +10,7 @@ import com.ahmdalii.medicinereminder.model.Medicine;
 import com.ahmdalii.medicinereminder.model.MedicineDose;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface RemoteSource {
 
@@ -23,6 +24,8 @@ public interface RemoteSource {
     void enqueueCall(AddMedicineNetworkDelegate networkDelegate, Medicine medicine, ArrayList<MedicineDose> doses);
     void enqueueCall(DisplayMedNetworkDelegate networkDelegate, String medID);
 
-
     void signOut();
+
+    void syncMedicineListToFirebase(NetworkDelegate networkDelegate, List<Medicine> unSyncedMedicines);
+    void syncMedicineDosesListToFirebase(NetworkDelegate networkDelegate, List<MedicineDose> unSyncedMedicinesDoses);
 }

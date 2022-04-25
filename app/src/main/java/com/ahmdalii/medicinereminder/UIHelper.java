@@ -21,8 +21,8 @@ public class UIHelper {
                 .show();
     }
 
-    public static void openNotification(MedicineDose medicineDose, Medicine medicine, Context context) {
-        Notification notificationHelper = new Notification(context, medicine, medicineDose);
+    public static void openNotification(MedicineDose medicineDose, Medicine medicine, Context context, String title) {
+        Notification notificationHelper = new Notification(context, medicine, medicineDose, title);
         NotificationCompat.Builder nb = notificationHelper.getChannelNotification();
         notificationHelper.getManager().notify(medicineDose.getId().hashCode(), nb.build());
     }
