@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ahmdalii.medicinereminder.R;
@@ -24,8 +25,10 @@ import com.ahmdalii.medicinereminder.model.MedicineDose;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -45,9 +48,11 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface {
 
     HomeFragmentPresenterInterface presenterInterface;
 
-    RecyclerView recyclerView;
     ImageView imgViewNoPills;
     TextView txtHome, txtHomeDescription;
+
+    RecyclerView recyclerView;
+    HomeFragmentAdapter homeFragmentAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -77,10 +82,16 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface {
 
         presenterInterface = new HomeFragmentPresenter(this, HomeFragmentRepo.getInstance(ConcreteLocalSourceMedicineDose.getInstance(view.getContext())));
 
-        recyclerView = view.findViewById(R.id.recyclerView);
         imgViewNoPills = view.findViewById(R.id.imgViewNoPills);
         txtHome = view.findViewById(R.id.txtHome);
         txtHomeDescription = view.findViewById(R.id.txtHomeDescription);
+
+        recyclerView = view.findViewById(R.id.recyclerView);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
+//        linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        homeFragmentAdapter = new HomeFragmentAdapter(view.getContext(), new HashMap<>()/*, this*/);
+        recyclerView.setAdapter(homeFragmentAdapter);
 
         selectedDate = Calendar.getInstance();
 
@@ -127,5 +138,7 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface {
             txtHome.setVisibility(View.GONE);
             txtHomeDescription.setVisibility(View.GONE);
         }
+
+        homeFragmentAdapter.setDataToAdapter(allDosesWithMedicineName);
     }
 }
