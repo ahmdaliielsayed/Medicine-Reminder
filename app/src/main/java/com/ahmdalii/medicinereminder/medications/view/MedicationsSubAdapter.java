@@ -12,13 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ahmdalii.medicinereminder.R;
 import com.ahmdalii.medicinereminder.medications.repository.MedicationsPojo;
+import com.ahmdalii.medicinereminder.medications.repository.MedsPojo;
 
 import java.util.List;
 
 public class MedicationsSubAdapter extends RecyclerView.Adapter<MedicationsSubAdapter.ViewHolder>{
-    List<MedicationsPojo> data;
+    List<MedsPojo> data;
 
-    public MedicationsSubAdapter(List<MedicationsPojo> data) {
+    public MedicationsSubAdapter(List<MedsPojo> data) {
         //this.context = context;
         this.data = data;
     }
@@ -51,13 +52,19 @@ public class MedicationsSubAdapter extends RecyclerView.Adapter<MedicationsSubAd
         return vh;
     }
 
+    public void setList(List<MedsPojo> updatedData){
+        this.data = updatedData;
+    }
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        holder.imageView.setImageResource(data.get(position).getIcon());
+        //holder.imageView.setImageResource(data.get(position).getIcon());
+        //if(data.get(position).getForm())
+        holder.imageView.setImageResource(R.drawable.temppill);
         holder.nameText.setText(data.get(position).getName());
-        holder.strengthText.setText(data.get(position).getStrength());
-        holder.pillText.setText(data.get(position).getLeftNum() + " Pill(s) left");
+        holder.strengthText.setText(data.get(position).getStrength().toString());
+        holder.pillText.setText(data.get(position).getRemainingMedAmount().toString() + " Pill(s) left");
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
