@@ -14,10 +14,11 @@ import com.ahmdalii.medicinereminder.R;
 import com.ahmdalii.medicinereminder.medications.repository.MedicationsPojo;
 import com.ahmdalii.medicinereminder.medications.repository.MedsPojo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MedicationsSubAdapter extends RecyclerView.Adapter<MedicationsSubAdapter.ViewHolder>{
-    List<MedsPojo> data;
+    List<MedsPojo> data = new ArrayList<>();
 
     public MedicationsSubAdapter(List<MedsPojo> data) {
         //this.context = context;

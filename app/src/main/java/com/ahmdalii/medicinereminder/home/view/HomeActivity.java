@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.ahmdalii.medicinereminder.R;
 import com.ahmdalii.medicinereminder.databinding.ActivityHomeBinding;
 import com.ahmdalii.medicinereminder.db.room.user.ConcreteLocalSourceUser;
+import com.ahmdalii.medicinereminder.healthtaker.view.HealthTakerActivity;
 import com.ahmdalii.medicinereminder.home.presenter.HomePresenter;
 import com.ahmdalii.medicinereminder.home.presenter.HomePresenterInterface;
 import com.ahmdalii.medicinereminder.home.repository.HomeRepo;
@@ -40,6 +41,8 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityInter
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private Toolbar toolbar;
+
+    String userId;
 
     HomePresenterInterface presenterInterface;
 
@@ -90,7 +93,10 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityInter
 
             switch (item.getItemId()) {
                 case R.id.itemInviteMedFriend:
-                    Toast.makeText(this, "itemInviteMedFriend", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "itemInviteMedFriend", Toast.LENGTH_SHORT).show();
+                    Intent healthTakerIntent = new Intent(this, HealthTakerActivity.class);
+                    healthTakerIntent.putExtra("userId", userId);
+                    startActivity(healthTakerIntent);
                     break;
                 case R.id.itemLogout:
                     presenterInterface.signOut(this);
@@ -114,6 +120,8 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityInter
 
     @Override
     public void displayUserInformation(User user) {
+        userId = user.getUserId();
+
         View headerView = navigationView.getHeaderView(0);
 
         profile_image = headerView.findViewById(R.id.profile_image);

@@ -80,4 +80,6 @@
     <string name="snooze_for_five_minutes">Snooze for 5 minutes</string>
     <string name="have_no_reminders">You don\'t have any reminders.</string>
     <string name="add_a_new_pill">Tap the button below to add a new pill.</string>
+    <string name="healthTakerDesc">A health taker is a family member or a friend that helps you remember/take your meds in case you forget</string>
+    <string name="send">Send</string>
 </resources>

@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MedicineReminder">
-
+        <activity
+            android:name=".healthtaker.view.HealthTakerActivity"
+            android:exported="true" />
         <activity
             android:name=".medicationreminder.view.MedicationReminderActivity"
             android:exported="true"
@@ -32,7 +34,6 @@
             android:name=".home.view.HomeActivity"
             android:exported="true"
             android:label="@string/title_activity_home" />
-
         <activity
             android:name=".splash.view.MainActivity"
             android:exported="true">
