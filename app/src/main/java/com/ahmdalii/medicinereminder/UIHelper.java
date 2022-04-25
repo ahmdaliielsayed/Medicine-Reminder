@@ -3,6 +3,10 @@ package com.ahmdalii.medicinereminder;
 import android.content.Context;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.NotificationCompat;
+
+import com.ahmdalii.medicinereminder.model.Medicine;
+import com.ahmdalii.medicinereminder.model.MedicineDose;
 
 public class UIHelper {
 
@@ -15,5 +19,11 @@ public class UIHelper {
                 })
                 .setIcon(icon)
                 .show();
+    }
+
+    public static void openNotification(MedicineDose medicineDose, Medicine medicine, Context context) {
+        Notification notificationHelper = new Notification(context, medicine, medicineDose);
+        NotificationCompat.Builder nb = notificationHelper.getChannelNotification();
+        notificationHelper.getManager().notify(medicineDose.getId().hashCode(), nb.build());
     }
 }
