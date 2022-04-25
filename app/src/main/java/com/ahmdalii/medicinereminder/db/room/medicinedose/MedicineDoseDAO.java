@@ -39,6 +39,6 @@ public interface MedicineDoseDAO {
 //    LiveData<List<POJO>> getAllDosesWithMedicineName();
 
 
-    @Query("SELECT DISTINCT * FROM medicine INNER JOIN medicine_dose ON medicine.id = medicine_dose.medID")
+    @Query("SELECT DISTINCT * FROM medicine INNER JOIN medicine_dose ON medicine.id = medicine_dose.medID AND medicine.isActivated = 1")
     Map<Medicine, List<MedicineDose>> getAllDosesWithMedicineName();
 }
