@@ -7,6 +7,7 @@ import androidx.annotation.RequiresApi;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.ahmdalii.medicinereminder.NetworkConnection;
+import com.ahmdalii.medicinereminder.WorkRequestManager;
 import com.ahmdalii.medicinereminder.addmed.presenter.AddMedicineNetworkDelegate;
 import com.ahmdalii.medicinereminder.db.room.medicine.LocalSourceMedicine;
 import com.ahmdalii.medicinereminder.db.room.medicinedose.LocalSourceMedicineDose;
@@ -119,14 +120,18 @@ public class DisplayMedRepo implements DisplayMedRepoInterface {
                 localSourceMedicineDose.deleteMedicineDose(dose);
             }
         }
+
+        WorkRequestManager.removeWork(medicine.getId(), context);
     }
 
     @Override
     public void getStoredMedicineAndDoses(DisplayMedNetworkDelegate networkDelegate, Context context, LifecycleOwner owner, String medID) {
         localSourceMedicine.getMedicine(medID).observe(owner, med -> {
             medicine = med;
-            getStoredDoses(networkDelegate, context, owner);
-            networkDelegate.onSuccessLocal();
+            if(med != null) {
+                getStoredDoses(networkDelegate, context, owner);
+                networkDelegate.onSuccessLocal();
+            }
         });
     }
 }

@@ -35,6 +35,7 @@ import com.ahmdalii.medicinereminder.model.MedicineDose;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -168,6 +169,16 @@ public class EditMedActivity extends AppCompatActivity implements EditMedActivit
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
+    private boolean isContaining(ArrayList<LocalTime> times, String time) {
+        for(LocalTime t: times) {
+            if (t.truncatedTo(ChronoUnit.MINUTES).toString().equals(LocalDateTime.parse(time).toLocalTime().truncatedTo(ChronoUnit.MINUTES).toString())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void setReminderTimesCardViewUI() {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,  R.array.time_frequency_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -198,8 +209,8 @@ public class EditMedActivity extends AppCompatActivity implements EditMedActivit
         ArrayList<Integer> amounts = new ArrayList<>();
 
         for(MedicineDose dose: editMedPresenter.getDoses()) {
-            if(times.size() == 0 || !times.contains(LocalDateTime.parse(dose.getTime()).toLocalTime())) {
-                times.add(LocalDateTime.parse(dose.getTime()).toLocalTime());
+            if(times.size() == 0 || !isContaining(times, dose.getTime())) {
+                times.add(LocalDateTime.parse(dose.getTime()).toLocalTime().truncatedTo(ChronoUnit.MINUTES));
                 amounts.add(dose.getAmount());
             }
         }
