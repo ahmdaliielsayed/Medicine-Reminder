@@ -8,6 +8,6 @@ import com.ahmdalii.medicinereminder.model.MedicineDose;
 public interface MedicationReminderPresenterInterface {
 
     void getUserFromRoom(Context context);
-    void updateDose(MedicineDose medicineDose, Context context);
+    void updateDose(MedicineDose medicineDose, Medicine medicine, Context context);
     void snoozeDose(MedicineDose medicineDose, Medicine medicine, Context context);
 }

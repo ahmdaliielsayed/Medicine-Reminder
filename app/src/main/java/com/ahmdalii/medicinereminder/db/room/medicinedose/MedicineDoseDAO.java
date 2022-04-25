@@ -28,6 +28,9 @@ public interface MedicineDoseDAO {
     @Update
     void updateMedicineDose(MedicineDose medicineDose);
 
+    @Update
+    void updateMedicine(Medicine medicine);
+
     @Query("SELECT * FROM medicine_dose WHERE status = :futureStatus ORDER BY time LIMIT 1")
     MedicineDose getNextMedicineDose(String futureStatus);
 

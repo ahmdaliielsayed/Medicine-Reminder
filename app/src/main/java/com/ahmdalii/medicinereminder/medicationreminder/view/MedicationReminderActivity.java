@@ -1,21 +1,15 @@
 package com.ahmdalii.medicinereminder.medicationreminder.view;
 
-import android.content.DialogInterface;
-import android.graphics.PixelFormat;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.provider.Settings;
-import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -76,7 +70,11 @@ public class MedicationReminderActivity extends AppCompatActivity implements Med
         displayCardInfo();
 
         cardViewSkip.setOnClickListener(view -> updateDose(DoseStatus.SKIPPED.getStatus()));
-        cardViewTake.setOnClickListener(view -> updateDose(DoseStatus.TAKEN.getStatus()));
+        cardViewTake.setOnClickListener(view -> {
+            medicine.setRemainingMedAmount(medicine.getRemainingMedAmount() - dose.getAmount());
+            medicine.setSync(false);
+            updateDose(DoseStatus.TAKEN.getStatus());
+        });
         cardViewSnooze.setOnClickListener(view -> {
             mediaPlayerSong.stop();
             dose.setStatus(DoseStatus.UNKNOWN.getStatus());
@@ -106,7 +104,7 @@ public class MedicationReminderActivity extends AppCompatActivity implements Med
 
         new Thread(() -> {
             // this is executed on another Thread
-            presenterInterface.updateDose(dose, MedicationReminderActivity.this);
+            presenterInterface.updateDose(dose, medicine,MedicationReminderActivity.this);
 
             // create a Handler associated with the main Thread
             Handler handler = new Handler(Looper.getMainLooper());

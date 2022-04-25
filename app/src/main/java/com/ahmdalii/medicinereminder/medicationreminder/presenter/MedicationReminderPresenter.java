@@ -23,8 +23,8 @@ public class MedicationReminderPresenter implements MedicationReminderPresenterI
     }
 
     @Override
-    public void updateDose(MedicineDose medicineDose, Context context) {
-        repoInterface.updateDose(medicineDose, context);
+    public void updateDose(MedicineDose medicineDose, Medicine medicine, Context context) {
+        repoInterface.updateDose(medicineDose, medicine, context);
     }
 
     @Override
