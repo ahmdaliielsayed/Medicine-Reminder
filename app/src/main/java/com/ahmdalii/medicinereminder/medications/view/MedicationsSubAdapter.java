@@ -60,6 +60,7 @@ public class MedicationsSubAdapter extends RecyclerView.Adapter<MedicationsSubAd
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
 
+        Log.i("TAG", "onBindViewHolder: id=" + data.get(position).getId());
         if(data.get(position).getForm().toString().equals("topical"))
             holder.imageView.setImageResource(R.drawable.ic_topical);
         else if(data.get(position).getForm().toString().equals("solution"))

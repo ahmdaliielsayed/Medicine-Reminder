@@ -27,10 +27,10 @@ public interface MedicineDAO {
     @Delete
     void deleteMedicine(Medicine medicine);
 
-    @Query("SELECT name, strength, remainingMedAmount, form FROM medicine where isActivated = 1")
+    @Query("SELECT id, name, strength, remainingMedAmount, form FROM medicine where isActivated = 1")
     LiveData<List<MedsPojo>> getActiveMeds();
 
-    @Query("SELECT name, strength, remainingMedAmount, form FROM medicine where isActivated = 0")
+    @Query("SELECT id, name, strength, remainingMedAmount, form FROM medicine where isActivated = 0")
     LiveData<List<MedsPojo>> getInactiveMeds();
 
 }
