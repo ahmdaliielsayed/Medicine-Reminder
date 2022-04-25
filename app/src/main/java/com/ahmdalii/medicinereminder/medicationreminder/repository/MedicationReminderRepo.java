@@ -56,8 +56,9 @@ public class MedicationReminderRepo implements MedicationReminderRepoInterface {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
-    public void updateDose(MedicineDose medicineDose, Context context) {
+    public void updateDose(MedicineDose medicineDose,  Medicine medicine, Context context) {
         localSourceMedicineDose.updateMedicineDose(medicineDose);
+        localSourceMedicineDose.updateMedicine(medicine);
         MedicineDose nextMedicineDose = localSourceMedicineDose.getNextMedicineDose();
         Medicine nextMedicine = localSourceMedicineDose.getNextMedicine(nextMedicineDose.getMedID());
         WorkRequestManager.createWorkRequest(nextMedicineDose, nextMedicine, context);

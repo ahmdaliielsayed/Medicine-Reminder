@@ -13,6 +13,7 @@ public interface LocalSourceMedicineDose {
     void insertMedicineDose(MedicineDose medicineDose);
     void deleteMedicineDose(MedicineDose medicineDose);
     void updateMedicineDose(MedicineDose medicineDose);
+    void updateMedicine(Medicine medicine);
     MedicineDose getNextMedicineDose();
     Medicine getNextMedicine(String med_id);
     Map<Medicine, List<MedicineDose>> getAllDosesWithMedicineName();

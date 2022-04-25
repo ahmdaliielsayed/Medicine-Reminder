@@ -62,6 +62,11 @@ public class ConcreteLocalSourceMedicineDose implements LocalSourceMedicineDose 
     }
 
     @Override
+    public void updateMedicine(Medicine medicine) {
+        dao.updateMedicine(medicine);
+    }
+
+    @Override
     public MedicineDose getNextMedicineDose() {
         return dao.getNextMedicineDose(DoseStatus.FUTURE.getStatus());
     }
