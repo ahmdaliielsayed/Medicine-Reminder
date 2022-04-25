@@ -1,6 +1,13 @@
 package com.ahmdalii.medicinereminder.home.view;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.PowerManager;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,19 +15,25 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ahmdalii.medicinereminder.NetworkConnection;
 import com.ahmdalii.medicinereminder.R;
+import com.ahmdalii.medicinereminder.addmed.view.AddMedActivity;
 import com.ahmdalii.medicinereminder.db.room.medicinedose.ConcreteLocalSourceMedicineDose;
 import com.ahmdalii.medicinereminder.home.presenter.HomeFragmentPresenter;
 import com.ahmdalii.medicinereminder.home.presenter.HomeFragmentPresenterInterface;
 import com.ahmdalii.medicinereminder.home.repository.HomeFragmentRepo;
 import com.ahmdalii.medicinereminder.model.Medicine;
 import com.ahmdalii.medicinereminder.model.MedicineDose;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -74,6 +87,39 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface {
                 Log.d("asdfgh:date", "onDateSelected: " + dateSelected.toString());
                 presenterInterface.getAllDosesWithMedicineName(dateSelected);
 //                allPresenter.getMeds(dateSelected);
+            }
+        });
+
+        ((FloatingActionButton) view.findViewById(R.id.floatingActionButton)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PowerManager pm = (PowerManager) view.getContext().getSystemService(Context.POWER_SERVICE);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && !Settings.canDrawOverlays(view.getContext())) {
+                    runtimePermissionForUser();
+                } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && !pm.isIgnoringBatteryOptimizations(view.getContext().getPackageName())) {
+                    Intent intent = new Intent();
+                    intent.setAction(android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+                    intent.setData(Uri.parse("package:" + view.getContext().getPackageName()));
+                    startActivity(intent);
+                } else {
+                    if(NetworkConnection.isNetworkAvailable(getContext())) {
+                        startActivity(new Intent(getContext(), AddMedActivity.class));
+                    }
+                    else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
+                                .setMessage("No Connection")
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    }
+                                });
+
+                        builder.create().show();
+
+                    }
+                }
             }
         });
     }
@@ -141,4 +187,42 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface {
 
         homeFragmentAdapter.setDataToAdapter(allDosesWithMedicineName);
     }
+
+
+    public void runtimePermissionForUser() {
+        if (!Settings.canDrawOverlays(view.getContext())) {
+            if ("xiaomi".equals(Build.MANUFACTURER.toLowerCase(Locale.ROOT))) {
+                final Intent intent = new Intent("miui.intent.action.APP_PERM_EDITOR");
+                intent.setClassName("com.miui.securitycenter",
+                        "com.miui.permcenter.permissions.PermissionsEditorActivity");
+                intent.putExtra("extra_pkgname", view.getContext().getPackageName());
+
+                new AlertDialog.Builder(view.getContext())
+                        .setTitle(R.string.additional_permissions)
+                        .setMessage(R.string.additional_permissions_description)
+                        .setPositiveButton(R.string.go_to_settings, (dialog, which) -> startActivity(intent))
+                        .setIcon(R.drawable.ic_warning)
+                        .show();
+            } else {
+                new AlertDialog.Builder(view.getContext())
+                        .setTitle(R.string.warning)
+                        .setMessage(R.string.error_msg_permission_required)
+                        .setPositiveButton(R.string.ok, (dialogInterface, i) -> {
+                            Intent permissionIntent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                                    Uri.parse("package:" + view.getContext().getPackageName()));
+
+                            runtimePermissionResultLauncher.launch(permissionIntent);
+                        })
+                        .setIcon(R.drawable.ic_warning)
+                        .show();
+            }
+        }
+    }
+
+    private final ActivityResultLauncher<Intent> runtimePermissionResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+
+            }
+    );
 }

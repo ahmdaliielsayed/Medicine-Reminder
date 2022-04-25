@@ -30,6 +30,7 @@ import android.widget.Toast;
 import com.ahmdalii.medicinereminder.JSONSerializer;
 import com.ahmdalii.medicinereminder.R;
 import com.ahmdalii.medicinereminder.addmed.model.MedicineDayFrequency;
+import com.ahmdalii.medicinereminder.addmed.model.MedicineForm;
 import com.ahmdalii.medicinereminder.displaymed.presenter.DisplayMedPresenter;
 import com.ahmdalii.medicinereminder.displaymed.presenter.DisplayMedPresenterInterface;
 import com.ahmdalii.medicinereminder.editmed.view.EditMedActivity;
@@ -98,6 +99,28 @@ public class DisplayMedFragment extends Fragment implements DisplayMedFragmentIn
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void setUI() {
+
+        if(displayMedPresenter.getMedicine().getForm().equals(MedicineForm.PILLS.getForm())) {
+            ((ImageView) view.findViewById(R.id.image_view_med_icon_display_med)).setImageResource(R.drawable.ic_pills);
+        }
+        else if(displayMedPresenter.getMedicine().getForm().equals(MedicineForm.SOLUTION.getForm())) {
+            ((ImageView) view.findViewById(R.id.image_view_med_icon_display_med)).setImageResource(R.drawable.ic_solution);
+        }
+        else if(displayMedPresenter.getMedicine().getForm().equals(MedicineForm.DROPS.getForm())) {
+            ((ImageView) view.findViewById(R.id.image_view_med_icon_display_med)).setImageResource(R.drawable.ic_drops);
+        }
+        else if(displayMedPresenter.getMedicine().getForm().equals(MedicineForm.INHALER.getForm())) {
+            ((ImageView) view.findViewById(R.id.image_view_med_icon_display_med)).setImageResource(R.drawable.ic_inhaler);
+        }
+        else if(displayMedPresenter.getMedicine().getForm().equals(MedicineForm.TOPICAL.getForm())) {
+            ((ImageView) view.findViewById(R.id.image_view_med_icon_display_med)).setImageResource(R.drawable.ic_topical);
+        }
+        else if(displayMedPresenter.getMedicine().getForm().equals(MedicineForm.POWDER.getForm())) {
+            ((ImageView) view.findViewById(R.id.image_view_med_icon_display_med)).setImageResource(R.drawable.ic_powder);
+        }
+        else {
+            ((ImageView) view.findViewById(R.id.image_view_med_icon_display_med)).setImageResource(R.drawable.ic_injection);
+        }
 
         ((ImageView) view.findViewById(R.id.icon_edit_display_med_toolbar)).setOnClickListener(new View.OnClickListener() {
             @Override
