@@ -6,11 +6,13 @@ import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.RequiresApi;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
 import com.ahmdalii.medicinereminder.JSONSerializer;
+import com.ahmdalii.medicinereminder.addmed.presenter.AddMedicineNetworkDelegate;
 import com.ahmdalii.medicinereminder.db.room.medicine.ConcreteLocalSourceMedicine;
 import com.ahmdalii.medicinereminder.db.room.medicinedose.ConcreteLocalSourceMedicineDose;
 import com.ahmdalii.medicinereminder.displaymed.repo.DisplayMedRepo;
@@ -28,7 +30,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-public class DisplayMedPresenter implements DisplayMedPresenterInterface, DisplayMedNetworkDelegate {
+public class DisplayMedPresenter implements DisplayMedPresenterInterface, DisplayMedNetworkDelegate, AddMedicineNetworkDelegate, DeleteMedicineNetworkDelegate {
 
     DisplayMedFragmentInterface displayMedView;
     DisplayMedRepoInterface repo;
@@ -84,6 +86,21 @@ public class DisplayMedPresenter implements DisplayMedPresenterInterface, Displa
     }
 
     @Override
+    public void updateMedicine() {
+        repo.updateMedicine(this, displayMedView.getViewContext());
+    }
+
+    @Override
+    public void deleteMedicine() {
+        repo.deleteMedicine(this, displayMedView.getViewContext());
+    }
+
+    @Override
+    public void getStoredMedicineAndDoses(String medID) {
+        repo.getStoredMedicineAndDoses(this, displayMedView.getViewContext(), displayMedView.getViewLifecycle(), medID);
+    }
+
+    @Override
     public void onSuccess(ArrayList<MedicineDose> doses) {
         Log.i("TAG", "onSuccess: " + doses);
         displayMedView.hideProgressBar();
@@ -92,7 +109,22 @@ public class DisplayMedPresenter implements DisplayMedPresenterInterface, Displa
     }
 
     @Override
-    public void onFailure() {
+    public void onSuccess(Medicine medicine, ArrayList<MedicineDose> doses) {
+        repo.updateMedicineLocal(medicine, doses);
+    }
 
+    @Override
+    public void onSuccess() {
+        displayMedView.showToast("Medicine deleted successfully");
+    }
+
+    @Override
+    public void onFailure() {
+        displayMedView.showToast("Operation failed.");
+    }
+
+    @Override
+    public void onSuccessLocal() {
+        displayMedView.refreshView();
     }
 }

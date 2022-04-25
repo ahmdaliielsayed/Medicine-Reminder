@@ -17,6 +17,9 @@ public interface MedicineDAO {
     @Query("SELECT * FROM medicine")
     LiveData<List<Medicine>> getAllMedicines();
 
+    @Query("SELECT * FROM medicine WHERE medicine.id=:medID")
+    LiveData<Medicine> getMedicine(String medID);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertMedicine(Medicine medicine);
 

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface LocalSourceMedicineDose {
-    LiveData<List<MedicineDose>> getAllMedicineDoses();
+    LiveData<List<MedicineDose>> getAllMedicineDoses(String medID);
     void insertMedicineDose(MedicineDose medicineDose);
     void deleteMedicineDose(MedicineDose medicineDose);
     void updateMedicineDose(MedicineDose medicineDose);

@@ -63,7 +63,7 @@ public class AddMedActivity extends AppCompatActivity implements AddMedActivityI
     }
 
     private void initToolbar() {
-        Toolbar toolbar = findViewById(R.id.toolbar_add_med);
+        Toolbar toolbar = findViewById(R.id.toolbar_display_med);
 
         setSupportActionBar(null);
         setSupportActionBar(toolbar);

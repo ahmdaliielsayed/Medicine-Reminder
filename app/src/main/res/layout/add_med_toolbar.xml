@@ -2,7 +2,7 @@
 <androidx.appcompat.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/toolbar_add_med"
+    android:id="@+id/toolbar_display_med"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:background="@color/dodger_blue"

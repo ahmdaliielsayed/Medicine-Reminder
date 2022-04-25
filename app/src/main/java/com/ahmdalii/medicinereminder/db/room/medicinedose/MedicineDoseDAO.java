@@ -16,8 +16,8 @@ import java.util.Map;
 
 @Dao
 public interface MedicineDoseDAO {
-    @Query("SELECT * FROM medicine_dose")
-    LiveData<List<MedicineDose>> getAllMedicineDoses();
+    @Query("SELECT * FROM medicine_dose WHERE medID=:medID")
+    LiveData<List<MedicineDose>> getAllMedicineDoses(String medID);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertMedicineDose(MedicineDose medicineDose);

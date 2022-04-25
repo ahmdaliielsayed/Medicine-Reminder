@@ -48,4 +48,9 @@ public class ConcreteLocalSourceMedicine implements LocalSourceMedicine {
     public LiveData<List<Medicine>> getAllStoredMedicines() {
         return storedMedicinesLiveData;
     }
+
+    @Override
+    public LiveData<Medicine> getMedicine(String medID) {
+        return dao.getMedicine(medID);
+    }
 }

@@ -25,6 +25,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.ahmdalii.medicinereminder.R;
+import com.ahmdalii.medicinereminder.addmed.model.MedicineDayFrequency;
 import com.ahmdalii.medicinereminder.addmed.model.MedicineInstruction;
 import com.ahmdalii.medicinereminder.editmed.presenter.EditMedPresenter;
 import com.ahmdalii.medicinereminder.editmed.presenter.EditMedPresenterInterface;
@@ -250,8 +251,26 @@ public class EditMedActivity extends AppCompatActivity implements EditMedActivit
         fourthDoseTimeTextView.setOnClickListener(this);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void setScheduleCardViewUI() {
         findViewById(R.id.radio_group_days_edit_med).setEnabled(false);
+        ((TextView) findViewById(R.id.text_view_start_date_edit_med)).setText(editMedPresenter.getMedicine().getStartDate());
+        ((TextView) findViewById(R.id.text_view_end_date_edit_med)).setText(editMedPresenter.getMedicine().getEndDate());
+
+        if(editMedPresenter.getMedicine().getDayFrequency().equals(MedicineDayFrequency.EVERYDAY.getFrequency())) {
+            ((RadioButton) findViewById(R.id.radio_button_every_day_edit_med)).setChecked(true);
+        }
+        else if(editMedPresenter.getMedicine().getDayFrequency().equals(MedicineDayFrequency.EVERY_NUMBER_OF_DAYS.getFrequency())) {
+            ((RadioButton) findViewById(R.id.radio_button_every_number_of_days_edit_med)).setChecked(true);
+        }
+        else if(editMedPresenter.getMedicine().getDayFrequency().equals(MedicineDayFrequency.SPECIFIC_DAYS.getFrequency())) {
+            ((RadioButton) findViewById(R.id.radio_button_specific_days_of_the_week_edit_med)).setChecked(true);
+        }
+
+        ((RadioButton) findViewById(R.id.radio_button_every_day_edit_med)).setEnabled(false);
+        ((RadioButton) findViewById(R.id.radio_button_every_number_of_days_edit_med)).setEnabled(false);
+        ((RadioButton) findViewById(R.id.radio_button_specific_days_of_the_week_edit_med)).setEnabled(false);
+
     }
 
     private void setReasonCardViewUI() {
@@ -421,7 +440,6 @@ public class EditMedActivity extends AppCompatActivity implements EditMedActivit
                 editMedPresenter.getMedicine().setRemainingMedAmount(Integer.parseInt(remainingMedAmountEditText.getText().toString()));
                 editMedPresenter.getMedicine().setReminderMedAmount(Integer.parseInt(reminderMedAmountEditText.getText().toString()));
                 editMedPresenter.getMedicine().setReason(reasonEditText.getText().toString());
-
 
                 editMedPresenter.submitUpdates();
             }

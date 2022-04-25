@@ -109,4 +109,9 @@ public class EditMedPresenter implements EditMedPresenterInterface, AddMedicineN
     public void onFailure() {
         editMedView.showFailureToast();
     }
+
+    @Override
+    public void onSuccessLocal() {
+
+    }
 }

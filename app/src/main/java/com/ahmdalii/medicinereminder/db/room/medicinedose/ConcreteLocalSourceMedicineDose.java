@@ -16,12 +16,11 @@ public class ConcreteLocalSourceMedicineDose implements LocalSourceMedicineDose 
 
     private static ConcreteLocalSourceMedicineDose instance = null;
     private final MedicineDoseDAO dao;
-//    private LiveData<List<MedicineDose>> storedMedicineDosesLiveData;
+    private LiveData<List<MedicineDose>> storedMedicineDosesLiveData;
 
     private ConcreteLocalSourceMedicineDose(Context context) {
         AppDataBase database = AppDataBase.getInstance(context.getApplicationContext());
         dao = database.timeSchedulerDAO();
-//        storedMedicineDosesLiveData = dao.getAllMedicineDoses();
     }
 
     public static ConcreteLocalSourceMedicineDose getInstance(Context context) {
@@ -31,8 +30,9 @@ public class ConcreteLocalSourceMedicineDose implements LocalSourceMedicineDose 
         return instance;
     }
     @Override
-    public LiveData<List<MedicineDose>> getAllMedicineDoses() {
-        return null;
+    public LiveData<List<MedicineDose>> getAllMedicineDoses(String medID) {
+        storedMedicineDosesLiveData = dao.getAllMedicineDoses(medID);
+        return storedMedicineDosesLiveData;
     }
 
     @Override
