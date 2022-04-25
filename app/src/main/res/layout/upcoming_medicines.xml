@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgViewPill"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/pills"
+            app:civ_border_color="@color/dodger_blue"
+            app:civ_border_width="1dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:background="@color/blue"
+            app:layout_constraintBottom_toBottomOf="@+id/imgViewPill"
+            app:layout_constraintStart_toEndOf="@+id/imgViewPill"
+            app:layout_constraintTop_toTopOf="@+id/imgViewPill" />
+
+        <TextView
+            android:id="@+id/medicineName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="Cefroxin"
+            android:textColor="@color/dodger_blue"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/txtViewStrengthUnit"
+            app:layout_constraintStart_toEndOf="@+id/view2"
+            app:layout_constraintTop_toTopOf="@+id/view2" />
+
+        <TextView
+            android:id="@+id/txtViewStrengthUnit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="50mg"
+            android:textColor="@color/dodger_blue"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/medicineName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/medicineName" />
+
+        <TextView
+            android:id="@+id/txtViewDayFrequency"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/txt_backgrund_grey"
+            android:text="everyday"
+            android:textColor="@color/dodger_blue"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/medicineName"
+            app:layout_constraintTop_toBottomOf="@+id/medicineName" />
+
+        <TextView
+            android:id="@+id/txtViewInstructions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/txt_backgrund_grey"
+            android:text="after_eating"
+            android:textColor="@color/dodger_blue"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/txtViewDayFrequency"
+            app:layout_constraintTop_toBottomOf="@+id/txtViewDayFrequency" />
+
+        <TextView
+            android:id="@+id/txtViewStatus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/txt_backgrund_grey"
+            android:text="future"
+            android:textColor="@color/dodger_blue"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/txtViewAmountForm"
+            app:layout_constraintTop_toTopOf="@+id/txtViewInstructions" />
+
+        <TextView
+            android:id="@+id/txtViewTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/txt_backgrund_dodger_bottom_corners"
+            android:text="03:30"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtViewInstructions" />
+
+        <TextView
+            android:id="@+id/txtViewAmountForm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/txt_backgrund_dodger"
+            android:text="2 Solution"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/txtViewStrengthUnit"
+            app:layout_constraintTop_toTopOf="@+id/txtViewDayFrequency" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

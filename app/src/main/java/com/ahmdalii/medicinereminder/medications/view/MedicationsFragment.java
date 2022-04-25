@@ -1,6 +1,8 @@
 package com.ahmdalii.medicinereminder.medications.view;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -17,6 +19,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.PowerManager;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -99,11 +102,20 @@ public class MedicationsFragment extends Fragment {
         recyclerView.setAdapter(mainAdapter);
 
         addMedBtn.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("BatteryLife")
             @Override
             public void onClick(View view) {
                 Log.i("emy", "onClick: you clicked");
+
+                PowerManager pm = (PowerManager) view.getContext().getSystemService(Context.POWER_SERVICE);
+
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && !Settings.canDrawOverlays(view.getContext())) {
                     runtimePermissionForUser();
+                } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && !pm.isIgnoringBatteryOptimizations(view.getContext().getPackageName())) {
+                    Intent intent = new Intent();
+                    intent.setAction(android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+                    intent.setData(Uri.parse("package:" + view.getContext().getPackageName()));
+                    startActivity(intent);
                 } else {
                     startActivity(new Intent(getContext(), AddMedActivity.class));
                 }

@@ -154,7 +154,7 @@ public class FirebaseClient implements RemoteSource {
     public GoogleSignInClient getGoogleSignInClient(Activity activity) {
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(activity.getString(R.string.default_web_client_id))
+                .requestIdToken("271946629486-t05podnl4iif8rf367qbe5cnprh9iire.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
 

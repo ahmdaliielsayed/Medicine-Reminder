@@ -10,17 +10,18 @@ import com.ahmdalii.medicinereminder.model.Medicine;
 import com.ahmdalii.medicinereminder.model.MedicineDose;
 
 import java.util.List;
+import java.util.Map;
 
 public class ConcreteLocalSourceMedicineDose implements LocalSourceMedicineDose {
 
     private static ConcreteLocalSourceMedicineDose instance = null;
-    private MedicineDoseDAO dao;
-    private LiveData<List<MedicineDose>> storedMedicineDosesLiveData;
+    private final MedicineDoseDAO dao;
+//    private LiveData<List<MedicineDose>> storedMedicineDosesLiveData;
 
     private ConcreteLocalSourceMedicineDose(Context context) {
         AppDataBase database = AppDataBase.getInstance(context.getApplicationContext());
         dao = database.timeSchedulerDAO();
-        storedMedicineDosesLiveData = dao.getAllMedicineDoses();
+//        storedMedicineDosesLiveData = dao.getAllMedicineDoses();
     }
 
     public static ConcreteLocalSourceMedicineDose getInstance(Context context) {
@@ -68,5 +69,10 @@ public class ConcreteLocalSourceMedicineDose implements LocalSourceMedicineDose 
     @Override
     public Medicine getNextMedicine(String med_id) {
         return dao.getNextMedicine(med_id);
+    }
+
+    @Override
+    public Map<Medicine, List<MedicineDose>> getAllDosesWithMedicineName() {
+        return dao.getAllDosesWithMedicineName();
     }
 }

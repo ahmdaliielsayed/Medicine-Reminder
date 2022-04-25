@@ -6,6 +6,7 @@ import com.ahmdalii.medicinereminder.model.Medicine;
 import com.ahmdalii.medicinereminder.model.MedicineDose;
 
 import java.util.List;
+import java.util.Map;
 
 public interface LocalSourceMedicineDose {
     LiveData<List<MedicineDose>> getAllMedicineDoses();
@@ -14,4 +15,5 @@ public interface LocalSourceMedicineDose {
     void updateMedicineDose(MedicineDose medicineDose);
     MedicineDose getNextMedicineDose();
     Medicine getNextMedicine(String med_id);
+    Map<Medicine, List<MedicineDose>> getAllDosesWithMedicineName();
 }
