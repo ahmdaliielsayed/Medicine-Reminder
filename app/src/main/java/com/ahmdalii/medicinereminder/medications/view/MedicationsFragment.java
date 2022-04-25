@@ -86,7 +86,7 @@ public class MedicationsFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerViewId);
         addMedBtn = view.findViewById(R.id.addMedId);
 
-        testNavigationToDisplay(view);
+        //testNavigationToDisplay(view);
         //testNavigationToEdit();
 
 
