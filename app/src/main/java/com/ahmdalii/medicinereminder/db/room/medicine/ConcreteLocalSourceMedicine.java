@@ -59,4 +59,11 @@ public class ConcreteLocalSourceMedicine implements LocalSourceMedicine {
     public LiveData<List<Medicine>> getAllUnSyncMedicines() {
         return allUnSyncMedicines;
     }
+
+    @Override
+    public void updateMedicinesInRoom(Medicine updatedList) {
+        new Thread(() -> {
+            dao.insertMedicine(updatedList);
+        }).start();
+    }
 }

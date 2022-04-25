@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -70,6 +71,8 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityInter
 
         initComponents();
         presenterInterface.getUserFromRoom(this);
+        presenterInterface.getAllUnSyncMedicines();
+        presenterInterface.getAllUnSyncMedicineDoses();
 
         startNetworkBroadcastReceiver(this);
 
@@ -174,6 +177,7 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityInter
         unSyncMedicineDoses.observe(this, new Observer<List<MedicineDose>>() {
             @Override
             public void onChanged(List<MedicineDose> medicineDoses) {
+                Log.d("testLoc:", String.valueOf(medicineDoses.size()));
                 if (medicineDoses.size() > 0) {
                     unSyncedMedicineDoses.clear();
                     unSyncedMedicineDoses = medicineDoses;
@@ -213,6 +217,7 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityInter
         if (unSyncedMedicines.size() > 0) {
             presenterInterface.syncMedicineListToFirebase(unSyncedMedicines);
         }
+        Log.d("testNet:", String.valueOf(unSyncedMedicineDoses.size()));
         if (unSyncedMedicineDoses.size() > 0) {
             presenterInterface.syncMedicineDosesListToFirebase(unSyncedMedicineDoses);
         }

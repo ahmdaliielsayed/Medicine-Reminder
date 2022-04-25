@@ -6,10 +6,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.ahmdalii.medicinereminder.R;
-
-import androidx.annotation.NonNull;
-
 import com.ahmdalii.medicinereminder.addmed.presenter.AddMedicineNetworkDelegate;
 import com.ahmdalii.medicinereminder.displaymed.presenter.DeleteMedicineNetworkDelegate;
 import com.ahmdalii.medicinereminder.displaymed.presenter.DisplayMedNetworkDelegate;
@@ -34,8 +30,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -44,6 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class FirebaseClient implements RemoteSource {
 
@@ -309,24 +304,28 @@ public class FirebaseClient implements RemoteSource {
         });
     }
     
-    public void syncMedicineListToFirebase(NetworkDelegate networkDelegate, List<Medicine> unSyncedMedicines) {
+    public void syncMedicineListToFirebase(NetworkSyncDelegate networkDelegate, List<Medicine> unSyncedMedicines) {
         databaseReference = FirebaseDatabase.getInstance().getReference("medicine");
+
         for (Medicine medicine : unSyncedMedicines) {
+            medicine.setSync(true);
             databaseReference.child(medicine.getId()).setValue(medicine)
                     .addOnSuccessListener(unused -> {
-
+                        networkDelegate.onResponse(medicine, true);
                     })
                     .addOnFailureListener(e -> networkDelegate.onFailure(e.getMessage()));
         }
     }
 
     @Override
-    public void syncMedicineDosesListToFirebase(NetworkDelegate networkDelegate, List<MedicineDose> unSyncedMedicinesDoses) {
+    public void syncMedicineDosesListToFirebase(NetworkSyncDelegate networkDelegate, List<MedicineDose> unSyncedMedicinesDoses) {
         databaseReference = FirebaseDatabase.getInstance().getReference("dose");
+
         for (MedicineDose medicineDose : unSyncedMedicinesDoses) {
+            medicineDose.setSync(true);
             databaseReference.child(medicineDose.getId()).setValue(medicineDose)
                     .addOnSuccessListener(unused -> {
-
+                        networkDelegate.onResponse(medicineDose);
                     })
                     .addOnFailureListener(e -> networkDelegate.onFailure(e.getMessage()));
         }

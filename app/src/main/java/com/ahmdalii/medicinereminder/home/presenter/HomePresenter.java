@@ -7,10 +7,11 @@ import com.ahmdalii.medicinereminder.home.view.HomeActivityInterface;
 import com.ahmdalii.medicinereminder.model.Medicine;
 import com.ahmdalii.medicinereminder.model.MedicineDose;
 import com.ahmdalii.medicinereminder.network.NetworkDelegate;
+import com.ahmdalii.medicinereminder.network.NetworkSyncDelegate;
 
 import java.util.List;
 
-public class HomePresenter implements HomePresenterInterface, NetworkDelegate {
+public class HomePresenter implements HomePresenterInterface, NetworkSyncDelegate {
 
     private final HomeActivityInterface viewInterface;
     private final HomeRepoInterface repoInterface;
@@ -52,8 +53,13 @@ public class HomePresenter implements HomePresenterInterface, NetworkDelegate {
     }
 
     @Override
-    public void onResponse() {
+    public void onResponse(Medicine syncedMedicinesList, boolean isMed) {
+        repoInterface.updateMedicinesInRoom(syncedMedicinesList);
+    }
 
+    @Override
+    public void onResponse(MedicineDose syncedMedicineDosesList) {
+        repoInterface.updateMedicineDosesInRoom(syncedMedicineDosesList);
     }
 
     @Override

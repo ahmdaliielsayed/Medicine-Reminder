@@ -17,4 +17,5 @@ public interface LocalSourceMedicineDose {
     Medicine getNextMedicine(String med_id);
     Map<Medicine, List<MedicineDose>> getAllDosesWithMedicineName();
     LiveData<List<MedicineDose>> getAllUnSyncMedicineDoses();
+    void updateMedicineDosesInRoom(MedicineDose updatedList);
 }
