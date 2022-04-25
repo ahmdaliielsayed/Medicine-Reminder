@@ -3,6 +3,7 @@ package com.ahmdalii.medicinereminder.network;
 import android.app.Activity;
 import android.net.Uri;
 
+import com.ahmdalii.medicinereminder.displaymed.presenter.DeleteMedicineNetworkDelegate;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.ahmdalii.medicinereminder.addmed.presenter.AddMedicineNetworkDelegate;
 import com.ahmdalii.medicinereminder.displaymed.presenter.DisplayMedNetworkDelegate;
@@ -22,5 +23,6 @@ public interface RemoteSource {
     void signInWithGoogle(NetworkLoginDelegate networkDelegate, String idToken);
     void enqueueCall(AddMedicineNetworkDelegate networkDelegate, Medicine medicine, ArrayList<MedicineDose> doses);
     void enqueueCall(DisplayMedNetworkDelegate networkDelegate, String medID);
+    void enqueueCall(DeleteMedicineNetworkDelegate networkDelegate, Medicine medicine, ArrayList<MedicineDose> doses);
 
 }

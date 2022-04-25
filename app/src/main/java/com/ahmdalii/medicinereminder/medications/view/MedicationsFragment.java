@@ -67,8 +67,8 @@ public class MedicationsFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerViewId);
         addMedBtn = view.findViewById(R.id.addMedId);
 
-        //testNavigationToDisplay(view);
-        testNavigationToEdit();
+        testNavigationToDisplay(view);
+        //testNavigationToEdit();
 
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
@@ -110,7 +110,7 @@ public class MedicationsFragment extends Fragment {
         medicine.setRemainingMedAmount(22);
         medicine.setDayFrequency(MedicineDayFrequency.EVERYDAY.getFrequency());
         medicine.setTimeFrequency(1);
-        medicine.setId("-N0HQWLRK210StWZBpNE");
+        medicine.setId("-N0W8rYy4Z0IRSOfRGID");
 
         Intent intent = new Intent(getActivity(), EditMedActivity.class);
         intent.putExtra("medicine", medicine);
@@ -122,23 +122,23 @@ public class MedicationsFragment extends Fragment {
     private void testNavigationToDisplay(@NonNull View view) {
         Bundle args = new Bundle();
         Medicine medicine = new Medicine();
-        medicine.setName("Panadol");
-        medicine.setUserID("asdf");
+        medicine.setName("panadol");
+        medicine.setUserID("8LBEbybYVRf6Kg3uPF7b9h8d83C2");
         medicine.setSync(true);
         medicine.setActivated(true);
-        medicine.setInstructions("Before eating");
+        medicine.setInstructions("before_eating");
         medicine.setReminderMedAmount(2);
-        medicine.setReason("Covid");
-        medicine.setStartDate("2022-04-19");
-        medicine.setStrength(2);
+        medicine.setReason("COVID-19");
+        medicine.setStartDate("2022-04-22");
+        medicine.setStrength(1);
         medicine.setUnit(MedicineUnit.g.getUnit());
-        medicine.setRefillReminderTime("20:15:00");
-        medicine.setForm(MedicineForm.INHALER.getForm());
-        medicine.setEndDate("2022-05-19");
-        medicine.setRemainingMedAmount(20);
-        medicine.setDayFrequency(MedicineDayFrequency.SPECIFIC_DAYS.getFrequency());
-        medicine.setWeekDays("saturday, wednesday, friday");
-        medicine.setId("-N07sFZYrJYuGhYN3T-c");
+        medicine.setRefillReminderTime("2022-04-22T16:00");
+        medicine.setForm(MedicineForm.PILLS.getForm());
+        medicine.setEndDate("2022-04-29");
+        medicine.setRemainingMedAmount(22);
+        medicine.setDayFrequency(MedicineDayFrequency.EVERYDAY.getFrequency());
+        medicine.setTimeFrequency(1);
+        medicine.setId("-N0W8rYy4Z0IRSOfRGID");
 
         args.putSerializable("medicine", medicine);
         Navigation.findNavController(view).navigate(R.id.action_navigation_dashboard_to_displayMedFragment, args);

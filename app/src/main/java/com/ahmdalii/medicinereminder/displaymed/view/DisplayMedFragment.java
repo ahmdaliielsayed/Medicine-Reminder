@@ -3,13 +3,16 @@ package com.ahmdalii.medicinereminder.displaymed.view;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
@@ -20,19 +23,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.ahmdalii.medicinereminder.JSONSerializer;
 import com.ahmdalii.medicinereminder.R;
 import com.ahmdalii.medicinereminder.addmed.model.MedicineDayFrequency;
 import com.ahmdalii.medicinereminder.displaymed.presenter.DisplayMedPresenter;
 import com.ahmdalii.medicinereminder.displaymed.presenter.DisplayMedPresenterInterface;
+import com.ahmdalii.medicinereminder.editmed.view.EditMedActivity;
 import com.ahmdalii.medicinereminder.model.DoseStatus;
 import com.ahmdalii.medicinereminder.model.Medicine;
 import com.ahmdalii.medicinereminder.model.MedicineDose;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-
 
 public class DisplayMedFragment extends Fragment implements DisplayMedFragmentInterface {
 
@@ -48,6 +54,15 @@ public class DisplayMedFragment extends Fragment implements DisplayMedFragmentIn
         return fragment;
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i("TAggggG", "onResume: ");
+        setPresenter();
+
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +72,7 @@ public class DisplayMedFragment extends Fragment implements DisplayMedFragmentIn
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        Log.i("TAggggG", "onCreateView: ");
         return inflater.inflate(R.layout.fragment_display_med, container, false);
     }
 
@@ -65,17 +81,37 @@ public class DisplayMedFragment extends Fragment implements DisplayMedFragmentIn
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         this.view = view;
+        Log.i("TAggggG", "onViewCreated: ");
         setPresenter();
-        setUI();
+        //setUI();
     }
 
     private void setPresenter() {
+
         displayMedPresenter = new DisplayMedPresenter(this);
-        displayMedPresenter.setMedicine((Medicine) getArguments().getSerializable("medicine"));
+        displayMedPresenter.getStoredMedicineAndDoses(((Medicine) getArguments().getSerializable("medicine")).getId());
+        //displayMedPresenter.getStoredDoses();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void setUI() {
+
+        ((ImageView) view.findViewById(R.id.icon_edit_display_med_toolbar)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), EditMedActivity.class);
+                intent.putExtra("medicine", displayMedPresenter.getMedicine());
+                intent.putExtra("doses", JSONSerializer.serializeMedicineDoses(displayMedPresenter.getDoses()));
+                startActivity(intent);
+            }
+        });
+
+        ((ImageView) view.findViewById(R.id.icon_delete_display_med_toolbar)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                displayMedPresenter.deleteMedicine();
+            }
+        });
 
         ((TextView) view.findViewById(R.id.text_view_med_name_display_med)).setText(displayMedPresenter.getMedicine().getName());
         ((TextView) view.findViewById(R.id.text_view_strength_display_med)).setText(displayMedPresenter.getMedicine().getStrength() + displayMedPresenter.getMedicine().getUnit());
@@ -115,6 +151,7 @@ public class DisplayMedFragment extends Fragment implements DisplayMedFragmentIn
                     displayMedPresenter.getMedicine().setActivated(true);
                     displayMedPresenter.addOneTimeWorkRequest();
                 }
+                displayMedPresenter.updateMedicine();
             }
         });
 
@@ -135,6 +172,7 @@ public class DisplayMedFragment extends Fragment implements DisplayMedFragmentIn
                                         displayMedPresenter.getMedicine().getRemainingMedAmount() +
                                                 Integer.parseInt(((EditText) dialog.findViewById(R.id.edit_text_add_amount_refill_amount_dialog)).getText().toString())
                                 );
+                                displayMedPresenter.updateMedicine();
                                 setUI();
                             }
                         })
@@ -260,5 +298,15 @@ public class DisplayMedFragment extends Fragment implements DisplayMedFragmentIn
     @Override
     public void hideProgressBar() {
         view.findViewById(R.id.progress_bar_display_med).setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showToast(String message) {
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public LifecycleOwner getViewLifecycle() {
+        return getViewLifecycleOwner();
     }
 }

@@ -1,7 +1,14 @@
 package com.ahmdalii.medicinereminder.displaymed.repo;
 
+import android.content.Context;
+
+import androidx.lifecycle.LifecycleOwner;
+
+import com.ahmdalii.medicinereminder.NetworkConnection;
+import com.ahmdalii.medicinereminder.addmed.presenter.AddMedicineNetworkDelegate;
 import com.ahmdalii.medicinereminder.db.room.medicine.LocalSourceMedicine;
 import com.ahmdalii.medicinereminder.db.room.medicinedose.LocalSourceMedicineDose;
+import com.ahmdalii.medicinereminder.displaymed.presenter.DeleteMedicineNetworkDelegate;
 import com.ahmdalii.medicinereminder.displaymed.presenter.DisplayMedNetworkDelegate;
 import com.ahmdalii.medicinereminder.model.DoseStatus;
 import com.ahmdalii.medicinereminder.model.Medicine;
@@ -58,10 +65,64 @@ public class DisplayMedRepo implements DisplayMedRepoInterface {
     @Override
     public MedicineDose getUpcomingDose() {
         for(MedicineDose dose: doses) {
-            if(dose.getStatus().equals(DoseStatus.FUTURE)) {
+            if(dose.getStatus().equals(DoseStatus.FUTURE.getStatus())) {
                 return dose;
             }
         }
         return null;
+    }
+
+    @Override
+    public void updateMedicine(AddMedicineNetworkDelegate networkDelegate, Context context) {
+        if(NetworkConnection.isNetworkAvailable(context)) {
+            remoteSource.enqueueCall(networkDelegate, medicine, doses);
+        }
+        else {
+            updateMedicineLocal(medicine, doses);
+        }
+    }
+
+    public void updateMedicineLocal(Medicine medicine, ArrayList<MedicineDose> doses) {
+        localSourceMedicine.insertMedicine(medicine);
+        for(MedicineDose dose: doses) {
+            localSourceMedicineDose.insertMedicineDose(dose);
+        }
+    }
+
+    @Override
+    public void getStoredDoses(DisplayMedNetworkDelegate networkDelegate, Context context, LifecycleOwner owner) {
+        if(NetworkConnection.isNetworkAvailable(context)) {
+            remoteSource.enqueueCall(networkDelegate, medicine.getId());
+        }
+        else {
+            localSourceMedicineDose.getAllMedicineDoses(medicine.getId()).observe(owner, storedDoses -> doses = (ArrayList<MedicineDose>) storedDoses);
+        }
+    }
+
+    @Override
+    public void deleteMedicine(DeleteMedicineNetworkDelegate networkDelegate, Context context) {
+        if(NetworkConnection.isNetworkAvailable(context)) {
+            remoteSource.enqueueCall(networkDelegate, medicine, doses);
+
+            localSourceMedicine.deleteMedicine(medicine);
+            for(MedicineDose dose: doses) {
+                localSourceMedicineDose.deleteMedicineDose(dose);
+            }
+        }
+        else {
+            localSourceMedicine.deleteMedicine(medicine);
+            for(MedicineDose dose: doses) {
+                localSourceMedicineDose.deleteMedicineDose(dose);
+            }
+        }
+    }
+
+    @Override
+    public void getStoredMedicineAndDoses(DisplayMedNetworkDelegate networkDelegate, Context context, LifecycleOwner owner, String medID) {
+        localSourceMedicine.getMedicine(medID).observe(owner, med -> {
+            medicine = med;
+            getStoredDoses(networkDelegate, context, owner);
+            networkDelegate.onSuccessLocal();
+        });
     }
 }

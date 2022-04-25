@@ -7,4 +7,5 @@ import java.util.ArrayList;
 public interface DisplayMedNetworkDelegate {
     void onSuccess(ArrayList<MedicineDose> doses);
     void onFailure();
+    void onSuccessLocal();
 }

@@ -8,6 +8,7 @@ import com.ahmdalii.medicinereminder.R;
 import androidx.annotation.NonNull;
 
 import com.ahmdalii.medicinereminder.addmed.presenter.AddMedicineNetworkDelegate;
+import com.ahmdalii.medicinereminder.displaymed.presenter.DeleteMedicineNetworkDelegate;
 import com.ahmdalii.medicinereminder.displaymed.presenter.DisplayMedNetworkDelegate;
 import com.ahmdalii.medicinereminder.model.Medicine;
 import com.ahmdalii.medicinereminder.model.MedicineDose;
@@ -236,6 +237,43 @@ public class FirebaseClient implements RemoteSource {
                 else {
                     networkDelegate.onFailure();
                 }
+            }
+        });
+    }
+
+    @Override
+    public void enqueueCall(DeleteMedicineNetworkDelegate networkDelegate, Medicine medicine, ArrayList<MedicineDose> doses) {
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        String medID = medicine.getId();
+
+        medicine.setUserID(uid);
+        medicine.setId(medID);
+        String finalMedID = medID;
+        databaseReference.child("medicine").child(medID).setValue(null).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                for(int i = 0; i < doses.size(); i++) {
+                    String doseID = doses.get(i).getId();
+
+                    databaseReference.child("dose").child(doseID).setValue(null).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            networkDelegate.onFailure();
+                        }
+                    });
+                }
+                networkDelegate.onSuccess();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                networkDelegate.onFailure();
             }
         });
     }
