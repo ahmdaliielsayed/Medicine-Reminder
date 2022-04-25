@@ -12,22 +12,33 @@ import android.widget.Toast;
 
 import com.ahmdalii.medicinereminder.NetworkConnection;
 import com.ahmdalii.medicinereminder.R;
+import com.ahmdalii.medicinereminder.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class HealthTakerActivity extends AppCompatActivity {
 
-    DatabaseReference reqRef;
+    DatabaseReference checkEmailRef,reqRef;
 
     TextView emailText;
     Button sendBtn;
 
-    String userId;
+    String senderId;
+
+    User user;
+    Boolean flag;
+
+    //receiver data
     String email;
+    String receiverId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +49,22 @@ public class HealthTakerActivity extends AppCompatActivity {
         sendBtn = findViewById(R.id.sendBtnId);
 
         Intent inIntent = getIntent();
-        userId = inIntent.getStringExtra("userId");
+        senderId = inIntent.getStringExtra("userId");
 
+        checkEmailRef = FirebaseDatabase.getInstance().getReference().child("Users");
         reqRef = FirebaseDatabase.getInstance().getReference().child("Requests");
 
         sendBtn.setOnClickListener(v -> {
+            email = emailText.getText().toString();
             if(NetworkConnection.isNetworkAvailable(this)){
-                Log.i("TAG", "onCreate: userId : " + userId);
-                sendRequest(userId);
                 Toast.makeText(this, "You are connected", Toast.LENGTH_SHORT).show();
+                checkEmailExisting(email);
+//                if(checkEmailExisting(email)){
+//                    Toast.makeText(this, "True Email", Toast.LENGTH_SHORT).show();
+//                }
+//                else{
+//                    Toast.makeText(this, "False Email", Toast.LENGTH_SHORT).show();
+//                }
             }
 
             else
@@ -56,17 +74,50 @@ public class HealthTakerActivity extends AppCompatActivity {
     }
 
     private void sendRequest(String senderUserId) {
+
+        //checkEmailRef.orderByChild("email").equalTo(email);
+        //Log.i("TAG", "sendRequest: " + checkEmailRef.orderByChild("email").equalTo(email));
+
         String receiverUserId = "123";
-        HashMap hashMap = new HashMap();
-        hashMap.put("status", "pending");
-        reqRef.child(senderUserId).child(receiverUserId).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener() {
+//        HashMap hashMap = new HashMap();
+//        hashMap.put("status", "pending");
+//        reqRef.child(senderUserId).child(receiverUserId).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener() {
+//            @Override
+//            public void onComplete(@NonNull Task task) {
+//                if(task.isSuccessful())
+//                    Toast.makeText(getApplicationContext(), "You have sent req", Toast.LENGTH_SHORT).show();
+//                else
+//                    Toast.makeText(getApplicationContext(), "An error happened, try again later", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+    }
+    private void checkEmailExisting(String email){
+        flag = false;
+        checkEmailRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onComplete(@NonNull Task task) {
-                if(task.isSuccessful())
-                    Toast.makeText(getApplicationContext(), "You have sent req", Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(getApplicationContext(), "An error happened, try again later", Toast.LENGTH_SHORT).show();
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    user = dataSnapshot.getValue(User.class);
+                    if(user.getEmail().equals(email)){
+                        receiverId = user.getUserId();
+                        Log.i("TAG", "onDataChange: receiverid:  "+ receiverId);
+                        flag = true;
+                    }
+
+                }
+                if(flag){
+                    Toast.makeText(getApplicationContext(), "True Email", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "False Email", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
+
     }
 }
