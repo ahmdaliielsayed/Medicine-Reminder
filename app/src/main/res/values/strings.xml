@@ -78,4 +78,6 @@
     <string name="go_to_settings">Go to Settings</string>
     <string name="error_msg_permission_required">Permission required!\nPlease, give the permission to work correctly!</string>
     <string name="snooze_for_five_minutes">Snooze for 5 minutes</string>
+    <string name="have_no_reminders">You don\'t have any reminders.</string>
+    <string name="add_a_new_pill">Tap the button below to add a new pill.</string>
 </resources>

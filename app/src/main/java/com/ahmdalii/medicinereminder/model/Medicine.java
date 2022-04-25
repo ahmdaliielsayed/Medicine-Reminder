@@ -22,8 +22,8 @@ public class Medicine implements Serializable {
     private Integer everyNDays;
     private String weekDays;
     private Integer timeFrequency;
-    private String startDate;
-    private String endDate;
+    private String startDate;   //2022-04-22
+    private String endDate;     //2022-04-29
     private Integer remainingMedAmount;
     private Integer reminderMedAmount;
     private String refillReminderTime;

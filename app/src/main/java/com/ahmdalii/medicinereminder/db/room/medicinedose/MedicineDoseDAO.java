@@ -12,6 +12,7 @@ import com.ahmdalii.medicinereminder.model.Medicine;
 import com.ahmdalii.medicinereminder.model.MedicineDose;
 
 import java.util.List;
+import java.util.Map;
 
 @Dao
 public interface MedicineDoseDAO {
@@ -37,10 +38,7 @@ public interface MedicineDoseDAO {
 //    @Query("SELECT md.id, md.medID, md.time, md.amount, md.status, medicine.name, medicine.unit, medicine.strength FROM medicine_dose AS md INNER JOIN medicine ON medID = medicine.id")
 //    LiveData<List<POJO>> getAllDosesWithMedicineName();
 
-    /*
-    @Query(
-        "SELECT * FROM user" +
-        "JOIN book ON user.id = book.user_id")
-    public Map<User, List<Book>> loadUserAndBookNames();
-    * */
+
+    @Query("SELECT DISTINCT * FROM medicine INNER JOIN medicine_dose ON medicine.id = medicine_dose.medID")
+    Map<Medicine, List<MedicineDose>> getAllDosesWithMedicineName();
 }
