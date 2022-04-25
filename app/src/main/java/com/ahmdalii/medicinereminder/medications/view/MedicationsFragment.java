@@ -30,6 +30,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.ahmdalii.medicinereminder.JSONSerializer;
+import com.ahmdalii.medicinereminder.NetworkConnection;
 import com.ahmdalii.medicinereminder.R;
 import com.ahmdalii.medicinereminder.addmed.model.MedicineDayFrequency;
 import com.ahmdalii.medicinereminder.addmed.model.MedicineForm;
@@ -154,7 +155,22 @@ public class MedicationsFragment extends Fragment implements MedicationsViewInte
                     intent.setData(Uri.parse("package:" + view.getContext().getPackageName()));
                     startActivity(intent);
                 } else {
-                    startActivity(new Intent(getContext(), AddMedActivity.class));
+                    if(NetworkConnection.isNetworkAvailable(getContext())) {
+                        startActivity(new Intent(getContext(), AddMedActivity.class));
+                    }
+                    else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
+                                .setMessage("No Connection")
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    }
+                                });
+
+                        builder.create().show();
+
+                    }
                 }
             }
         });
