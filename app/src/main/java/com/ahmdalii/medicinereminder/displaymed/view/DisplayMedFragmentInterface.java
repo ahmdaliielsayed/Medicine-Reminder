@@ -11,6 +11,7 @@ public interface DisplayMedFragmentInterface {
     void showProgressBar();
     void hideProgressBar();
     void showToast(String message);
+    void closeView();
 
     LifecycleOwner getViewLifecycle();
 }

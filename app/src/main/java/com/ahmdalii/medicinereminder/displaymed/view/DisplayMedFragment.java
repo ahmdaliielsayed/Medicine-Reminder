@@ -38,7 +38,12 @@ import com.ahmdalii.medicinereminder.model.Medicine;
 import com.ahmdalii.medicinereminder.model.MedicineDose;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.concurrent.TimeUnit;
 
 public class DisplayMedFragment extends Fragment implements DisplayMedFragmentInterface {
 
@@ -87,10 +92,8 @@ public class DisplayMedFragment extends Fragment implements DisplayMedFragmentIn
     }
 
     private void setPresenter() {
-
         displayMedPresenter = new DisplayMedPresenter(this);
-        displayMedPresenter.getStoredMedicineAndDoses(((Medicine) getArguments().getSerializable("medicine")).getId());
-        //displayMedPresenter.getStoredDoses();
+        displayMedPresenter.getStoredMedicineAndDoses(getArguments().getString("medicineID"));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -138,6 +141,12 @@ public class DisplayMedFragment extends Fragment implements DisplayMedFragmentIn
         Button suspendButton = view.findViewById(R.id.button_suspend_display_med);
         Button refillButton = view.findViewById(R.id.button_refill_display_med);
 
+        if(displayMedPresenter.getMedicine().getActivated()) {
+            suspendButton.setText("Suspend");
+        }
+        else {
+            suspendButton.setText("Activate");
+        }
         suspendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -207,29 +216,41 @@ public class DisplayMedFragment extends Fragment implements DisplayMedFragmentIn
         String firstDay = LocalDateTime.parse(doses.get(0).getTime()).toLocalDate().toString();
         for(MedicineDose dose: doses) {
             if(firstDay.equals(LocalDateTime.parse(dose.getTime()).toLocalDate().toString())) {
-                dosesTimes.add(dose.getTime());
+                dosesTimes.add(LocalDateTime.parse(dose.getTime()).toLocalTime().truncatedTo(ChronoUnit.MINUTES).toString());
             }
         }
 
+
+
         if(dosesTimes.size() == 1) {
+            ((TextView) view.findViewById(R.id.text_view_time_1_display_med)).setVisibility(View.VISIBLE);
             ((TextView) view.findViewById(R.id.text_view_time_1_display_med)).setText(dosesTimes.get(0));
             ((TextView) view.findViewById(R.id.text_view_time_2_display_med)).setVisibility(View.GONE);
             ((TextView) view.findViewById(R.id.text_view_time_3_display_med)).setVisibility(View.GONE);
             ((TextView) view.findViewById(R.id.text_view_time_4_display_med)).setVisibility(View.GONE);
         }
         else if(dosesTimes.size() == 2) {
+            ((TextView) view.findViewById(R.id.text_view_time_1_display_med)).setVisibility(View.VISIBLE);
+            ((TextView) view.findViewById(R.id.text_view_time_2_display_med)).setVisibility(View.VISIBLE);
             ((TextView) view.findViewById(R.id.text_view_time_1_display_med)).setText(dosesTimes.get(0));
             ((TextView) view.findViewById(R.id.text_view_time_2_display_med)).setText(dosesTimes.get(1));
             ((TextView) view.findViewById(R.id.text_view_time_3_display_med)).setVisibility(View.GONE);
             ((TextView) view.findViewById(R.id.text_view_time_4_display_med)).setVisibility(View.GONE);
         }
         else if(dosesTimes.size() == 3) {
+            ((TextView) view.findViewById(R.id.text_view_time_1_display_med)).setVisibility(View.VISIBLE);
+            ((TextView) view.findViewById(R.id.text_view_time_2_display_med)).setVisibility(View.VISIBLE);
+            ((TextView) view.findViewById(R.id.text_view_time_3_display_med)).setVisibility(View.VISIBLE);
             ((TextView) view.findViewById(R.id.text_view_time_1_display_med)).setText(dosesTimes.get(0));
             ((TextView) view.findViewById(R.id.text_view_time_2_display_med)).setText(dosesTimes.get(1));
             ((TextView) view.findViewById(R.id.text_view_time_3_display_med)).setText(dosesTimes.get(2));
             ((TextView) view.findViewById(R.id.text_view_time_4_display_med)).setVisibility(View.GONE);
         }
         else if(dosesTimes.size() == 4) {
+            ((TextView) view.findViewById(R.id.text_view_time_1_display_med)).setVisibility(View.VISIBLE);
+            ((TextView) view.findViewById(R.id.text_view_time_2_display_med)).setVisibility(View.VISIBLE);
+            ((TextView) view.findViewById(R.id.text_view_time_3_display_med)).setVisibility(View.VISIBLE);
+            ((TextView) view.findViewById(R.id.text_view_time_4_display_med)).setVisibility(View.VISIBLE);
             ((TextView) view.findViewById(R.id.text_view_time_1_display_med)).setText(dosesTimes.get(0));
             ((TextView) view.findViewById(R.id.text_view_time_2_display_med)).setText(dosesTimes.get(1));
             ((TextView) view.findViewById(R.id.text_view_time_3_display_med)).setText(dosesTimes.get(2));
@@ -248,6 +269,8 @@ public class DisplayMedFragment extends Fragment implements DisplayMedFragmentIn
         }
 
         if(dosesAmounts.size() == 1) {
+            ((TextView) view.findViewById(R.id.text_view_dose_amount_1_display_med)).setVisibility(View.VISIBLE);
+            ((TextView) view.findViewById(R.id.text_view_take_1_display_med)).setVisibility(View.VISIBLE);
             ((TextView) view.findViewById(R.id.text_view_dose_amount_1_display_med)).setText(dosesAmounts.get(0) + "");
             ((TextView) view.findViewById(R.id.text_view_dose_amount_2_display_med)).setVisibility(View.GONE);
             ((TextView) view.findViewById(R.id.text_view_dose_amount_3_display_med)).setVisibility(View.GONE);
@@ -257,6 +280,10 @@ public class DisplayMedFragment extends Fragment implements DisplayMedFragmentIn
             ((TextView) view.findViewById(R.id.text_view_take_4_display_med)).setVisibility(View.GONE);
         }
         else if(dosesAmounts.size() == 2) {
+            ((TextView) view.findViewById(R.id.text_view_dose_amount_1_display_med)).setVisibility(View.VISIBLE);
+            ((TextView) view.findViewById(R.id.text_view_take_1_display_med)).setVisibility(View.VISIBLE);
+            ((TextView) view.findViewById(R.id.text_view_dose_amount_2_display_med)).setVisibility(View.VISIBLE);
+            ((TextView) view.findViewById(R.id.text_view_take_2_display_med)).setVisibility(View.VISIBLE);
             ((TextView) view.findViewById(R.id.text_view_dose_amount_1_display_med)).setText(dosesAmounts.get(0) + "");
             ((TextView) view.findViewById(R.id.text_view_dose_amount_2_display_med)).setText(dosesAmounts.get(1) + "");
             ((TextView) view.findViewById(R.id.text_view_dose_amount_3_display_med)).setVisibility(View.GONE);
@@ -265,6 +292,12 @@ public class DisplayMedFragment extends Fragment implements DisplayMedFragmentIn
             ((TextView) view.findViewById(R.id.text_view_take_4_display_med)).setVisibility(View.GONE);
         }
         else if(dosesAmounts.size() == 3) {
+            ((TextView) view.findViewById(R.id.text_view_dose_amount_1_display_med)).setVisibility(View.VISIBLE);
+            ((TextView) view.findViewById(R.id.text_view_take_1_display_med)).setVisibility(View.VISIBLE);
+            ((TextView) view.findViewById(R.id.text_view_dose_amount_2_display_med)).setVisibility(View.VISIBLE);
+            ((TextView) view.findViewById(R.id.text_view_take_2_display_med)).setVisibility(View.VISIBLE);
+            ((TextView) view.findViewById(R.id.text_view_dose_amount_3_display_med)).setVisibility(View.VISIBLE);
+            ((TextView) view.findViewById(R.id.text_view_take_3_display_med)).setVisibility(View.VISIBLE);
             ((TextView) view.findViewById(R.id.text_view_dose_amount_1_display_med)).setText(dosesAmounts.get(0) + "");
             ((TextView) view.findViewById(R.id.text_view_dose_amount_2_display_med)).setText(dosesAmounts.get(1) + "");
             ((TextView) view.findViewById(R.id.text_view_dose_amount_3_display_med)).setText(dosesAmounts.get(2) + "");
@@ -272,6 +305,14 @@ public class DisplayMedFragment extends Fragment implements DisplayMedFragmentIn
             ((TextView) view.findViewById(R.id.text_view_take_4_display_med)).setVisibility(View.GONE);
         }
         else if(dosesAmounts.size() == 4) {
+            ((TextView) view.findViewById(R.id.text_view_dose_amount_1_display_med)).setVisibility(View.VISIBLE);
+            ((TextView) view.findViewById(R.id.text_view_take_1_display_med)).setVisibility(View.VISIBLE);
+            ((TextView) view.findViewById(R.id.text_view_dose_amount_2_display_med)).setVisibility(View.VISIBLE);
+            ((TextView) view.findViewById(R.id.text_view_take_2_display_med)).setVisibility(View.VISIBLE);
+            ((TextView) view.findViewById(R.id.text_view_dose_amount_3_display_med)).setVisibility(View.VISIBLE);
+            ((TextView) view.findViewById(R.id.text_view_take_3_display_med)).setVisibility(View.VISIBLE);
+            ((TextView) view.findViewById(R.id.text_view_dose_amount_4_display_med)).setVisibility(View.VISIBLE);
+            ((TextView) view.findViewById(R.id.text_view_take_4_display_med)).setVisibility(View.VISIBLE);
             ((TextView) view.findViewById(R.id.text_view_dose_amount_1_display_med)).setText(dosesAmounts.get(0) + "");
             ((TextView) view.findViewById(R.id.text_view_dose_amount_2_display_med)).setText(dosesAmounts.get(1) + "");
             ((TextView) view.findViewById(R.id.text_view_dose_amount_3_display_med)).setText(dosesAmounts.get(2) + "");
@@ -303,6 +344,11 @@ public class DisplayMedFragment extends Fragment implements DisplayMedFragmentIn
     @Override
     public void showToast(String message) {
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void closeView() {
+        Navigation.findNavController(view).popBackStack();
     }
 
     @Override

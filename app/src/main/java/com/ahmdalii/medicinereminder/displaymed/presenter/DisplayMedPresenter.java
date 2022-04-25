@@ -116,6 +116,7 @@ public class DisplayMedPresenter implements DisplayMedPresenterInterface, Displa
     @Override
     public void onSuccess() {
         displayMedView.showToast("Medicine deleted successfully");
+        displayMedView.closeView();
     }
 
     @Override

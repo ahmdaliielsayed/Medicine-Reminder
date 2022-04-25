@@ -36,6 +36,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class EditMedActivity extends AppCompatActivity implements EditMedActivityInterface, View.OnClickListener {
 
@@ -195,16 +196,19 @@ public class EditMedActivity extends AppCompatActivity implements EditMedActivit
 
         ArrayList<LocalTime> times = new ArrayList<>();
         ArrayList<Integer> amounts = new ArrayList<>();
-        LocalDate firstDate = LocalDateTime.parse(editMedPresenter.getDoses().get(0).getTime()).toLocalDate();
 
         for(MedicineDose dose: editMedPresenter.getDoses()) {
-            if(LocalDateTime.parse(dose.getTime()).toLocalDate().isEqual(firstDate)) {
+            if(times.size() == 0 || !times.contains(LocalDateTime.parse(dose.getTime()).toLocalTime())) {
                 times.add(LocalDateTime.parse(dose.getTime()).toLocalTime());
                 amounts.add(dose.getAmount());
             }
         }
 
+
+
         if(times.size() == 1) {
+            firstDoseTimeTextView.setVisibility(View.VISIBLE);
+            firstDoseAmountTextView.setVisibility(View.VISIBLE);
             firstDoseTimeTextView.setText(times.get(0).toString());
             firstDoseAmountTextView.setText(amounts.get(0).toString() + "Med(s)");
             secondDoseTimeTextView.setVisibility(View.GONE);
@@ -215,6 +219,10 @@ public class EditMedActivity extends AppCompatActivity implements EditMedActivit
             fourthDoseAmountTextView.setVisibility(View.GONE);
         }
         else if(times.size() == 2) {
+            firstDoseTimeTextView.setVisibility(View.VISIBLE);
+            firstDoseAmountTextView.setVisibility(View.VISIBLE);
+            secondDoseTimeTextView.setVisibility(View.VISIBLE);
+            secondDoseAmountTextView.setVisibility(View.VISIBLE);
             firstDoseTimeTextView.setText(times.get(0).toString());
             firstDoseAmountTextView.setText(amounts.get(0).toString() + " Med(s)");
             secondDoseTimeTextView.setText(times.get(1).toString());
@@ -225,6 +233,12 @@ public class EditMedActivity extends AppCompatActivity implements EditMedActivit
             fourthDoseAmountTextView.setVisibility(View.GONE);
         }
         else if(times.size() == 3) {
+            firstDoseTimeTextView.setVisibility(View.VISIBLE);
+            firstDoseAmountTextView.setVisibility(View.VISIBLE);
+            secondDoseTimeTextView.setVisibility(View.VISIBLE);
+            secondDoseAmountTextView.setVisibility(View.VISIBLE);
+            thirdDoseTimeTextView.setVisibility(View.VISIBLE);
+            thirdDoseAmountTextView.setVisibility(View.VISIBLE);
             firstDoseTimeTextView.setText(times.get(0).toString());
             firstDoseAmountTextView.setText(amounts.get(0).toString() + " Med(s)");
             secondDoseTimeTextView.setText(times.get(1).toString());
@@ -235,6 +249,14 @@ public class EditMedActivity extends AppCompatActivity implements EditMedActivit
             fourthDoseAmountTextView.setVisibility(View.GONE);
         }
         else if (times.size() == 4) {
+            firstDoseTimeTextView.setVisibility(View.VISIBLE);
+            firstDoseAmountTextView.setVisibility(View.VISIBLE);
+            secondDoseTimeTextView.setVisibility(View.VISIBLE);
+            secondDoseAmountTextView.setVisibility(View.VISIBLE);
+            thirdDoseTimeTextView.setVisibility(View.VISIBLE);
+            thirdDoseAmountTextView.setVisibility(View.VISIBLE);
+            fourthDoseTimeTextView.setVisibility(View.VISIBLE);
+            fourthDoseAmountTextView.setVisibility(View.VISIBLE);
             firstDoseTimeTextView.setText(times.get(0).toString());
             firstDoseAmountTextView.setText(amounts.get(0).toString() + " Med(s)");
             secondDoseTimeTextView.setText(times.get(1).toString());

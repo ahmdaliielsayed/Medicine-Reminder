@@ -1,5 +1,6 @@
 package com.ahmdalii.medicinereminder.medications.view;
 
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,11 +9,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ahmdalii.medicinereminder.R;
+import com.ahmdalii.medicinereminder.addmed.model.MedicineDayFrequency;
+import com.ahmdalii.medicinereminder.addmed.model.MedicineForm;
 import com.ahmdalii.medicinereminder.medications.repository.MedicationsPojo;
 import com.ahmdalii.medicinereminder.medications.repository.MedsPojo;
+import com.ahmdalii.medicinereminder.model.Medicine;
+import com.ahmdalii.medicinereminder.model.MedicineUnit;
 
 import java.util.List;
 
@@ -83,7 +89,9 @@ public class MedicationsSubAdapter extends RecyclerView.Adapter<MedicationsSubAd
             @Override
             public void onClick(View view) {
                 Log.i("emy", "onClick: you clicked a medication row " + data.get(position).getName());
-
+                Bundle args = new Bundle();
+                args.putString("medicineID", data.get(position).getId());
+                Navigation.findNavController(view).navigate(R.id.action_navigation_dashboard_to_displayMedFragment, args);
             }
         });
 
