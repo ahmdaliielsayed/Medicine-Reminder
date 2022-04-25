@@ -11,12 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ahmdalii.medicinereminder.R;
 import com.ahmdalii.medicinereminder.medications.repository.MedicationsPojo;
 import com.ahmdalii.medicinereminder.medications.repository.MedicationsSectionPojo;
+import com.ahmdalii.medicinereminder.medications.repository.MedsPojo;
 
 import java.util.List;
 
 public class MedicationsMainAdapter extends RecyclerView.Adapter<MedicationsMainAdapter.ViewHolder>{
 
     List<MedicationsSectionPojo> data;
+    //MedicationsSubAdapter medAdapter;
+
     public MedicationsMainAdapter(List<MedicationsSectionPojo> data) {
         this.data = data;
     }
@@ -36,9 +39,13 @@ public class MedicationsMainAdapter extends RecyclerView.Adapter<MedicationsMain
     public void onBindViewHolder(@NonNull MedicationsMainAdapter.ViewHolder holder, int position) {
         holder.sectionName.setText(data.get(position).getSectionName());
 
-        List<MedicationsPojo> medList = data.get(position).getMedPojo();
+        List<MedsPojo> medList = data.get(position).getMedPojo();
         MedicationsSubAdapter medAdapter = new MedicationsSubAdapter(medList);
         holder.childRecycler.setAdapter(medAdapter);
+    }
+
+    public void setList(List<MedicationsSectionPojo> updatedData){
+        this.data = updatedData;
     }
 
     @Override

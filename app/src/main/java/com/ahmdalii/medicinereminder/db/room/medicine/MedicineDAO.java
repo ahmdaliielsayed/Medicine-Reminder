@@ -7,6 +7,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+import com.ahmdalii.medicinereminder.medications.repository.MedsPojo;
 import com.ahmdalii.medicinereminder.model.Medicine;
 
 import java.util.List;
@@ -22,4 +23,11 @@ public interface MedicineDAO {
 
     @Delete
     void deleteMedicine(Medicine medicine);
+
+    @Query("SELECT name, strength, remainingMedAmount, form FROM medicine where isActivated = 1")
+    LiveData<List<MedsPojo>> getActiveMeds();
+
+    @Query("SELECT name, strength, remainingMedAmount, form FROM medicine where isActivated = 0")
+    LiveData<List<MedsPojo>> getInactiveMeds();
+
 }

@@ -4,9 +4,9 @@ import java.util.List;
 
 public class MedicationsSectionPojo {
     String sectionName;
-    List<MedicationsPojo> medsList;
+    List<MedsPojo> medsList;
 
-    public MedicationsSectionPojo(String sectionName, List<MedicationsPojo> medPojo) {
+    public MedicationsSectionPojo(String sectionName, List<MedsPojo> medPojo) {
         this.sectionName = sectionName;
         this.medsList = medPojo;
     }
@@ -19,11 +19,11 @@ public class MedicationsSectionPojo {
         this.sectionName = sectionName;
     }
 
-    public List<MedicationsPojo> getMedPojo() {
+    public List<MedsPojo> getMedPojo() {
         return medsList;
     }
 
-    public void setMedPojo(List<MedicationsPojo> medPojo) {
+    public void setMedPojo(List<MedsPojo> medPojo) {
         this.medsList = medPojo;
     }
 }

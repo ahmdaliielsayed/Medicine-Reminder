@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,8 +23,13 @@ import com.ahmdalii.medicinereminder.addmed.model.MedicineDayFrequency;
 import com.ahmdalii.medicinereminder.addmed.model.MedicineForm;
 import com.ahmdalii.medicinereminder.addmed.view.AddMedActivity;
 import com.ahmdalii.medicinereminder.editmed.view.EditMedActivity;
+import com.ahmdalii.medicinereminder.medications.presenter.MedicationsPresenter;
+import com.ahmdalii.medicinereminder.medications.presenter.MedicationsPresenterInterface;
+import com.ahmdalii.medicinereminder.medications.repository.MedicationsLocalSource;
 import com.ahmdalii.medicinereminder.medications.repository.MedicationsPojo;
+import com.ahmdalii.medicinereminder.medications.repository.MedicationsRepository;
 import com.ahmdalii.medicinereminder.medications.repository.MedicationsSectionPojo;
+import com.ahmdalii.medicinereminder.medications.repository.MedsPojo;
 import com.ahmdalii.medicinereminder.model.DoseStatus;
 import com.ahmdalii.medicinereminder.model.Medicine;
 import com.ahmdalii.medicinereminder.model.MedicineDose;
@@ -34,10 +40,16 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class MedicationsFragment extends Fragment {
+public class MedicationsFragment extends Fragment implements MedicationsViewInterface {
 
-    List<MedicationsPojo> activeData;
-    List<MedicationsPojo> inactiveData;
+    MedicationsPresenterInterface presenter;
+
+//    List<MedicationsPojo> activeData;
+//    List<MedicationsPojo> inactiveData;
+
+    MedicationsMainAdapter mainAdapter;
+    List<MedsPojo> activeData;
+    List<MedsPojo> inactiveData;
     List<MedicationsSectionPojo> data;
     RecyclerView recyclerView;
 
@@ -68,19 +80,43 @@ public class MedicationsFragment extends Fragment {
         addMedBtn = view.findViewById(R.id.addMedId);
 
         //testNavigationToDisplay(view);
-        testNavigationToEdit();
+        //testNavigationToEdit();
 
+        presenter = new MedicationsPresenter(this, MedicationsRepository.getInstance(getContext(), MedicationsLocalSource.getInstance(getContext())));
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        activeData = Arrays.asList(new MedicationsPojo("Clobex", "3 mg", 10, R.drawable.temppill), new MedicationsPojo("Clobex", "3 mg", 10, R.drawable.temppill), new MedicationsPojo("Clobex", "3 mg", 10, R.drawable.temppill), new MedicationsPojo("Clobex", "3 mg", 10, R.drawable.temppill), new MedicationsPojo("Clobex", "3 mg", 10, R.drawable.temppill), new MedicationsPojo("Clobex", "3 mg", 10, R.drawable.temppill), new MedicationsPojo("Clobex", "3 mg", 10, R.drawable.temppill), new MedicationsPojo("Lopid", "5 mg", 5, R.drawable.temppill));
-        inactiveData = Arrays.asList(new MedicationsPojo("Balmex", "7 mg", 9, R.drawable.temppill), new MedicationsPojo("Balmex", "7 mg", 9, R.drawable.temppill), new MedicationsPojo("Balmex", "7 mg", 9, R.drawable.temppill), new MedicationsPojo("Plavix", "7 mg", 9, R.drawable.temppill));
-        data =  Arrays.asList(new MedicationsSectionPojo("Active meds", activeData), new MedicationsSectionPojo("Inactive meds", inactiveData));
+        //data =  Arrays.asList(new MedicationsSectionPojo("Active meds", activeData), new MedicationsSectionPojo("Inactive meds", inactiveData));
 
-        MedicationsMainAdapter mainAdapter = new MedicationsMainAdapter(data);
+        data = Arrays.asList(new MedicationsSectionPojo("Active meds", new ArrayList<>()), new MedicationsSectionPojo("Inactive meds", new ArrayList<>()));
+        mainAdapter = new MedicationsMainAdapter(data);
         recyclerView.setAdapter(mainAdapter);
+
+        presenter.getActiveMeds().observe(this, new Observer<List<MedsPojo>>() {
+            @Override
+            public void onChanged(List<MedsPojo> medsPojos) {
+                activeData = medsPojos;
+                data =  Arrays.asList(new MedicationsSectionPojo("Active meds", activeData), new MedicationsSectionPojo("Inactive meds", inactiveData));
+                mainAdapter.setList(data);
+                mainAdapter.notifyDataSetChanged();
+            }
+        });
+
+        presenter.getInactiveMeds().observe(this, new Observer<List<MedsPojo>>() {
+            @Override
+            public void onChanged(List<MedsPojo> medsPojos) {
+                inactiveData = medsPojos;
+                data =  Arrays.asList(new MedicationsSectionPojo("Active meds", activeData), new MedicationsSectionPojo("Inactive meds", inactiveData));
+                mainAdapter.setList(data);
+                mainAdapter.notifyDataSetChanged();
+            }
+        });
+        //activeData = Arrays.asList(new MedicationsPojo("Clobex", "3 mg", 10, R.drawable.temppill), new MedicationsPojo("Clobex", "3 mg", 10, R.drawable.temppill), new MedicationsPojo("Clobex", "3 mg", 10, R.drawable.temppill), new MedicationsPojo("Clobex", "3 mg", 10, R.drawable.temppill), new MedicationsPojo("Clobex", "3 mg", 10, R.drawable.temppill), new MedicationsPojo("Clobex", "3 mg", 10, R.drawable.temppill), new MedicationsPojo("Clobex", "3 mg", 10, R.drawable.temppill), new MedicationsPojo("Lopid", "5 mg", 5, R.drawable.temppill));
+        //inactiveData = Arrays.asList(new MedicationsPojo("Balmex", "7 mg", 9, R.drawable.temppill), new MedicationsPojo("Balmex", "7 mg", 9, R.drawable.temppill), new MedicationsPojo("Balmex", "7 mg", 9, R.drawable.temppill), new MedicationsPojo("Plavix", "7 mg", 9, R.drawable.temppill));
+
+
 
         addMedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
