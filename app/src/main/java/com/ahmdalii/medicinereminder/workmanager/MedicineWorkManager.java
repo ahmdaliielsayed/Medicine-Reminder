@@ -12,6 +12,7 @@ import androidx.work.WorkerParameters;
 import com.ahmdalii.medicinereminder.Constants;
 import com.ahmdalii.medicinereminder.JSONSerializer;
 import com.ahmdalii.medicinereminder.Notification;
+import com.ahmdalii.medicinereminder.UIHelper;
 import com.ahmdalii.medicinereminder.medicationreminder.view.MedicationReminderActivity;
 import com.ahmdalii.medicinereminder.model.Medicine;
 import com.ahmdalii.medicinereminder.model.MedicineDose;
@@ -37,7 +38,7 @@ public class MedicineWorkManager extends Worker {
         Medicine medicine = JSONSerializer.deserializeMedicine((String) map.get("medicine"));
         MedicineDose dose = JSONSerializer.deserializeMedicineDose((String) map.get("dose"));
 
-        openNotification(dose, medicine, context);
+        UIHelper.openNotification(dose, medicine, context);
 
         Log.d("asdfg:", "test test1");
 
@@ -52,11 +53,5 @@ public class MedicineWorkManager extends Worker {
         Log.d("asdfg:", "test test2");
 
         return Result.success();
-    }
-
-    public void openNotification(MedicineDose medicineDose, Medicine medicine, Context context) {
-        Notification notificationHelper = new Notification(context, medicine, medicineDose);
-        NotificationCompat.Builder nb = notificationHelper.getChannelNotification();
-        notificationHelper.getManager().notify(medicineDose.getId().hashCode(), nb.build());
     }
 }
