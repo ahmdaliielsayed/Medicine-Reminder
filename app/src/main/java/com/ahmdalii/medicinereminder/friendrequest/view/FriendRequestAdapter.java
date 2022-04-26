@@ -13,13 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ahmdalii.medicinereminder.R;
 import com.ahmdalii.medicinereminder.friendrequest.repository.FriendRequestPojo;
-import com.ahmdalii.medicinereminder.medications.repository.MedicationsSectionPojo;
-import com.ahmdalii.medicinereminder.medications.repository.MedsPojo;
-import com.ahmdalii.medicinereminder.medications.view.MedicationsMainAdapter;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 

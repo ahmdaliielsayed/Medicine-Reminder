@@ -15,7 +15,7 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
-public class FriendRequestActivity extends AppCompatActivity {
+public class FriendRequestActivity extends AppCompatActivity implements FriendRequestViewInterface{
 
     FriendRequestPresenterInterface presenter;
 
