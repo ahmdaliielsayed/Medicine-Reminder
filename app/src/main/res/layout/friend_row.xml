@@ -2,13 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/friendReqRowId"
+    android:id="@+id/friendRowId"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp">
 
     <ImageView
-        android:id="@+id/friendReqImgId"
+        android:id="@+id/friendImgId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="2dp"
@@ -17,35 +17,16 @@
         app:srcCompat="@drawable/ic_pills" />
 
     <TextView
-        android:id="@+id/friendReqNameId"
+        android:id="@+id/friendNameId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="2dp"
         android:textColor="#252424"
         android:textSize="16sp"
-        app:layout_constraintLeft_toRightOf="@id/friendReqImgId"
+        app:layout_constraintLeft_toRightOf="@id/friendImgId"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:text="Drug Name" />
-
-    <Button
-        android:id="@+id/confirmBtnId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="@string/confirm"
-        app:layout_constraintLeft_toRightOf="@id/friendReqImgId"
-        app:layout_constraintTop_toBottomOf="@+id/friendReqNameId" />
-
-    <Button
-        android:id="@+id/deleteBtnId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/delete"
-        tools:layout_editor_absoluteX="271dp"
-        tools:layout_editor_absoluteY="3dp"
-        app:layout_constraintTop_toBottomOf="@+id/friendReqNameId"
-        app:layout_constraintLeft_toRightOf="@id/confirmBtnId"
-        android:layout_margin="5dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
