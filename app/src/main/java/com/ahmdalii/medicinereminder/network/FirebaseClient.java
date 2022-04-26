@@ -367,7 +367,7 @@ public class FirebaseClient implements RemoteSource {
                                 listMap.put(medicine, medicineDoseList);
 
                                 Log.d("asdfg:size", String.valueOf(listMap.size()));
-                                networkHomeDelegate.onResponse(listMap, currentDate);
+//                                networkHomeDelegate.onResponse(listMap, currentDate);
                             }
 
                             @Override
@@ -377,6 +377,32 @@ public class FirebaseClient implements RemoteSource {
                         });
                     }
                 }
+
+                Map<Medicine, MedicineDose> returnedMedDosMap = new HashMap<>();
+
+                for (Map.Entry<Medicine, List<MedicineDose>> entry : listMap.entrySet()) {
+                    Medicine key = entry.getKey();
+                    List<MedicineDose> value = entry.getValue();
+                    Log.d("asdfg:Cdate", currentDate.toString());
+                    for (int i=0; i<value.size(); i++) {
+                        String[] dateTime = value.get(i).getTime().split("T"); // 2022-04-25 T 03:41
+                        @SuppressLint("SimpleDateFormat")
+                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                        try {
+                            Date parsedDate = formatter.parse(dateTime[0]);
+
+                            Log.d("asdfg:Pdate", parsedDate.toString());
+                            if (Objects.requireNonNull(parsedDate).equals(currentDate)) {
+                                returnedMedDosMap.put(key, value.get(i));
+                            }
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                Log.d("asdfg:sizeL", String.valueOf(listMap.size()));
+                Log.d("asdfg:sizeRL", String.valueOf(returnedMedDosMap.size()));
+                networkHomeDelegate.onResponse(returnedMedDosMap);
             }
 
             @Override
