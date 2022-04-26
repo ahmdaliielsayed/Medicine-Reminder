@@ -77,8 +77,8 @@ public class ConcreteLocalSourceMedicineDose implements LocalSourceMedicineDose 
     }
 
     @Override
-    public Map<Medicine, List<MedicineDose>> getAllDosesWithMedicineName() {
-        return dao.getAllDosesWithMedicineName();
+    public Map<Medicine, List<MedicineDose>> getAllDosesWithMedicineName(String uid) {
+        return dao.getAllDosesWithMedicineName(uid);
     }
 
     @Override

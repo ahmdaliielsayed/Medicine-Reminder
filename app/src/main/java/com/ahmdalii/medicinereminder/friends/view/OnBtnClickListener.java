@@ -1,5 +1,5 @@
 package com.ahmdalii.medicinereminder.friends.view;
 
 public interface OnBtnClickListener {
-    void onRowClick();
+    void onRowClick(String uid);
 }

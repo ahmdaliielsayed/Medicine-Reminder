@@ -48,6 +48,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.HorizontalCalendarView;
@@ -83,14 +84,14 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
 
         initComponents();
 
-        presenterInterface.getAllDosesWithMedicineName(changeDateFormat(Calendar.getInstance(Locale.US).getTime()));
+        presenterInterface.getAllDosesWithMedicineName(changeDateFormat(Calendar.getInstance(Locale.US).getTime()), view.getContext());
 
         horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
             @Override
             public void onDateSelected(Calendar date, int position) {
                 dateSelected = changeDateFormat(date.getTime());
                 Log.d("asdfgh:date", "onDateSelected: " + dateSelected.toString());
-                presenterInterface.getAllDosesWithMedicineName(dateSelected);
+                presenterInterface.getAllDosesWithMedicineName(dateSelected, view.getContext());
 //                allPresenter.getMeds(dateSelected);
             }
         });
@@ -160,6 +161,14 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
                 .datesNumberOnScreen(5)
                 .build();
         horizontalCalendar.selectDate(selectedDate,true);
+
+        if (Objects.requireNonNull(getActivity()).getIntent().getStringExtra("uid") != null) {
+            String uid = getActivity().getIntent().getStringExtra("uid");
+            Log.d("asdfg:", "entered if with user " + uid);
+            presenterInterface.getAllDosesWithMedicineNameForUser(changeDateFormat(Calendar.getInstance(Locale.US).getTime()), uid);
+        } else {
+            Log.d("asdfg:", "not entered");
+        }
     }
 
     private Date changeDateFormat(Date currentDate) {

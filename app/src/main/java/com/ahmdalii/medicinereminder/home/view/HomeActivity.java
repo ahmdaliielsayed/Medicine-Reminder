@@ -1,6 +1,7 @@
 package com.ahmdalii.medicinereminder.home.view;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -21,6 +22,7 @@ import com.ahmdalii.medicinereminder.db.room.user.ConcreteLocalSourceUser;
 import com.ahmdalii.medicinereminder.friendrequest.view.FriendRequestActivity;
 import com.ahmdalii.medicinereminder.friends.view.FriendsActivity;
 import com.ahmdalii.medicinereminder.healthtaker.view.HealthTakerActivity;
+import com.ahmdalii.medicinereminder.home.presenter.HomeFragmentPresenterInterface;
 import com.ahmdalii.medicinereminder.home.presenter.HomePresenter;
 import com.ahmdalii.medicinereminder.home.presenter.HomePresenterInterface;
 import com.ahmdalii.medicinereminder.home.repository.HomeRepo;
@@ -34,6 +36,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -127,7 +130,7 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityInter
                 case R.id.itemMedFriends:
                     Intent friendIntent = new Intent(this, FriendsActivity.class);
                     friendIntent.putExtra("userId", userId);
-                    startActivity(friendIntent);
+                    startActivityForResult(friendIntent, 100);
                     break;
                 case R.id.itemMedFriendsReqs:
                     Intent friendReqsIntent = new Intent(this, FriendRequestActivity.class);
@@ -152,6 +155,17 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityInter
             drawerLayout.closeDrawers();
             return true;
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && requestCode == 100) {
+            String uid = Objects.requireNonNull(data).getStringExtra("uid");
+            Log.d("asdfg:", "onActivityResult: " + uid);
+        } else {
+            Log.d("asdfg:", "zeft");
+        }
     }
 
     @Override
@@ -239,7 +253,6 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityInter
 
     @Override
     public void networkAvailable() {
-//        Toast.makeText(this, R.string.connection_back, Toast.LENGTH_SHORT).show();
         if (unSyncedMedicines.size() > 0) {
             presenterInterface.syncMedicineListToFirebase(unSyncedMedicines);
         }

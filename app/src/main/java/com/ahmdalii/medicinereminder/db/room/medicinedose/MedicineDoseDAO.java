@@ -38,8 +38,8 @@ public interface MedicineDoseDAO {
     Medicine getNextMedicine(String med_id);
 
 
-    @Query("SELECT DISTINCT * FROM medicine INNER JOIN medicine_dose ON medicine.id = medicine_dose.medID AND medicine.isActivated = 1")
-    Map<Medicine, List<MedicineDose>> getAllDosesWithMedicineName();
+    @Query("SELECT DISTINCT * FROM medicine INNER JOIN medicine_dose ON medicine.id = medicine_dose.medID AND medicine.isActivated = 1 AND :uid = userID")
+    Map<Medicine, List<MedicineDose>> getAllDosesWithMedicineName(String uid);
 
     @Query("SELECT * FROM medicine_dose WHERE isSync = 0")
     LiveData<List<MedicineDose>> getAllUnSyncMedicineDoses();

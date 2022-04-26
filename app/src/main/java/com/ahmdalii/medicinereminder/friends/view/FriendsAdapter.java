@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ahmdalii.medicinereminder.R;
@@ -27,10 +28,12 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
 
     Context context;
     List<RequestPojo> data;
+    private OnBtnClickListener onBtnClickListener;
 
-    public FriendsAdapter(Context context, List<RequestPojo> data) {
+    public FriendsAdapter(Context context, List<RequestPojo> data, OnBtnClickListener onBtnClickListener) {
         this.context = context;
         this.data = data;
+        this.onBtnClickListener = onBtnClickListener;
         Log.i("TAG", "FriendsAdapter: yadata");
     }
 
@@ -58,6 +61,8 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
         Glide.with(context).load(data.get(i).getProfile_image_uri())
                 .apply(new RequestOptions().override(200,200))
                 .into(holder.friendImg);
+
+        holder.friendRowId.setOnClickListener(view -> onBtnClickListener.onRowClick(data.get(position).getSenderId()));
     }
 
     @Override
@@ -72,11 +77,13 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView friendImg;
         TextView friendName;
+        ConstraintLayout friendRowId;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             friendImg = itemView.findViewById(R.id.friendImgId);
             friendName = itemView.findViewById(R.id.friendNameId);
+            friendRowId = itemView.findViewById(R.id.friendRowId);
         }
     }
 }
