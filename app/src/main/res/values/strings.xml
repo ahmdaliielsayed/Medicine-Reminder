@@ -97,4 +97,6 @@
     <string name="confirm">Confirm</string>
     <string name="delete">Delete</string>
     <string name="refill">You need to refill this medicine.\nRemaining amount = </string>
+    <string name="do_not_forgot_medicine">Let\'s make sure you don\'t forget your medicine</string>
+    <string name="appointed_time">We will remind you at the appointed time</string>
 </resources>
