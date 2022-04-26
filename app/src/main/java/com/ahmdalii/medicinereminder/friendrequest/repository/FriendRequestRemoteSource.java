@@ -38,7 +38,6 @@ public class FriendRequestRemoteSource implements FriendRequestRemoteSourceInter
     }
 
     public List<RequestPojo> getRequests(String receiverId){
-
         requests = new ArrayList<>();
         getData = FirebaseDatabase.getInstance().getReference().child("Users");
         reqRef = FirebaseDatabase.getInstance().getReference().child("Requests");
@@ -49,7 +48,8 @@ public class FriendRequestRemoteSource implements FriendRequestRemoteSourceInter
                 if(snapshot.exists()){
                     for(DataSnapshot temp : snapshot.getChildren()){
                         request = temp.getValue(RequestPojo.class);
-                        requests.add(request);
+                        if(request.getStatus().equals("pending"))
+                            requests.add(request);
                     }
                 }
                 view.setData(requests);
@@ -61,6 +61,33 @@ public class FriendRequestRemoteSource implements FriendRequestRemoteSourceInter
             }
         });
         return requests;
+    }
+
+    public void addFriend(String receiverId, String senderId){
+        final String[] id = new String[1];
+        reqRef = FirebaseDatabase.getInstance().getReference().child("Requests");
+        reqRef.orderByChild("receiverId").equalTo(receiverId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot temp : snapshot.getChildren()){
+                        request = temp.getValue(RequestPojo.class);
+                        if(request.getSenderId().equals(senderId)){
+                            id[0] = temp.getKey();
+                            request.setStatus("accept");
+                            reqRef.child(id[0]).setValue(request);
+                            Log.i("TAG", "onDataChange: key of add " + id[0]);
+
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 }

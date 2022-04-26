@@ -20,7 +20,7 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
-public class FriendRequestActivity extends AppCompatActivity implements FriendRequestViewInterface{
+public class FriendRequestActivity extends AppCompatActivity implements FriendRequestViewInterface, OnBtnClickListener{
 
     FriendRequestPresenterInterface presenter;
 
@@ -51,16 +51,21 @@ public class FriendRequestActivity extends AppCompatActivity implements FriendRe
         //tempData = Arrays.asList(new FriendRequestPojo("1","Emy","https://firebasestorage.googleapis.com/v0/b/medicine-reminder-91bf9.appspot.com/o/Profile%20Image%2F1650664925668.jpg?alt=media&token=c1edd658-a25f-4ebd-badb-003776e7837b"), new FriendRequestPojo("2","Adam","https://lh3.googleusercontent.com/a-/AOh14GgLBxNEv3de1mQnBtNj7IRyHm-pmiLGFTGtdpYjPQ=s96-c"));
         requestsData = presenter.getRequests(userId);
         Log.i("TAG", "onCreate: request data size " + requestsData.size());
-        adapter = new FriendRequestAdapter(requestsData,this);
+        adapter = new FriendRequestAdapter(requestsData,this, this);
         recyclerView.setAdapter(adapter);
 
     }
 
     @Override
     public void setData(List<RequestPojo> requests) {
-        Log.i("TAG", "setData: sizeeeee" + requests.size());
+        Log.i("TAG", "setData: sizeeeee " + requests.size());
         requestsData = requests;
         adapter.setList(requestsData);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onConfirmClick(String receiverId, String senderId) {
+        presenter.addFriend(receiverId, senderId);
     }
 }
