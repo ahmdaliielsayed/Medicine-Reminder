@@ -2,6 +2,7 @@ package com.ahmdalii.medicinereminder.workmanager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import androidx.work.WorkerParameters;
 
 import com.ahmdalii.medicinereminder.Constants;
 import com.ahmdalii.medicinereminder.JSONSerializer;
+import com.ahmdalii.medicinereminder.MyService;
 import com.ahmdalii.medicinereminder.Notification;
 import com.ahmdalii.medicinereminder.R;
 import com.ahmdalii.medicinereminder.UIHelper;
@@ -39,7 +41,21 @@ public class MedicineWorkManager extends Worker {
         Medicine medicine = JSONSerializer.deserializeMedicine((String) map.get("medicine"));
         MedicineDose dose = JSONSerializer.deserializeMedicineDose((String) map.get("dose"));
 
-        UIHelper.openNotification(dose, medicine, context, getApplicationContext().getString(R.string.medicine_time));
+        Log.d("asdfg:", "test test1");
+
+        Intent startIntent = new Intent(context, MyService.class);
+        startIntent.putExtra(Constants.MEDICINE_KEY, medicine);
+        startIntent.putExtra(Constants.DOSE_KEY, dose);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            context.startForegroundService(startIntent);
+        } else {
+            context.startService(startIntent);
+        }
+
+        Log.d("asdfg:", "test test2");
+
+        /*UIHelper.openNotification(dose, medicine, context, getApplicationContext().getString(R.string.medicine_time));
 
         Log.d("asdfg:", "test test1");
 
@@ -51,7 +67,7 @@ public class MedicineWorkManager extends Worker {
 
         context.startActivity(startIntent);
 
-        Log.d("asdfg:", "test test2");
+        Log.d("asdfg:", "test test2");*/
 
         return Result.success();
     }
