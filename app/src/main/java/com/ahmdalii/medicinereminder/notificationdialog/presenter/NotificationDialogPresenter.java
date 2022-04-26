@@ -1,6 +1,7 @@
 package com.ahmdalii.medicinereminder.notificationdialog.presenter;
 
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -62,8 +63,10 @@ public class NotificationDialogPresenter implements NotificationDialogPresenterI
     @Override
     public void deleteDose() {
 
+        Log.i("TAG", "deleteDose: ");
         for(int i = 0; i < repo.getDoses().size(); i++) {
             if(repo.getDoses().get(i).getId().equals(repo.getDose().getId())) {
+                Log.i("TAG", "deleteDose: if ");
                 repo.getDoses().remove(repo.getDose());
             }
         }
@@ -80,6 +83,10 @@ public class NotificationDialogPresenter implements NotificationDialogPresenterI
     public void takeDose() {
         repo.getMedicine().setRemainingMedAmount(repo.getMedicine().getRemainingMedAmount() - repo.getDose().getAmount());
         repo.getDose().setStatus(DoseStatus.TAKEN.getStatus());
+
+        if(repo.getMedicine().getRemainingMedAmount() <= repo.getMedicine().getReminderMedAmount()) {
+            notificationDialogView.showRefillReminderDialog();
+        }
 
         for(int i = 0; i < repo.getDoses().size(); i++) {
             if(repo.getDoses().get(i).getId().equals(repo.getDose().getId())) {

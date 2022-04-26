@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -60,6 +61,9 @@ public class AddMedFormFragment extends Fragment implements View.OnClickListener
         view.findViewById(R.id.text_view_drops_add_med_form).setOnClickListener(this);
         view.findViewById(R.id.text_view_inhaler_add_med_form).setOnClickListener(this);
         view.findViewById(R.id.text_view_topical_add_med_form).setOnClickListener(this);
+
+        ((ImageView) view.findViewById(R.id.image_view_add_header)).setImageResource(R.drawable.ic_pills);
+
     }
 
     @Override

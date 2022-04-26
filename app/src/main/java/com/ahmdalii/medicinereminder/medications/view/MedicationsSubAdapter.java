@@ -89,7 +89,7 @@ public class MedicationsSubAdapter extends RecyclerView.Adapter<MedicationsSubAd
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("emy", "onClick: you clicked a medication row " + data.get(position).getName());
+                Log.i("TAG", "onClick: you clicked a medication row " + data.get(position).getName());
                 Bundle args = new Bundle();
                 args.putString("medicineID", data.get(position).getId());
                 Navigation.findNavController(view).navigate(R.id.action_navigation_dashboard_to_displayMedFragment, args);

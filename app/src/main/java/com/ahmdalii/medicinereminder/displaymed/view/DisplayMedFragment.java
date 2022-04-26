@@ -1,6 +1,7 @@
 package com.ahmdalii.medicinereminder.displaymed.view;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -51,6 +52,9 @@ public class DisplayMedFragment extends Fragment implements DisplayMedFragmentIn
     DisplayMedPresenterInterface displayMedPresenter;
     View view;
 
+    ProgressDialog dialog;
+
+
     public DisplayMedFragment() {
 
     }
@@ -65,6 +69,7 @@ public class DisplayMedFragment extends Fragment implements DisplayMedFragmentIn
     public void onResume() {
         super.onResume();
         Log.i("TAggggG", "onResume: ");
+
         setPresenter();
 
     }
@@ -88,6 +93,8 @@ public class DisplayMedFragment extends Fragment implements DisplayMedFragmentIn
 
         this.view = view;
         Log.i("TAggggG", "onViewCreated: ");
+        dialog = new ProgressDialog(getContext());
+        dialog.show();
         setPresenter();
         //setUI();
     }
@@ -221,7 +228,7 @@ public class DisplayMedFragment extends Fragment implements DisplayMedFragmentIn
     }
 
     private void setLastTakenTextView(@NonNull View view, ArrayList<MedicineDose> doses) {
-        String lastTakenString = "";
+        String lastTakenString = "Unknown";
         for(int i = doses.size() - 1; i >= 0; i--) {
             if(doses.get(i).getStatus().equals(DoseStatus.TAKEN.getStatus())) {
                 Log.i("TAG", "setLastTakenTextView: ");
@@ -356,12 +363,11 @@ public class DisplayMedFragment extends Fragment implements DisplayMedFragmentIn
 
     @Override
     public void showProgressBar() {
-        view.findViewById(R.id.progress_bar_display_med).setVisibility(View.VISIBLE);
-    }
+        dialog.show();    }
 
     @Override
     public void hideProgressBar() {
-        view.findViewById(R.id.progress_bar_display_med).setVisibility(View.GONE);
+        dialog.hide();
     }
 
     @Override

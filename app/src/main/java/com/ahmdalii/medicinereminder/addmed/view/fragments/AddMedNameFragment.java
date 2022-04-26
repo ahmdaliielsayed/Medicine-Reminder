@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.ahmdalii.medicinereminder.R;
+import com.ahmdalii.medicinereminder.addmed.model.MedicineForm;
 import com.ahmdalii.medicinereminder.addmed.view.AddMedActivityInterface;
 
 
@@ -84,5 +86,8 @@ public class AddMedNameFragment extends Fragment {
                 ((AddMedActivityInterface) getActivity()).nextStep(savedInstanceState, new AddMedFormFragment());
             }
         });
+
+        ((ImageView) view.findViewById(R.id.image_view_add_header)).setImageResource(R.drawable.ic_pills);
+
     }
 }

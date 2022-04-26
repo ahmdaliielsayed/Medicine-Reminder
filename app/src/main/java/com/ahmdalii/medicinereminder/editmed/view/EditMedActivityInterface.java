@@ -9,4 +9,8 @@ public interface EditMedActivityInterface {
     void showFailureToast();
 
     void setUI();
+
+    void showProgressDialog();
+
+    void hideProgressDialog();
 }

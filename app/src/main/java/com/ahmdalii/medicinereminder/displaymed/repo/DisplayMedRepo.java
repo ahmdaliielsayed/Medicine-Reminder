@@ -2,6 +2,7 @@ package com.ahmdalii.medicinereminder.displaymed.repo;
 
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 import androidx.lifecycle.LifecycleOwner;
@@ -100,7 +101,12 @@ public class DisplayMedRepo implements DisplayMedRepoInterface {
             remoteSource.enqueueCall(networkDelegate, medicine.getId());
         }
         else {
-            localSourceMedicineDose.getAllMedicineDoses(medicine.getId()).observe(owner, storedDoses -> doses = (ArrayList<MedicineDose>) storedDoses);
+            Log.i("TAG", "getStoredDoses: " + medicine.getId());
+            localSourceMedicineDose.getAllMedicineDoses(medicine.getId()).observe(owner, storedDoses -> {
+                doses = ((ArrayList<MedicineDose>) storedDoses);
+                Log.i("TAG", "getStoredDoses: " + doses);
+                networkDelegate.onSuccessLocal();
+            });
         }
     }
 
@@ -130,7 +136,7 @@ public class DisplayMedRepo implements DisplayMedRepoInterface {
             medicine = med;
             if(med != null) {
                 getStoredDoses(networkDelegate, context, owner);
-                networkDelegate.onSuccessLocal();
+
             }
         });
     }

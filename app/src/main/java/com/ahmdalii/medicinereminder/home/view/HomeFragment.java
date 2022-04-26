@@ -32,6 +32,7 @@ import com.ahmdalii.medicinereminder.db.room.medicinedose.ConcreteLocalSourceMed
 import com.ahmdalii.medicinereminder.home.presenter.HomeFragmentPresenter;
 import com.ahmdalii.medicinereminder.home.presenter.HomeFragmentPresenterInterface;
 import com.ahmdalii.medicinereminder.home.repository.HomeFragmentRepo;
+import com.ahmdalii.medicinereminder.model.DoseStatus;
 import com.ahmdalii.medicinereminder.model.Medicine;
 import com.ahmdalii.medicinereminder.model.MedicineDose;
 import com.ahmdalii.medicinereminder.notificationdialog.view.NotificationDialog;
@@ -192,8 +193,10 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
 
     @Override
     public void onCardClick(Medicine medicine, MedicineDose medicineDose) {
-        NotificationDialog dialog = new NotificationDialog(getContext(), medicine, medicineDose, getViewLifecycleOwner());
-        dialog.show();
+        if(medicineDose.getStatus().equals(DoseStatus.FUTURE.getStatus())) {
+            NotificationDialog dialog = new NotificationDialog(getContext(), medicine, medicineDose, getViewLifecycleOwner());
+            dialog.show();
+        }
     }
 
     public void runtimePermissionForUser() {

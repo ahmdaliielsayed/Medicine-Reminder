@@ -2,6 +2,7 @@ package com.ahmdalii.medicinereminder.notificationdialog.view;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.lifecycle.LifecycleOwner;
 
@@ -33,8 +35,8 @@ public class NotificationDialog extends Dialog implements NotificationDialogInte
         this.lifecycleOwner = lifecycleOwner;
         Log.i("TAG", "NotificationDialog: " + medicine);
         Log.i("TAG", "NotificationDialog: " + dose);
+        medicine.setId(dose.getMedID());
         notificationDialogPresenter = new NotificationDialogPresenter(this, medicine, dose);
-
     }
 
     @Override
@@ -91,8 +93,9 @@ public class NotificationDialog extends Dialog implements NotificationDialogInte
         ((ImageView) findViewById(R.id.image_view_delete_notification_dialog)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                notificationDialogPresenter.deleteDose();
-                cancel();
+                //notificationDialogPresenter.deleteDose();
+                //cancel();
+                Toast.makeText(context, "Coming Soon", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -137,5 +140,17 @@ public class NotificationDialog extends Dialog implements NotificationDialogInte
     @Override
     public void showToast(String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public void showRefillReminderDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
+                .setMessage("You should refill " + notificationDialogPresenter.getMedicine().getName())
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+        builder.create().show();
     }
 }

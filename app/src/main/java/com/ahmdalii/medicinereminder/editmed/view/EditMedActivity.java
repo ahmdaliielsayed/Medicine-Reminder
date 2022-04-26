@@ -4,12 +4,14 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,6 +26,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.ahmdalii.medicinereminder.JSONSerializer;
 import com.ahmdalii.medicinereminder.R;
 import com.ahmdalii.medicinereminder.addmed.model.MedicineDayFrequency;
 import com.ahmdalii.medicinereminder.addmed.model.MedicineInstruction;
@@ -42,6 +45,8 @@ import java.util.Comparator;
 public class EditMedActivity extends AppCompatActivity implements EditMedActivityInterface, View.OnClickListener {
 
     EditMedPresenterInterface editMedPresenter;
+
+    //ProgressDialog dialog;
 
     EditText nameEditText;
 
@@ -83,17 +88,21 @@ public class EditMedActivity extends AppCompatActivity implements EditMedActivit
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_med);
 
-
+        //dialog = new ProgressDialog(getViewContext());
+        //dialog.show();
 
         editMedPresenter = new EditMedPresenter(this);
 
         editMedPresenter.setMedicine((Medicine) getIntent().getSerializableExtra("medicine"));
-        //editMedPresenter.setDoses(JSONSerializer.deserializeMedicineDoses(getIntent().getStringExtra("doses")));
+        editMedPresenter.setDoses(JSONSerializer.deserializeMedicineDoses(getIntent().getStringExtra("doses")));
 
+        Log.i("TAG", "onCreate: " + editMedPresenter.getMedicine());
 
+        Log.i("TAG", "onCreate: " + editMedPresenter.getDoses());
 
         initViewIDs();
-        //setUI();
+        showProgressDialog();
+        setUI();
     }
 
     private void initViewIDs() {
@@ -133,6 +142,7 @@ public class EditMedActivity extends AppCompatActivity implements EditMedActivit
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void setUI() {
+
         setNameCardViewUI();
         setReminderTimesCardViewUI();
         setScheduleCardViewUI();
@@ -576,5 +586,13 @@ public class EditMedActivity extends AppCompatActivity implements EditMedActivit
                 })
                 .create()
                 .show();
+    }
+
+    public void showProgressDialog() {
+        //dialog.show();
+    }
+
+    public void hideProgressDialog() {
+        //dialog.hide();
     }
 }

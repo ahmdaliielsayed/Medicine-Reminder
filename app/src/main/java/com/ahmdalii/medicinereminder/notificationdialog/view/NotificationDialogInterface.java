@@ -10,4 +10,6 @@ public interface NotificationDialogInterface {
     LifecycleOwner getLifecycleOwner();
 
     void showToast(String message);
+
+    void showRefillReminderDialog();
 }

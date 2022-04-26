@@ -103,9 +103,11 @@ public class DisplayMedPresenter implements DisplayMedPresenterInterface, Displa
     @Override
     public void onSuccess(ArrayList<MedicineDose> doses) {
         Log.i("TAG", "onSuccess: " + doses);
-        displayMedView.hideProgressBar();
+
+        Log.i("TAG", "onSuccess: " + doses);
         repo.setDoses(doses);
         displayMedView.refreshView();
+        displayMedView.hideProgressBar();
     }
 
     @Override
@@ -127,5 +129,6 @@ public class DisplayMedPresenter implements DisplayMedPresenterInterface, Displa
     @Override
     public void onSuccessLocal() {
         displayMedView.refreshView();
+        displayMedView.hideProgressBar();
     }
 }
