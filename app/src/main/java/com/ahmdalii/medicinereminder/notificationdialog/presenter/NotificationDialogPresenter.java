@@ -1,7 +1,15 @@
 package com.ahmdalii.medicinereminder.notificationdialog.presenter;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
+import com.ahmdalii.medicinereminder.WorkRequestManager;
+import com.ahmdalii.medicinereminder.addmed.presenter.AddMedicineNetworkDelegate;
 import com.ahmdalii.medicinereminder.db.room.medicine.ConcreteLocalSourceMedicine;
 import com.ahmdalii.medicinereminder.db.room.medicinedose.ConcreteLocalSourceMedicineDose;
+import com.ahmdalii.medicinereminder.displaymed.presenter.DisplayMedNetworkDelegate;
+import com.ahmdalii.medicinereminder.model.DoseStatus;
 import com.ahmdalii.medicinereminder.model.Medicine;
 import com.ahmdalii.medicinereminder.model.MedicineDose;
 import com.ahmdalii.medicinereminder.network.FirebaseClient;
@@ -9,7 +17,9 @@ import com.ahmdalii.medicinereminder.notificationdialog.repo.NotificationDialogR
 import com.ahmdalii.medicinereminder.notificationdialog.repo.NotificationDialogRepoInterface;
 import com.ahmdalii.medicinereminder.notificationdialog.view.NotificationDialogInterface;
 
-public class NotificationDialogPresenter implements NotificationDialogPresenterInterface {
+import java.util.ArrayList;
+
+public class NotificationDialogPresenter implements NotificationDialogPresenterInterface, DisplayMedNetworkDelegate, AddMedicineNetworkDelegate {
 
     NotificationDialogInterface notificationDialogView;
     NotificationDialogRepoInterface repo;
@@ -23,6 +33,8 @@ public class NotificationDialogPresenter implements NotificationDialogPresenterI
         );
         repo.setMedicine(medicine);
         repo.setDose(dose);
+
+        repo.getStoredDoses(notificationDialogView.getViewContext(), this, notificationDialogView.getLifecycleOwner());
 
     }
 
@@ -46,18 +58,108 @@ public class NotificationDialogPresenter implements NotificationDialogPresenterI
         repo.setDose(dose);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void deleteDose() {
 
+        for(int i = 0; i < repo.getDoses().size(); i++) {
+            if(repo.getDoses().get(i).getId().equals(repo.getDose().getId())) {
+                repo.getDoses().remove(repo.getDose());
+            }
+        }
+
+        if(isThisTheUpcomingDose()) {
+            MedicineDose upcomingDose = getUpcomingDose();
+            WorkRequestManager.removeWork(repo.getMedicine().getId(), notificationDialogView.getViewContext());
+            WorkRequestManager.createWorkRequest(upcomingDose, repo.getMedicine(), notificationDialogView.getViewContext());
+        }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void takeDose() {
+        repo.getMedicine().setRemainingMedAmount(repo.getMedicine().getRemainingMedAmount() - repo.getDose().getAmount());
+        repo.getDose().setStatus(DoseStatus.TAKEN.getStatus());
 
+        for(int i = 0; i < repo.getDoses().size(); i++) {
+            if(repo.getDoses().get(i).getId().equals(repo.getDose().getId())) {
+                repo.getDoses().set(i, repo.getDose());
+            }
+        }
+
+        repo.updateMedicineAndDose(notificationDialogView.getViewContext(), this);
+
+        if(isThisTheUpcomingDose()) {
+            MedicineDose upcomingDose = getUpcomingDose();
+            WorkRequestManager.removeWork(repo.getMedicine().getId(), notificationDialogView.getViewContext());
+            WorkRequestManager.createWorkRequest(upcomingDose, repo.getMedicine(), notificationDialogView.getViewContext());
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void skipDose() {
+        repo.getMedicine().setRemainingMedAmount(repo.getMedicine().getRemainingMedAmount() - repo.getDose().getAmount());
+        repo.getDose().setStatus(DoseStatus.SKIPPED.getStatus());
+
+        for(int i = 0; i < repo.getDoses().size(); i++) {
+            if(repo.getDoses().get(i).getId().equals(repo.getDose().getId())) {
+                repo.getDoses().set(i, repo.getDose());
+            }
+        }
+
+        repo.updateMedicineAndDose(notificationDialogView.getViewContext(), this);
+
+        if(isThisTheUpcomingDose()) {
+            MedicineDose upcomingDose = getUpcomingDose();
+            WorkRequestManager.removeWork(repo.getMedicine().getId(), notificationDialogView.getViewContext());
+            WorkRequestManager.createWorkRequest(upcomingDose, repo.getMedicine(), notificationDialogView.getViewContext());
+        }
     }
 
     @Override
-    public void skipDose() {
+    public void onSuccess(ArrayList<MedicineDose> doses) {
+        repo.setDoses(doses);
+    }
 
+    @Override
+    public void onSuccess(Medicine medicine, ArrayList<MedicineDose> doses) {
+        repo.updateMedicineAndDoseLocal(medicine, doses);
+    }
+
+    @Override
+    public void onFailure() {
+        notificationDialogView.showToast("Operation failed");
+    }
+
+    @Override
+    public void onSuccessLocal() {
+
+    }
+
+    private boolean isThisTheUpcomingDose() {
+        MedicineDose upcomingDose = null;
+        for(MedicineDose dose: repo.getDoses()) {
+            if(dose.getStatus().equals(DoseStatus.FUTURE.getStatus())) {
+                upcomingDose = dose;
+                break;
+            }
+        }
+        if(upcomingDose == null) {
+            return false;
+        }
+
+        return upcomingDose.getId().equals(repo.getDose().getId());
+    }
+
+    private MedicineDose getUpcomingDose() {
+        MedicineDose upcomingDose = null;
+        for(MedicineDose dose: repo.getDoses()) {
+            if(dose.getStatus().equals(DoseStatus.FUTURE.getStatus())) {
+                upcomingDose = dose;
+                break;
+            }
+        }
+        return upcomingDose;
     }
 }
