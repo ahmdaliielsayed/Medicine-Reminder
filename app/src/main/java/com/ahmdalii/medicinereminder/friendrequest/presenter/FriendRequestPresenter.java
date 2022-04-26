@@ -14,6 +14,7 @@ public class FriendRequestPresenter implements FriendRequestPresenterInterface{
     public FriendRequestPresenter(FriendRequestViewInterface view, FriendRequestRepositoryInterface repo) {
         this.view = view;
         this.repo = repo;
+        repo.setView(view);
     }
 
     public List<RequestPojo> getRequests(String receiverId) {

@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 
 import com.ahmdalii.medicinereminder.NetworkConnection;
+import com.ahmdalii.medicinereminder.friendrequest.view.FriendRequestViewInterface;
 import com.ahmdalii.medicinereminder.healthtaker.repository.RequestPojo;
 import com.ahmdalii.medicinereminder.medications.repository.MedicationRemoteSourceInterface;
 import com.ahmdalii.medicinereminder.medications.repository.MedicationsLocalSourceInterface;
@@ -24,6 +25,7 @@ public class FriendRequestRepository implements FriendRequestRepositoryInterface
         this.context = context;
         //this.localSource
         this.remoteSource = remoteSource;
+
     }
 
     public static FriendRequestRepository getInstance(Context context, FriendRequestRemoteSourceInterface remoteSource){
@@ -39,6 +41,11 @@ public class FriendRequestRepository implements FriendRequestRepositoryInterface
 
     public void addFriend(String receiverId, String senderId){
         remoteSource.addFriend(receiverId, senderId);
+    }
+
+    @Override
+    public void setView(FriendRequestViewInterface view) {
+        remoteSource.setView(view);
     }
 
 

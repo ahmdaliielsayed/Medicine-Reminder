@@ -45,22 +45,27 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
     }
 
     public void setList(List<RequestPojo> updatedData){
+        Log.i("TAG", "setList: " + updatedData.size());
         this.data = updatedData;
     }
 
     @Override
     public void onBindViewHolder(@NonNull FriendsAdapter.ViewHolder holder, int position) {
-        holder.friendName.setText(data.get(position).getSenderUsername());
+        int i = position;
+        Log.i("TAG", "onBindViewHolder: hellllllllllo bnding");
+        holder.friendName.setText(data.get(i).getSenderUsername());
 
-        Glide.with(context).load(data.get(position).getProfile_image_uri())
+        Glide.with(context).load(data.get(i).getProfile_image_uri())
                 .apply(new RequestOptions().override(200,200))
                 .into(holder.friendImg);
     }
 
     @Override
     public int getItemCount() {
+        Log.i("TAG", "getItemCount: " + data);
         if(data == null)
             return 0;
+        Log.i("TAG", "getItemCount: size = " + data.size());
         return data.size();
     }
 
