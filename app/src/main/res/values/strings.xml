@@ -92,4 +92,5 @@
     <string name="after_eating">after_eating</string>
     <string name="future">future</string>
     <string name="amount_form">2 Solution</string>
+    <string name="refill">You need to refill this medicine.\nRemaining amount = </string>
 </resources>

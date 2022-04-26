@@ -145,6 +145,8 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
 
     @Override
     public void onCardClick(Medicine medicine, MedicineDose medicineDose) {
+        Log.d("asdid:", medicineDose.getMedID());
+        Log.d("asdid:", medicineDose.getId());
         Toast.makeText(view.getContext(), medicine.getName() + "\n" + medicineDose.getStatus(), Toast.LENGTH_SHORT).show();
     }
 }
