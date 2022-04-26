@@ -102,6 +102,7 @@ public class EditMedPresenter implements EditMedPresenterInterface, AddMedicineN
     @Override
     public void onSuccess(ArrayList<MedicineDose> doses) {
         repo.setDoses(doses);
+        editMedView.hideProgressDialog();
         editMedView.setUI();
     }
 
