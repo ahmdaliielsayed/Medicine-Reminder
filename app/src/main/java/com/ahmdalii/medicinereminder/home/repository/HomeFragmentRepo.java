@@ -9,6 +9,8 @@ import androidx.lifecycle.LiveData;
 import com.ahmdalii.medicinereminder.db.room.medicinedose.ConcreteLocalSourceMedicineDose;
 import com.ahmdalii.medicinereminder.model.Medicine;
 import com.ahmdalii.medicinereminder.model.MedicineDose;
+import com.ahmdalii.medicinereminder.network.NetworkHomeDelegate;
+import com.ahmdalii.medicinereminder.network.RemoteSource;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,17 +26,19 @@ import java.util.Objects;
 
 public class HomeFragmentRepo implements HomeFragmentRepoInterface {
 
+    RemoteSource remoteSource;
     ConcreteLocalSourceMedicineDose localSourceMedicineDose;
     private static HomeFragmentRepo homeFragmentRepo = null;
     Map<Medicine, MedicineDose> returnedMedDosMap;
 
-    private HomeFragmentRepo(ConcreteLocalSourceMedicineDose localSourceMedicineDose) {
+    private HomeFragmentRepo(ConcreteLocalSourceMedicineDose localSourceMedicineDose, RemoteSource remoteSource) {
         this.localSourceMedicineDose = localSourceMedicineDose;
+        this.remoteSource = remoteSource;
     }
 
-    public static HomeFragmentRepo getInstance(ConcreteLocalSourceMedicineDose localSourceMedicineDose) {
+    public static HomeFragmentRepo getInstance(ConcreteLocalSourceMedicineDose localSourceMedicineDose, RemoteSource remoteSource) {
         if (homeFragmentRepo == null) {
-            homeFragmentRepo = new HomeFragmentRepo(localSourceMedicineDose);
+            homeFragmentRepo = new HomeFragmentRepo(localSourceMedicineDose, remoteSource);
         }
 
         return homeFragmentRepo;
@@ -67,6 +71,11 @@ public class HomeFragmentRepo implements HomeFragmentRepoInterface {
         }
 
         return returnedMedDosMap;
+    }
+
+    @Override
+    public void getAllDosesWithMedicineNameForUser(Date currentDate, String uid, NetworkHomeDelegate networkHomeDelegate) {
+        remoteSource.getAllDosesWithMedicineNameForUser(currentDate, uid, networkHomeDelegate);
     }
 
 //    public List<Date> getDaysBetweenDates (Date startDate, Date endDate) {
