@@ -19,4 +19,8 @@ public class FriendRequestPresenter implements FriendRequestPresenterInterface{
     public List<RequestPojo> getRequests(String receiverId) {
         return repo.getRequests(receiverId);
     }
+
+    public void addFriend(String receiverId, String senderId){
+        repo.addFriend(receiverId, senderId);
+    }
 }

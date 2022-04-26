@@ -37,5 +37,9 @@ public class FriendRequestRepository implements FriendRequestRepositoryInterface
         return remoteSource.getRequests(receiverId);
     }
 
+    public void addFriend(String receiverId, String senderId){
+        remoteSource.addFriend(receiverId, senderId);
+    }
+
 
 }

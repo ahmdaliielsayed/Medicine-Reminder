@@ -125,18 +125,16 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityInter
 
             switch (item.getItemId()) {
                 case R.id.itemMedFriends:
-                    //Toast.makeText(this, "your friends", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(this, FriendsActivity.class));
+                    Intent friendIntent = new Intent(this, FriendsActivity.class);
+                    friendIntent.putExtra("userId", userId);
+                    startActivity(friendIntent);
                     break;
                 case R.id.itemMedFriendsReqs:
-                    //Toast.makeText(this, "your friends requests", Toast.LENGTH_SHORT).show();
-                    //startActivity(new Intent(this, FriendRequestActivity.class));
                     Intent friendReqsIntent = new Intent(this, FriendRequestActivity.class);
                     friendReqsIntent.putExtra("userId", userId);
                     startActivity(friendReqsIntent);
                     break;
                 case R.id.itemInviteMedFriend:
-                    //Toast.makeText(this, "itemInviteMedFriend", Toast.LENGTH_SHORT).show();
                     Intent healthTakerIntent = new Intent(this, HealthTakerActivity.class);
                     healthTakerIntent.putExtra("userId", userId);
                     healthTakerIntent.putExtra("userName", userName);
