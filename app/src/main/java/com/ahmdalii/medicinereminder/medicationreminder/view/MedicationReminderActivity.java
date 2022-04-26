@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -72,6 +73,17 @@ public class MedicationReminderActivity extends AppCompatActivity implements Med
         cardViewSkip.setOnClickListener(view -> updateDose(DoseStatus.SKIPPED.getStatus()));
         cardViewTake.setOnClickListener(view -> {
             medicine.setRemainingMedAmount(medicine.getRemainingMedAmount() - dose.getAmount());
+            if (medicine.getRemainingMedAmount() <= medicine.getReminderMedAmount()) {
+                Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.warning)
+                        .setMessage(getString(R.string.refill) + medicine.getRemainingMedAmount())
+                        .setPositiveButton(R.string.ok, (dialogInterface, i) -> {
+
+                        })
+                        .setIcon(R.drawable.ic_warning)
+                        .show();
+            }
             medicine.setSync(false);
             updateDose(DoseStatus.TAKEN.getStatus());
         });
