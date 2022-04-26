@@ -33,6 +33,12 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
         this.listener = listener;
     }
 
+    public void setList(List<RequestPojo> updatedData){
+        Log.i("TAG", "setList: hello from setList " + updatedData.size());
+        this.data = updatedData;
+        this.notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public FriendRequestAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -43,10 +49,7 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
         return vh;
     }
 
-    public void setList(List<RequestPojo> updatedData){
-        Log.i("TAG", "setList: hello from setList " + updatedData.size());
-        this.data = updatedData;
-    }
+
 
     @Override
     public void onBindViewHolder(@NonNull FriendRequestAdapter.ViewHolder holder, int position) {

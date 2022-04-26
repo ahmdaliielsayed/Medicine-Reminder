@@ -15,6 +15,7 @@ public class FriendPresenter implements FriendPresenterInterface{
     public FriendPresenter(FriendsViewInterface view, FriendRepoInterface repo) {
         this.view = view;
         this.repo = repo;
+        repo.setView(view);
     }
 
     @Override

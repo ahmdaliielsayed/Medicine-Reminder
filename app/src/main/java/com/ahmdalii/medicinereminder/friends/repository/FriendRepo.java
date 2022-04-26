@@ -22,13 +22,13 @@ public class FriendRepo implements FriendRepoInterface{
     RequestPojo friend;
     FriendsViewInterface view;
 
-    private FriendRepo(FriendsViewInterface view){
+    private FriendRepo(){
         this.view = view;
     }
 
-    public static FriendRepo getInstance(FriendsViewInterface view){
+    public static FriendRepo getInstance(){
         if(friendRepo == null)
-            friendRepo = new FriendRepo(view);
+            friendRepo = new FriendRepo();
         return friendRepo;
     }
 
@@ -49,6 +49,7 @@ public class FriendRepo implements FriendRepoInterface{
 
                     }
                 }
+                Log.i("TAG", "onDataChange: " + friends.size());
                 view.setData(friends);
             }
 
@@ -59,5 +60,10 @@ public class FriendRepo implements FriendRepoInterface{
         });
 
         return friends;
+    }
+
+    @Override
+    public void setView(FriendsViewInterface view) {
+        this.view = view;
     }
 }

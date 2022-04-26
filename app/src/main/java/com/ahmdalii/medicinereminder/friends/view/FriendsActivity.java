@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.ahmdalii.medicinereminder.R;
 import com.ahmdalii.medicinereminder.friends.presenter.FriendPresenter;
@@ -22,7 +23,6 @@ public class FriendsActivity extends AppCompatActivity implements FriendsViewInt
     FriendPresenter presenter;
 
     FriendsAdapter adapter;
-    List<FriendPojo> tempData;
     List<RequestPojo> friendsData;
     RecyclerView recyclerView;
 
@@ -35,10 +35,16 @@ public class FriendsActivity extends AppCompatActivity implements FriendsViewInt
 
         recyclerView = findViewById(R.id.friendRecyclerId);
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         Intent inIntent = getIntent();
         userId = inIntent.getStringExtra("userId");
 
-        presenter = new FriendPresenter(this, FriendRepo.getInstance(this));
+        presenter = new FriendPresenter(this, FriendRepo.getInstance());
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
@@ -52,6 +58,8 @@ public class FriendsActivity extends AppCompatActivity implements FriendsViewInt
 
     @Override
     public void setData(List<RequestPojo> friends) {
+        Log.i("TAG", "setData: this " + this);
+        Log.i("TAG", "setData: " + friends.size());
         friendsData = friends;
         adapter.setList(friendsData);
         adapter.notifyDataSetChanged();

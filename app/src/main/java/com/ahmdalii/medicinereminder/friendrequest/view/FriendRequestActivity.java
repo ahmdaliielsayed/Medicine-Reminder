@@ -41,18 +41,22 @@ public class FriendRequestActivity extends AppCompatActivity implements FriendRe
         userId = inIntent.getStringExtra("userId");
         Log.i("TAG", "onCreate: I am the user id " + userId);
 
-        presenter = new FriendRequestPresenter(this, FriendRequestRepository.getInstance(getApplicationContext(), FriendRequestRemoteSource.getInstance(this)));
+        presenter = new FriendRequestPresenter(this, FriendRequestRepository.getInstance(getApplicationContext(), FriendRequestRemoteSource.getInstance()));
 
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
         //tempData = Arrays.asList(new FriendRequestPojo("1","Emy","https://firebasestorage.googleapis.com/v0/b/medicine-reminder-91bf9.appspot.com/o/Profile%20Image%2F1650664925668.jpg?alt=media&token=c1edd658-a25f-4ebd-badb-003776e7837b"), new FriendRequestPojo("2","Adam","https://lh3.googleusercontent.com/a-/AOh14GgLBxNEv3de1mQnBtNj7IRyHm-pmiLGFTGtdpYjPQ=s96-c"));
         requestsData = presenter.getRequests(userId);
-        Log.i("TAG", "onCreate: request data size " + requestsData.size());
-        adapter = new FriendRequestAdapter(requestsData,this, this);
-        recyclerView.setAdapter(adapter);
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
     }
 
@@ -60,6 +64,9 @@ public class FriendRequestActivity extends AppCompatActivity implements FriendRe
     public void setData(List<RequestPojo> requests) {
         Log.i("TAG", "setData: sizeeeee " + requests.size());
         requestsData = requests;
+        Log.i("TAG", "onCreate: request data size " + requestsData.size());
+        adapter = new FriendRequestAdapter(requestsData,this, this);
+        recyclerView.setAdapter(adapter);
         adapter.setList(requestsData);
         adapter.notifyDataSetChanged();
     }

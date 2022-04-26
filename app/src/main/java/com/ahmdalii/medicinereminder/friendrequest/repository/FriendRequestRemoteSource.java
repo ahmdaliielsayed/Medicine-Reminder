@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 
 import com.ahmdalii.medicinereminder.NetworkConnection;
 import com.ahmdalii.medicinereminder.friendrequest.view.FriendRequestViewInterface;
+import com.ahmdalii.medicinereminder.friends.view.FriendsViewInterface;
 import com.ahmdalii.medicinereminder.healthtaker.repository.RequestPojo;
 import com.ahmdalii.medicinereminder.model.User;
 import com.google.firebase.database.DataSnapshot;
@@ -27,13 +28,13 @@ public class FriendRequestRemoteSource implements FriendRequestRemoteSourceInter
     RequestPojo request;
     FriendRequestViewInterface view;
 
-    private FriendRequestRemoteSource(FriendRequestViewInterface view) {
+    private FriendRequestRemoteSource() {
         this.view = view;
     }
 
-    public static FriendRequestRemoteSource getInstance(FriendRequestViewInterface view){
+    public static FriendRequestRemoteSource getInstance(){
         if(remoteSource == null)
-            remoteSource = new FriendRequestRemoteSource(view);
+            remoteSource = new FriendRequestRemoteSource();
         return remoteSource;
     }
 
@@ -53,6 +54,7 @@ public class FriendRequestRemoteSource implements FriendRequestRemoteSourceInter
                     }
                 }
                 view.setData(requests);
+                Log.i("TAG", "onDataChange: yalaaaaaaaaaaaa " + requests.size());
             }
 
             @Override
@@ -88,6 +90,11 @@ public class FriendRequestRemoteSource implements FriendRequestRemoteSourceInter
 
             }
         });
+    }
+
+    @Override
+    public void setView(FriendRequestViewInterface view) {
+        this.view = view;
     }
 
 }
