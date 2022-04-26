@@ -1,7 +1,9 @@
 package com.ahmdalii.medicinereminder.friendrequest.repository;
 
+import com.ahmdalii.medicinereminder.healthtaker.repository.RequestPojo;
+
 import java.util.List;
 
 public interface FriendRequestRemoteSourceInterface {
-    public List<FriendRequestPojo> getRequests();
+    public List<RequestPojo> getRequests(String receiverId);
 }
