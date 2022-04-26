@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ahmdalii.medicinereminder.R;
 import com.ahmdalii.medicinereminder.friendrequest.repository.FriendRequestPojo;
+import com.ahmdalii.medicinereminder.healthtaker.repository.RequestPojo;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -21,9 +22,9 @@ import java.util.List;
 public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdapter.ViewHolder>{
 
     Context context;
-    List<FriendRequestPojo> data;
+    List<RequestPojo> data;
 
-    public FriendRequestAdapter(List<FriendRequestPojo> data, Context context) {
+    public FriendRequestAdapter(List<RequestPojo> data, Context context) {
         this.data = data;
         this.context = context;
     }
@@ -38,17 +39,20 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
         return vh;
     }
 
-    public void setList(List<FriendRequestPojo> updatedData){
+    public void setList(List<RequestPojo> updatedData){
         this.data = updatedData;
     }
 
     @Override
     public void onBindViewHolder(@NonNull FriendRequestAdapter.ViewHolder holder, int position) {
-        holder.friendReqName.setText(data.get(position).getUsername());
+        holder.friendReqName.setText(data.get(position).getSenderUsername());
         //holder.friendReqImg
         Glide.with(context).load(data.get(position).getProfile_image_uri())
                 .apply(new RequestOptions().override(200,200))
                 .into(holder.friendReqImg);
+        holder.confirmBtn.setOnClickListener(v -> {
+
+        });
     }
 
     @Override

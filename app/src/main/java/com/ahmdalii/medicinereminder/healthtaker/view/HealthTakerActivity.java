@@ -34,6 +34,7 @@ public class HealthTakerActivity extends AppCompatActivity {
 
     String senderId;
     String senderUsername;
+    String userImg;
 
     User user;
     Boolean flag;
@@ -54,6 +55,7 @@ public class HealthTakerActivity extends AppCompatActivity {
         Intent inIntent = getIntent();
         senderId = inIntent.getStringExtra("userId");
         senderUsername = inIntent.getStringExtra("userName");
+        userImg = inIntent.getStringExtra("userImg");
 
         checkEmailRef = FirebaseDatabase.getInstance().getReference().child("Users");
         reqRef = FirebaseDatabase.getInstance().getReference().child("Requests");
@@ -122,9 +124,14 @@ public class HealthTakerActivity extends AppCompatActivity {
 //        });
         //databaseReference.child("medicine").child(medID).setValue(medicine).addOnSuccessListener(
 
-        reqRef.child(receiverId).setValue(new RequestPojo(senderId,senderUsername,"pending")).addOnCompleteListener(new OnCompleteListener<Void>() {
+        String id = reqRef.push().getKey();
+        reqRef.child(id).setValue(new RequestPojo(receiverId ,senderId,senderUsername,userImg, "pending")).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(getApplicationContext(), "Done", Toast.LENGTH_SHORT).show();
+                    emailText.setText("");
+                }
 
             }
         });

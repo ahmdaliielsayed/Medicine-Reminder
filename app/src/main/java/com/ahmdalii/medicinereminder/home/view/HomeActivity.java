@@ -59,6 +59,7 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityInter
 
     String userId;
     String userName;
+    String userImg;
 
     HomePresenterInterface presenterInterface;
 
@@ -129,13 +130,17 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityInter
                     break;
                 case R.id.itemMedFriendsReqs:
                     //Toast.makeText(this, "your friends requests", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(this, FriendRequestActivity.class));
+                    //startActivity(new Intent(this, FriendRequestActivity.class));
+                    Intent friendReqsIntent = new Intent(this, FriendRequestActivity.class);
+                    friendReqsIntent.putExtra("userId", userId);
+                    startActivity(friendReqsIntent);
                     break;
                 case R.id.itemInviteMedFriend:
                     //Toast.makeText(this, "itemInviteMedFriend", Toast.LENGTH_SHORT).show();
                     Intent healthTakerIntent = new Intent(this, HealthTakerActivity.class);
                     healthTakerIntent.putExtra("userId", userId);
                     healthTakerIntent.putExtra("userName", userName);
+                    healthTakerIntent.putExtra("userImg", userImg);
                     startActivity(healthTakerIntent);
                     break;
 
@@ -163,6 +168,7 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityInter
     public void displayUserInformation(User user) {
         userId = user.getUserId();
         userName = user.getUsername();
+        userImg = user.getProfile_image_uri();
 
         View headerView = navigationView.getHeaderView(0);
 

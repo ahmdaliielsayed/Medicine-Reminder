@@ -1,9 +1,12 @@
 package com.ahmdalii.medicinereminder.friendrequest.repository;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
+import com.ahmdalii.medicinereminder.NetworkConnection;
+import com.ahmdalii.medicinereminder.healthtaker.repository.RequestPojo;
 import com.ahmdalii.medicinereminder.medications.repository.MedicationRemoteSourceInterface;
 import com.ahmdalii.medicinereminder.medications.repository.MedicationsLocalSourceInterface;
 import com.ahmdalii.medicinereminder.medications.repository.MedicationsRepository;
@@ -30,8 +33,8 @@ public class FriendRequestRepository implements FriendRequestRepositoryInterface
     }
 
     @Override
-    public List<FriendRequestPojo> getRequests() {
-        return remoteSource.getRequests();
+    public List<RequestPojo> getRequests(String receiverId) {
+        return remoteSource.getRequests(receiverId);
     }
 
 

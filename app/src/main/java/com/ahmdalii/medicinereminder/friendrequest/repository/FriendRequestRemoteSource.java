@@ -7,6 +7,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.ahmdalii.medicinereminder.NetworkConnection;
+import com.ahmdalii.medicinereminder.friendrequest.view.FriendRequestViewInterface;
+import com.ahmdalii.medicinereminder.healthtaker.repository.RequestPojo;
 import com.ahmdalii.medicinereminder.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -14,54 +17,49 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FriendRequestRemoteSource implements FriendRequestRemoteSourceInterface{
     private static FriendRequestRemoteSource remoteSource = null;
-    List<FriendRequestPojo> requests;
-    DatabaseReference getData,getReqs;
+    List<RequestPojo> requests;
+    DatabaseReference getData,reqRef;
+    RequestPojo request;
+    FriendRequestViewInterface view;
 
-    private FriendRequestRemoteSource() {
+    private FriendRequestRemoteSource(FriendRequestViewInterface view) {
+        this.view = view;
     }
 
-    public static FriendRequestRemoteSource getInstance(){
+    public static FriendRequestRemoteSource getInstance(FriendRequestViewInterface view){
         if(remoteSource == null)
-            remoteSource = new FriendRequestRemoteSource();
+            remoteSource = new FriendRequestRemoteSource(view);
         return remoteSource;
     }
 
-    public List<FriendRequestPojo> getRequests(){
-        getData = FirebaseDatabase.getInstance().getReference().child("Users");
-        getReqs = FirebaseDatabase.getInstance().getReference().child("Requests");
-        //getReqs.addValueEventListener()
+    public List<RequestPojo> getRequests(String receiverId){
 
-//        checkEmailRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-//                    user = dataSnapshot.getValue(User.class);
-//                    if(user.getEmail().equals(email)){
-//                        receiverId = user.getUserId();
-//                        Log.i("TAG", "onDataChange: receiverid:  "+ receiverId);
-//                        sendRequest(receiverId);
-//                        flag = true;
-//                        break;
-//                    }
-//
-//                }
-//                if(flag){
-//                    Toast.makeText(getApplicationContext(), "True Email", Toast.LENGTH_SHORT).show();
-//                }
-//                else {
-//                    Toast.makeText(getApplicationContext(), "False Email", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
+        requests = new ArrayList<>();
+        getData = FirebaseDatabase.getInstance().getReference().child("Users");
+        reqRef = FirebaseDatabase.getInstance().getReference().child("Requests");
+
+        reqRef.orderByChild("receiverId").equalTo(receiverId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot temp : snapshot.getChildren()){
+                        request = temp.getValue(RequestPojo.class);
+                        requests.add(request);
+                    }
+                }
+                view.setData(requests);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         return requests;
     }
 
