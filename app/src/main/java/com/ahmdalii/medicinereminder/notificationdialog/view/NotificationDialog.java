@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.lifecycle.LifecycleOwner;
 
 import com.ahmdalii.medicinereminder.R;
 import com.ahmdalii.medicinereminder.addmed.model.MedicineForm;
@@ -24,10 +25,14 @@ public class NotificationDialog extends Dialog implements NotificationDialogInte
 
     Context context;
     NotificationDialogPresenterInterface notificationDialogPresenter;
+    LifecycleOwner lifecycleOwner;
 
-    public NotificationDialog(@NonNull Context context, Medicine medicine, MedicineDose dose) {
+    public NotificationDialog(@NonNull Context context, Medicine medicine, MedicineDose dose, LifecycleOwner lifecycleOwner) {
         super(context);
         this.context = context;
+        this.lifecycleOwner = lifecycleOwner;
+        Log.i("TAG", "NotificationDialog: " + medicine);
+        Log.i("TAG", "NotificationDialog: " + dose);
         notificationDialogPresenter = new NotificationDialogPresenter(this, medicine, dose);
 
     }
@@ -122,5 +127,15 @@ public class NotificationDialog extends Dialog implements NotificationDialogInte
     @Override
     public Context getViewContext() {
         return getContext();
+    }
+
+    @Override
+    public LifecycleOwner getLifecycleOwner() {
+        return lifecycleOwner;
+    }
+
+    @Override
+    public void showToast(String message) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 }

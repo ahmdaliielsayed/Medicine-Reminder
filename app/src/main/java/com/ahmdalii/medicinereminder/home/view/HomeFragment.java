@@ -192,7 +192,7 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
 
     @Override
     public void onCardClick(Medicine medicine, MedicineDose medicineDose) {
-        NotificationDialog dialog = new NotificationDialog(getContext(), medicine, medicineDose);
+        NotificationDialog dialog = new NotificationDialog(getContext(), medicine, medicineDose, getViewLifecycleOwner());
         dialog.show();
     }
 
