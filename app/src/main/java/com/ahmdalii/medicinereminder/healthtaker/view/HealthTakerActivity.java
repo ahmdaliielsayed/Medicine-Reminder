@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.ahmdalii.medicinereminder.NetworkConnection;
 import com.ahmdalii.medicinereminder.R;
+import com.ahmdalii.medicinereminder.healthtaker.repository.RequestPojo;
 import com.ahmdalii.medicinereminder.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -32,6 +33,7 @@ public class HealthTakerActivity extends AppCompatActivity {
     Button sendBtn;
 
     String senderId;
+    String senderUsername;
 
     User user;
     Boolean flag;
@@ -39,6 +41,7 @@ public class HealthTakerActivity extends AppCompatActivity {
     //receiver data
     String email;
     String receiverId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,7 @@ public class HealthTakerActivity extends AppCompatActivity {
 
         Intent inIntent = getIntent();
         senderId = inIntent.getStringExtra("userId");
+        senderUsername = inIntent.getStringExtra("userName");
 
         checkEmailRef = FirebaseDatabase.getInstance().getReference().child("Users");
         reqRef = FirebaseDatabase.getInstance().getReference().child("Requests");
@@ -73,24 +77,6 @@ public class HealthTakerActivity extends AppCompatActivity {
         });
     }
 
-    private void sendRequest(String senderUserId) {
-
-        //checkEmailRef.orderByChild("email").equalTo(email);
-        //Log.i("TAG", "sendRequest: " + checkEmailRef.orderByChild("email").equalTo(email));
-
-        String receiverUserId = "123";
-//        HashMap hashMap = new HashMap();
-//        hashMap.put("status", "pending");
-//        reqRef.child(senderUserId).child(receiverUserId).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener() {
-//            @Override
-//            public void onComplete(@NonNull Task task) {
-//                if(task.isSuccessful())
-//                    Toast.makeText(getApplicationContext(), "You have sent req", Toast.LENGTH_SHORT).show();
-//                else
-//                    Toast.makeText(getApplicationContext(), "An error happened, try again later", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-    }
     private void checkEmailExisting(String email){
         flag = false;
         checkEmailRef.addValueEventListener(new ValueEventListener() {
@@ -101,7 +87,9 @@ public class HealthTakerActivity extends AppCompatActivity {
                     if(user.getEmail().equals(email)){
                         receiverId = user.getUserId();
                         Log.i("TAG", "onDataChange: receiverid:  "+ receiverId);
+                        sendRequest(receiverId);
                         flag = true;
+                        break;
                     }
 
                 }
@@ -118,6 +106,27 @@ public class HealthTakerActivity extends AppCompatActivity {
 
             }
         });
+    }
 
+    private void sendRequest(String receiverId) {
+//        HashMap hashMap = new HashMap();
+//        hashMap.put("status", "pending");
+//        reqRef.child(receiverId).child(senderId).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener() {
+//            @Override
+//            public void onComplete(@NonNull Task task) {
+//                if(task.isSuccessful())
+//                    Toast.makeText(getApplicationContext(), "You have sent req", Toast.LENGTH_SHORT).show();
+//                else
+//                    Toast.makeText(getApplicationContext(), "An error happened, try again later", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+        //databaseReference.child("medicine").child(medID).setValue(medicine).addOnSuccessListener(
+
+        reqRef.child(receiverId).setValue(new RequestPojo(senderId,senderUsername,"pending")).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+            }
+        });
     }
 }

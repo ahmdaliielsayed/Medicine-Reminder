@@ -27,26 +27,25 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Drug Name" />
 
-    <TextView
-        android:id="@+id/text_view_med_name_display_med"
+    <Button
+        android:id="@+id/confirmBtnId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:padding="2dp"
-        android:textSize="16sp"
-        app:layout_constraintLeft_toRightOf="@id/friendReqNameId"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Strength" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="2dp"
-        android:textSize="16sp"
+        android:layout_margin="5dp"
+        android:text="@string/confirm"
         app:layout_constraintLeft_toRightOf="@id/friendReqImgId"
-        app:layout_constraintTop_toBottomOf="@id/friendReqNameId"
-        tools:text="PillLeft" />
+        app:layout_constraintTop_toBottomOf="@+id/friendReqNameId" />
+
+    <Button
+        android:id="@+id/deleteBtnId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/delete"
+        tools:layout_editor_absoluteX="271dp"
+        tools:layout_editor_absoluteY="3dp"
+        app:layout_constraintTop_toBottomOf="@+id/friendReqNameId"
+        app:layout_constraintLeft_toRightOf="@id/confirmBtnId"
+        android:layout_margin="5dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

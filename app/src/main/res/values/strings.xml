@@ -92,4 +92,8 @@
     <string name="after_eating">after_eating</string>
     <string name="future">future</string>
     <string name="amount_form">2 Solution</string>
+    <string name="friendsRequests">Friends Requests</string>
+    <string name="medFriends">Medfriends</string>
+    <string name="confirm">Confirm</string>
+    <string name="delete">Delete</string>
 </resources>
