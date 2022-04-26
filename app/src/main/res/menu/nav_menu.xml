@@ -11,12 +11,38 @@
 
             <menu>
                 <item
+                    android:id="@+id/itemMedFriends"
+                    android:icon="@drawable/ic_groups_black_24dp"
+                    android:title="@string/medFriends" />
+                <item
+                    android:id="@+id/itemMedFriendsReqs"
+                    android:icon="@drawable/ic_account_circle_black_24dp"
+                    android:title="@string/friendsRequests" />
+                <item
                     android:id="@+id/itemInviteMedFriend"
                     android:icon="@drawable/ic_baseline_add_circle_dogger_blue_24"
                     android:title="@string/invite_med_friend" />
             </menu>
+
         </item>
     </group>
+
+<!--    <group-->
+<!--        android:id="@+id/group3"-->
+<!--        android:checkableBehavior="single">-->
+
+<!--        <item-->
+<!--            android:id="@+id/friendsRequests"-->
+<!--            android:title="@string/friendsRequests">-->
+
+<!--            <menu>-->
+<!--                <item-->
+<!--                    android:id="@+id/itemFriendReq"-->
+<!--                    android:icon="@drawable/ic_account_circle_black_24dp"-->
+<!--                    android:title="Friend name" />-->
+<!--            </menu>-->
+<!--        </item>-->
+<!--    </group>-->
 
     <item
         android:id="@+id/itemLogout"

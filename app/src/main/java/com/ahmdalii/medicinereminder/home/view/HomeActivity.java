@@ -18,6 +18,8 @@ import com.ahmdalii.medicinereminder.databinding.ActivityHomeBinding;
 import com.ahmdalii.medicinereminder.db.room.medicine.ConcreteLocalSourceMedicine;
 import com.ahmdalii.medicinereminder.db.room.medicinedose.ConcreteLocalSourceMedicineDose;
 import com.ahmdalii.medicinereminder.db.room.user.ConcreteLocalSourceUser;
+import com.ahmdalii.medicinereminder.friendrequest.view.FriendRequestActivity;
+import com.ahmdalii.medicinereminder.friends.view.FriendsActivity;
 import com.ahmdalii.medicinereminder.healthtaker.view.HealthTakerActivity;
 import com.ahmdalii.medicinereminder.home.presenter.HomePresenter;
 import com.ahmdalii.medicinereminder.home.presenter.HomePresenterInterface;
@@ -56,6 +58,7 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityInter
     private Toolbar toolbar;
 
     String userId;
+    String userName;
 
     HomePresenterInterface presenterInterface;
 
@@ -120,12 +123,22 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityInter
             item.setChecked(true);
 
             switch (item.getItemId()) {
+                case R.id.itemMedFriends:
+                    //Toast.makeText(this, "your friends", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(this, FriendsActivity.class));
+                    break;
+                case R.id.itemMedFriendsReqs:
+                    //Toast.makeText(this, "your friends requests", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(this, FriendRequestActivity.class));
+                    break;
                 case R.id.itemInviteMedFriend:
                     //Toast.makeText(this, "itemInviteMedFriend", Toast.LENGTH_SHORT).show();
                     Intent healthTakerIntent = new Intent(this, HealthTakerActivity.class);
                     healthTakerIntent.putExtra("userId", userId);
+                    healthTakerIntent.putExtra("userName", userName);
                     startActivity(healthTakerIntent);
                     break;
+
                 case R.id.itemLogout:
                     presenterInterface.signOut(this);
                     break;
@@ -149,6 +162,7 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityInter
     @Override
     public void displayUserInformation(User user) {
         userId = user.getUserId();
+        userName = user.getUsername();
 
         View headerView = navigationView.getHeaderView(0);
 

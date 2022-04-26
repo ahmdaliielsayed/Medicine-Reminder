@@ -13,12 +13,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ahmdalii.medicinereminder.R;
-import com.ahmdalii.medicinereminder.addmed.model.MedicineDayFrequency;
-import com.ahmdalii.medicinereminder.addmed.model.MedicineForm;
-import com.ahmdalii.medicinereminder.medications.repository.MedicationsPojo;
 import com.ahmdalii.medicinereminder.medications.repository.MedsPojo;
-import com.ahmdalii.medicinereminder.model.Medicine;
-import com.ahmdalii.medicinereminder.model.MedicineUnit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +35,8 @@ public class MedicationsSubAdapter extends RecyclerView.Adapter<MedicationsSubAd
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.imageViewId);
-            nameText = itemView.findViewById(R.id.textView1);
+            imageView = itemView.findViewById(R.id.friendReqImgId);
+            nameText = itemView.findViewById(R.id.friendReqNameId);
             strengthText = itemView.findViewById(R.id.text_view_med_name_display_med);
             pillText = itemView.findViewById(R.id.textView3);
             layout = itemView.findViewById(R.id.innerRowId);

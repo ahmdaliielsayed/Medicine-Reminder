@@ -16,6 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedicineReminder">
         <activity
+            android:name=".friends.view.FriendsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".friendrequest.view.FriendRequestActivity"
+            android:exported="true" />
+        <activity
             android:name=".healthtaker.view.HealthTakerActivity"
             android:exported="true" />
         <activity
