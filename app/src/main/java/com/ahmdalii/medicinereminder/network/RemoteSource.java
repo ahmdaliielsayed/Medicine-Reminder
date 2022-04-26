@@ -11,6 +11,7 @@ import com.ahmdalii.medicinereminder.model.Medicine;
 import com.ahmdalii.medicinereminder.model.MedicineDose;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public interface RemoteSource {
@@ -30,4 +31,6 @@ public interface RemoteSource {
 
     void syncMedicineListToFirebase(NetworkSyncDelegate networkDelegate, List<Medicine> unSyncedMedicines);
     void syncMedicineDosesListToFirebase(NetworkSyncDelegate networkDelegate, List<MedicineDose> unSyncedMedicinesDoses);
+
+    void getAllDosesWithMedicineNameForUser(Date currentDate, String uid, NetworkHomeDelegate networkHomeDelegate);
 }

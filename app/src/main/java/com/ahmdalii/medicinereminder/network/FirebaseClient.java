@@ -1,5 +1,6 @@
 package com.ahmdalii.medicinereminder.network;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.net.Uri;
 import android.util.Log;
@@ -34,7 +35,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -47,6 +52,8 @@ public class FirebaseClient implements RemoteSource {
     private final FirebaseAuth mAuth;
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
+    private DatabaseReference databaseReferenceMed;
+    private DatabaseReference databaseReferenceMedDos;
 
     private FirebaseClient() {
         mAuth = FirebaseAuth.getInstance();
@@ -329,5 +336,68 @@ public class FirebaseClient implements RemoteSource {
                     })
                     .addOnFailureListener(e -> networkDelegate.onFailure(e.getMessage()));
         }
+    }
+
+    @Override
+    public void getAllDosesWithMedicineNameForUser(Date currentDate, String uid, NetworkHomeDelegate networkHomeDelegate) {
+        Map<Medicine, List<MedicineDose>> listMap = new HashMap<>();
+        List<MedicineDose> medicineDoseList = new ArrayList<>();
+
+        databaseReferenceMed = FirebaseDatabase.getInstance().getReference("medicine");
+        databaseReferenceMed.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot medicineSnapshot : snapshot.getChildren()) {
+                    Medicine medicine = medicineSnapshot.getValue(Medicine.class);
+                    if (Objects.requireNonNull(medicine).getUserID().equals(uid)) {
+                        databaseReferenceMedDos = FirebaseDatabase.getInstance().getReference("dose");
+                        databaseReferenceMedDos.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot medicineDoseSnapshot : snapshot.getChildren()) {
+                                    MedicineDose medicineDose = medicineDoseSnapshot.getValue(MedicineDose.class);
+                                    if (Objects.requireNonNull(medicineDose).getMedID().equals(medicine.getId())) {
+                                        medicineDoseList.add(medicineDose);
+                                    }
+                                }
+                                listMap.put(medicine, medicineDoseList);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                networkHomeDelegate.onFailure(error.getMessage());
+                            }
+                        });
+                    }
+                }
+
+                Map<Medicine, MedicineDose> returnedMedDosMap = new HashMap<>();
+
+                for (Map.Entry<Medicine, List<MedicineDose>> entry : listMap.entrySet()) {
+                    Medicine key = entry.getKey();
+                    List<MedicineDose> value = entry.getValue();
+                    for (int i=0; i<value.size(); i++) {
+                        String[] dateTime = value.get(i).getTime().split("T"); // 2022-04-25 T 03:41
+                        @SuppressLint("SimpleDateFormat")
+                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                        try {
+                            Date parsedDate = formatter.parse(dateTime[0]);
+
+                            if (Objects.requireNonNull(parsedDate).equals(currentDate)) {
+                                returnedMedDosMap.put(key, value.get(i));
+                            }
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                networkHomeDelegate.onResponse(returnedMedDosMap);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                networkHomeDelegate.onFailure(error.getMessage());
+            }
+        });
     }
 }

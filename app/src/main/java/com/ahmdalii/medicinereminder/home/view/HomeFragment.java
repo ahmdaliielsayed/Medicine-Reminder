@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ahmdalii.medicinereminder.NetworkConnection;
 import com.ahmdalii.medicinereminder.R;
+import com.ahmdalii.medicinereminder.UIHelper;
 import com.ahmdalii.medicinereminder.addmed.view.AddMedActivity;
 import com.ahmdalii.medicinereminder.db.room.medicinedose.ConcreteLocalSourceMedicineDose;
 import com.ahmdalii.medicinereminder.home.presenter.HomeFragmentPresenter;
@@ -34,6 +35,7 @@ import com.ahmdalii.medicinereminder.home.presenter.HomeFragmentPresenterInterfa
 import com.ahmdalii.medicinereminder.home.repository.HomeFragmentRepo;
 import com.ahmdalii.medicinereminder.model.Medicine;
 import com.ahmdalii.medicinereminder.model.MedicineDose;
+import com.ahmdalii.medicinereminder.network.FirebaseClient;
 import com.ahmdalii.medicinereminder.notificationdialog.view.NotificationDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -128,7 +130,7 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
 
     private void initComponents() {
 
-        presenterInterface = new HomeFragmentPresenter(this, HomeFragmentRepo.getInstance(ConcreteLocalSourceMedicineDose.getInstance(view.getContext())));
+        presenterInterface = new HomeFragmentPresenter(this, HomeFragmentRepo.getInstance(ConcreteLocalSourceMedicineDose.getInstance(view.getContext()), FirebaseClient.getInstance()));
 
         imgViewNoPills = view.findViewById(R.id.imgViewNoPills);
         txtHome = view.findViewById(R.id.txtHome);
@@ -191,8 +193,13 @@ public class HomeFragment extends Fragment implements HomeFragmentInterface, OnC
     }
 
     @Override
+    public void onError(String error) {
+        UIHelper.showAlert(view.getContext(), R.string.error, error, R.drawable.error_icon);
+    }
+
+    @Override
     public void onCardClick(Medicine medicine, MedicineDose medicineDose) {
-        NotificationDialog dialog = new NotificationDialog(getContext(), medicine, medicineDose, getViewLifecycleOwner());
+        NotificationDialog dialog = new NotificationDialog(view.getContext(), medicine, medicineDose, getViewLifecycleOwner());
         dialog.show();
     }
 
