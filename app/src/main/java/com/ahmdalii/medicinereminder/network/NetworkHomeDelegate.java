@@ -9,6 +9,6 @@ import java.util.Map;
 
 public interface NetworkHomeDelegate {
 
-    void onResponse(Map<Medicine, MedicineDose> listMap);
+    void onResponse(Map<Medicine, List<MedicineDose>> listMap, Date currentDate);
     void onFailure(String error);
 }

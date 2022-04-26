@@ -1,12 +1,15 @@
 package com.ahmdalii.medicinereminder.home.repository;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 import androidx.lifecycle.LiveData;
 
+import com.ahmdalii.medicinereminder.Constants;
 import com.ahmdalii.medicinereminder.db.room.medicinedose.ConcreteLocalSourceMedicineDose;
+import com.ahmdalii.medicinereminder.db.sharedpreference.SharedPrefManager;
 import com.ahmdalii.medicinereminder.model.Medicine;
 import com.ahmdalii.medicinereminder.model.MedicineDose;
 import com.ahmdalii.medicinereminder.network.NetworkHomeDelegate;
@@ -46,10 +49,10 @@ public class HomeFragmentRepo implements HomeFragmentRepoInterface {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
-    public Map<Medicine, MedicineDose> getAllDosesWithMedicineName(Date currentDate) {
+    public Map<Medicine, MedicineDose> getAllDosesWithMedicineName(Date currentDate, Context context) {
         returnedMedDosMap = new HashMap<>();
 
-        Map<Medicine, List<MedicineDose>> allDosesWithMedicineName = localSourceMedicineDose.getAllDosesWithMedicineName();
+        Map<Medicine, List<MedicineDose>> allDosesWithMedicineName = localSourceMedicineDose.getAllDosesWithMedicineName(SharedPrefManager.getInstance(context, Constants.USERS_FILE).getStringValue(Constants.USER_ID_KEY));
 
         for (Map.Entry<Medicine, List<MedicineDose>> entry : allDosesWithMedicineName.entrySet()) {
             Medicine key = entry.getKey();
