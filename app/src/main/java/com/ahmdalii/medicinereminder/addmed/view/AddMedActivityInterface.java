@@ -13,4 +13,6 @@ public interface AddMedActivityInterface {
 
     AddMedPresenterInterface getAddMedPresenter();
     void closeKeyboard(View view);
+
+
 }

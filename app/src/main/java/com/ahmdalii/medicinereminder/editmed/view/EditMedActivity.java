@@ -46,7 +46,7 @@ public class EditMedActivity extends AppCompatActivity implements EditMedActivit
 
     EditMedPresenterInterface editMedPresenter;
 
-    //ProgressDialog dialog;
+    ProgressDialog dialog;
 
     EditText nameEditText;
 
@@ -589,10 +589,11 @@ public class EditMedActivity extends AppCompatActivity implements EditMedActivit
     }
 
     public void showProgressDialog() {
-        //dialog.show();
+        dialog = new ProgressDialog(this);
+        dialog.show();
     }
 
     public void hideProgressDialog() {
-        //dialog.hide();
+        dialog.dismiss();
     }
 }

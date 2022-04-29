@@ -164,6 +164,7 @@ public class AddMedPresenter implements AddMedPresenterInterface, AddMedicineNet
     @Override
     public void addMedFinished() {
 
+        addMedView.showProgressDialog();
         medicine.setActivated(true);
         medicine.setSync(true);
 
@@ -259,6 +260,7 @@ public class AddMedPresenter implements AddMedPresenterInterface, AddMedicineNet
         repo.insertMedicineInRoom(medicine, doses);
 
         createWorkRequest();
+        addMedView.hideProgressDialog();
 
         addMedView.showToast("Medicine Added Successfully");
         addMedView.closeActivity();

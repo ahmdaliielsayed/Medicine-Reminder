@@ -64,6 +64,7 @@ public class EditMedPresenter implements EditMedPresenterInterface, AddMedicineN
     @Override
     public void submitUpdates() {
         if(NetworkConnection.isNetworkAvailable(editMedView.getViewContext())) {
+            editMedView.showProgressDialog();
             repo.updateMedInFirebase(this);
         }
         else {
@@ -95,6 +96,7 @@ public class EditMedPresenter implements EditMedPresenterInterface, AddMedicineN
                 editMedView.getViewContext()
         );
 
+        editMedView.hideProgressDialog();
         editMedView.closeView();
 
     }
@@ -113,6 +115,6 @@ public class EditMedPresenter implements EditMedPresenterInterface, AddMedicineN
 
     @Override
     public void onSuccessLocal() {
-
+        editMedView.hideProgressDialog();
     }
 }
