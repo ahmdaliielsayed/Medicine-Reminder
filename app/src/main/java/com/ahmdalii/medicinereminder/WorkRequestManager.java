@@ -39,10 +39,12 @@ public class WorkRequestManager {
 
         WorkManager worker = WorkManager.getInstance(context);
         worker.enqueue(addMedRequest);
+
     }
 
     public static void removeWork(String tag, Context context) {
         WorkManager worker = WorkManager.getInstance(context);
         worker.cancelAllWorkByTag(tag);
+
     }
 }

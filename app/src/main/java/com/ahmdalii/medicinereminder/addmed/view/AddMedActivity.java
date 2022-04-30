@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +26,7 @@ public class AddMedActivity extends AppCompatActivity implements AddMedActivityI
     private AddMedPresenterInterface addMedPresenter;
 
     StepView stepper;
+    ProgressDialog dialog;
 
     FragmentManager manager;
     ArrayList<Fragment> fragments;
@@ -133,5 +135,16 @@ public class AddMedActivity extends AppCompatActivity implements AddMedActivityI
     public void closeKeyboard(View view) {
         InputMethodManager manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    @Override
+    public void showProgressDialog() {
+        dialog = new ProgressDialog(this);
+        dialog.show();
+    }
+
+    @Override
+    public void hideProgressDialog() {
+        dialog.dismiss();
     }
 }

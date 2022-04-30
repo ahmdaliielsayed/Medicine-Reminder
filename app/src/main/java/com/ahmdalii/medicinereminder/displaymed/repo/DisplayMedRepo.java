@@ -136,7 +136,6 @@ public class DisplayMedRepo implements DisplayMedRepoInterface {
             medicine = med;
             if(med != null) {
                 getStoredDoses(networkDelegate, context, owner);
-
             }
         });
     }

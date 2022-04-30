@@ -91,9 +91,6 @@ public class AddMedInstructionsFragment extends Fragment implements View.OnClick
             ((AddMedActivityInterface) getActivity()).getAddMedPresenter().getMedicine().setInstructions(MedicineInstruction.AFTER_EATING.getInstruction());
         }
 
-        ProgressDialog dialog = new ProgressDialog(getContext());
-        dialog.show();
-
         ((AddMedActivityInterface) getActivity()).getAddMedPresenter().addMedFinished();
     }
 }

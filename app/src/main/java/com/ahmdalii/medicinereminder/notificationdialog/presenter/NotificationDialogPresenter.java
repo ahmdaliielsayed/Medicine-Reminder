@@ -81,6 +81,13 @@ public class NotificationDialogPresenter implements NotificationDialogPresenterI
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void takeDose() {
+        boolean flag = false;
+        if(isThisTheUpcomingDose()) {
+            Log.i("TAG", "takeDose: ");
+
+            WorkRequestManager.removeWork(repo.getDose().getId(), notificationDialogView.getViewContext());
+            flag = true;
+        }
         repo.getMedicine().setRemainingMedAmount(repo.getMedicine().getRemainingMedAmount() - repo.getDose().getAmount());
         repo.getDose().setStatus(DoseStatus.TAKEN.getStatus());
 
@@ -96,16 +103,22 @@ public class NotificationDialogPresenter implements NotificationDialogPresenterI
 
         repo.updateMedicineAndDose(notificationDialogView.getViewContext(), this);
 
-        if(isThisTheUpcomingDose()) {
+        if(flag) {
             MedicineDose upcomingDose = getUpcomingDose();
-            WorkRequestManager.removeWork(repo.getMedicine().getId(), notificationDialogView.getViewContext());
-            WorkRequestManager.createWorkRequest(upcomingDose, repo.getMedicine(), notificationDialogView.getViewContext());
+            //WorkRequestManager.createWorkRequest(upcomingDose, repo.getMedicine(), notificationDialogView.getViewContext());
         }
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void skipDose() {
+
+        boolean flag = false;
+        if(isThisTheUpcomingDose()) {
+            flag = true;
+            WorkRequestManager.removeWork(repo.getDose().getId(), notificationDialogView.getViewContext());
+        }
         repo.getMedicine().setRemainingMedAmount(repo.getMedicine().getRemainingMedAmount() - repo.getDose().getAmount());
         repo.getDose().setStatus(DoseStatus.SKIPPED.getStatus());
 
@@ -117,11 +130,11 @@ public class NotificationDialogPresenter implements NotificationDialogPresenterI
 
         repo.updateMedicineAndDose(notificationDialogView.getViewContext(), this);
 
-        if(isThisTheUpcomingDose()) {
+        if(flag) {
             MedicineDose upcomingDose = getUpcomingDose();
-            WorkRequestManager.removeWork(repo.getMedicine().getId(), notificationDialogView.getViewContext());
-            WorkRequestManager.createWorkRequest(upcomingDose, repo.getMedicine(), notificationDialogView.getViewContext());
+            //WorkRequestManager.createWorkRequest(upcomingDose, repo.getMedicine(), notificationDialogView.getViewContext());
         }
+
     }
 
     @Override
@@ -156,6 +169,8 @@ public class NotificationDialogPresenter implements NotificationDialogPresenterI
             return false;
         }
 
+        Log.i("TAG", "isThisTheUpcomingDose: upcoming: " + upcomingDose);
+        Log.i("TAG", "isThisTheUpcomingDose: current: " + repo.getDose());
         return upcomingDose.getId().equals(repo.getDose().getId());
     }
 

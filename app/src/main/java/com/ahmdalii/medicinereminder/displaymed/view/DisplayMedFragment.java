@@ -142,7 +142,21 @@ public class DisplayMedFragment extends Fragment implements DisplayMedFragmentIn
         ((ImageView) view.findViewById(R.id.icon_delete_display_med_toolbar)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                displayMedPresenter.deleteMedicine();
+                androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(getContext())
+                        .setMessage("Are you sure?")
+                        .setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                displayMedPresenter.deleteMedicine();
+                            }
+                        })
+                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        });
+                builder.create().show();
             }
         });
 
@@ -367,7 +381,7 @@ public class DisplayMedFragment extends Fragment implements DisplayMedFragmentIn
 
     @Override
     public void hideProgressBar() {
-        dialog.hide();
+        dialog.dismiss();
     }
 
     @Override
