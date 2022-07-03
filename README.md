@@ -1,8 +1,8 @@
 # The Team
 ### Team Members
-* Team Member 1: Ahmed Ali El-Sayed
-* Team Member 2: Eman Mahmoud Abobakr
-* Team Member 3 : Youssef Samed Ghattas
+* Ahmed Ali El-Sayed
+* Eman Mahmoud Abobakr
+* Youssef Samed Ghattas
 
 # Medical Reminder
 Android Mobile Application that helps the user to record his list of medication drugs with the detailed treatments. In addition he can schedule reminders of the treatments and dosages. In addition he receives notifications as refill reminders. Besides, it supports registering more than one health taker.
@@ -64,14 +64,11 @@ https://user-images.githubusercontent.com/29761752/177056428-ae8e3f1d-afd0-40c2-
     </td>
   </tr>
    <tr>
-   
-   
-   
     <td>
        <img src="https://user-images.githubusercontent.com/53404081/177056608-6be99410-0b36-4040-b680-4c895c7b80a7.jpeg"></img>
     </td>
     <td>
-       <img src="https://user-images.githubusercontent.com/53404081/177056609-7ee899e1-3588-44b2-a6ef-dd0e2d8e818f.jpeg"></img>
+       <img src="https://user-images.githubusercontent.com/53404081/177056620-df1bdba8-e9c4-4075-9bc3-0ee17a23bc71.jpeg"></img>
     </td>
     <td>
        <img src="https://user-images.githubusercontent.com/53404081/177056610-8d282ce9-57eb-4dac-8936-a31fb064b6f1.jpeg"></img>
@@ -102,9 +99,6 @@ https://user-images.githubusercontent.com/29761752/177056428-ae8e3f1d-afd0-40c2-
    <tr>
     <td>
        <img src="https://user-images.githubusercontent.com/53404081/177056619-4a0b6db5-8f6a-4aa9-aa78-8dab34d53004.jpeg"></img>
-    </td>
-    <td>
-       <img src="https://user-images.githubusercontent.com/53404081/177056620-df1bdba8-e9c4-4075-9bc3-0ee17a23bc71.jpeg"></img>
     </td>
      
   </tr>
