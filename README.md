@@ -22,12 +22,21 @@ https://user-images.githubusercontent.com/29761752/177056428-ae8e3f1d-afd0-40c2-
  * Add Health taker
  * Display the drug notification dialog when pressing on an item
 ## Project functionality:
-  * MVP
-  * Room
+  * Android SDK
+  * Java
   * Firebase
+  * Room
+  * Notifications
+  * Work Manager
+  * MVP
   * minSdk 21
   * targetSdk 32
-  ## Screenshots
+ 
+ 
+  
+  
+## Screenshots
+
 <table>
   <tr>
     <td>
