@@ -9,8 +9,8 @@ Android Mobile Application that helps the user to record his list of medication 
 <p align="center">
 
 https://user-images.githubusercontent.com/29761752/177056428-ae8e3f1d-afd0-40c2-aa47-57a9c6f3fde5.mp4
-
 </p>
+
 ## Description:
 
   * Pill reminder and alarm for all medication needs.
